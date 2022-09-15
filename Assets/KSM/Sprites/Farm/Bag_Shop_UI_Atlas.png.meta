@@ -1,0 +1,619 @@
+fileFormatVersion: 2
+guid: b0f9fdd39faab454cb96df9e9dbc75d4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2908484057092035018
+    second: Bag_Shop_UI_Atlas_0
+  - first:
+      213: -1602115036633864054
+    second: Bag_Shop_UI_Atlas_1
+  - first:
+      213: -2750441801071364335
+    second: Bag_Shop_UI_Atlas_2
+  - first:
+      213: 3686543144498248700
+    second: Bag_Shop_UI_Atlas_3
+  - first:
+      213: -1627783397072345455
+    second: Bag_Shop_UI_Atlas_4
+  - first:
+      213: 2206991306084121850
+    second: Bag_Shop_UI_Atlas_5
+  - first:
+      213: 2783260368375344348
+    second: Bag_Shop_UI_Atlas_6
+  - first:
+      213: -2499739917698918113
+    second: Bag_Shop_UI_Atlas_7
+  - first:
+      213: 3531451425521552256
+    second: Bag_Shop_UI_Atlas_8
+  - first:
+      213: -2277646432015461520
+    second: Bag_Shop_UI_Atlas_9
+  - first:
+      213: -3156574895647134329
+    second: Bag_Shop_UI_Atlas_10
+  - first:
+      213: 8246515723539554341
+    second: Bag_Shop_UI_Atlas_11
+  - first:
+      213: 580096794186290876
+    second: Bag_Shop_UI_Atlas_12
+  - first:
+      213: -9209529491834905623
+    second: Bag_Shop_UI_Atlas_13
+  - first:
+      213: -8202005521494513644
+    second: Bag_Shop_UI_Atlas_14
+  - first:
+      213: 4725852285465362344
+    second: Bag_Shop_UI_Atlas_15
+  - first:
+      213: -768719743940450000
+    second: Bag_Shop_UI_Atlas_16
+  - first:
+      213: -7341087515061584876
+    second: Bag_Shop_UI_Atlas_17
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_0
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 815
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac19bd117d20d5820800000000000000
+      internalID: 2908484057092035018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_1
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 870
+        width: 286
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a886020dcd424c9e0800000000000000
+      internalID: -1602115036633864054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_2
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 870
+        width: 286
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11771cf11c774d9d0800000000000000
+      internalID: -2750441801071364335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_3
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 635
+        width: 400
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfb38f0357b392330800000000000000
+      internalID: 3686543144498248700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_4
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 713
+        width: 286
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 196693eef93f869e0800000000000000
+      internalID: -1627783397072345455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_5
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 713
+        width: 286
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afcf48556eec0ae10800000000000000
+      internalID: 2206991306084121850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_6
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 85
+        width: 540
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdc6f660f8020a620800000000000000
+      internalID: 2783260368375344348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_7
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 885
+        width: 384
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1911bef9c32f4dd0800000000000000
+      internalID: -2499739917698918113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_8
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 556
+        width: 286
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08b42cf6c5c320130800000000000000
+      internalID: 3531451425521552256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_9
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 556
+        width: 286
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07358c733ac2460e0800000000000000
+      internalID: -2277646432015461520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_10
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 455
+        width: 384
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78d690e4bd79134d0800000000000000
+      internalID: -3156574895647134329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_11
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 399
+        width: 286
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 520af30db52817270800000000000000
+      internalID: 8246515723539554341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_12
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 399
+        width: 286
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb611d8f5faec0800800000000000000
+      internalID: 580096794186290876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_13
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 242
+        width: 286
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eb52baa8bd213080800000000000000
+      internalID: -9209529491834905623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_14
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 242
+        width: 286
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 418e68d2f6f9c2e80800000000000000
+      internalID: -8202005521494513644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_15
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 85
+        width: 384
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8af71207d99959140800000000000000
+      internalID: 4725852285465362344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_16
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 85
+        width: 286
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 039a99a3775f455f0800000000000000
+      internalID: -768719743940450000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_17
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 85
+        width: 286
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41cf2bfbcc73f1a90800000000000000
+      internalID: -7341087515061584876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bag_Shop_UI_Atlas_18
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 274
+        width: 384
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 168e81722612641a3acda3c34b7be7ac
+      internalID: -1107521836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Bag_Shop_UI_Atlas_0: 2908484057092035018
+      Bag_Shop_UI_Atlas_10: -3156574895647134329
+      Bag_Shop_UI_Atlas_14: -8202005521494513644
+      Bag_Shop_UI_Atlas_13: -9209529491834905623
+      Bag_Shop_UI_Atlas_5: 2206991306084121850
+      Bag_Shop_UI_Atlas_18: -1107521836
+      Bag_Shop_UI_Atlas_3: 3686543144498248700
+      Bag_Shop_UI_Atlas_2: -2750441801071364335
+      Bag_Shop_UI_Atlas_9: -2277646432015461520
+      Bag_Shop_UI_Atlas_11: 8246515723539554341
+      Bag_Shop_UI_Atlas_1: -1602115036633864054
+      Bag_Shop_UI_Atlas_17: -7341087515061584876
+      Bag_Shop_UI_Atlas_8: 3531451425521552256
+      Bag_Shop_UI_Atlas_16: -768719743940450000
+      Bag_Shop_UI_Atlas_7: -2499739917698918113
+      Bag_Shop_UI_Atlas_6: 2783260368375344348
+      Bag_Shop_UI_Atlas_12: 580096794186290876
+      Bag_Shop_UI_Atlas_15: 4725852285465362344
+      Bag_Shop_UI_Atlas_4: -1627783397072345455
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

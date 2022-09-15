@@ -1,0 +1,824 @@
+fileFormatVersion: 2
+guid: d5b4e53bd0f6a1d41ab962d86473ab10
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3367648623954912669
+    second: Profile_Friend_Option_Btn_Atlas_0
+  - first:
+      213: -5172080750586105219
+    second: Profile_Friend_Option_Btn_Atlas_1
+  - first:
+      213: -2142588563082759467
+    second: Profile_Friend_Option_Btn_Atlas_2
+  - first:
+      213: -5671765115539348532
+    second: Profile_Friend_Option_Btn_Atlas_3
+  - first:
+      213: -285947471512834633
+    second: Profile_Friend_Option_Btn_Atlas_4
+  - first:
+      213: -2699332446027598454
+    second: Profile_Friend_Option_Btn_Atlas_5
+  - first:
+      213: -3803599564661220160
+    second: Profile_Friend_Option_Btn_Atlas_6
+  - first:
+      213: -6189730185244352410
+    second: Profile_Friend_Option_Btn_Atlas_7
+  - first:
+      213: -88763241542744813
+    second: Profile_Friend_Option_Btn_Atlas_8
+  - first:
+      213: 6782675373748098281
+    second: Profile_Friend_Option_Btn_Atlas_9
+  - first:
+      213: -5784120794479541203
+    second: Profile_Friend_Option_Btn_Atlas_10
+  - first:
+      213: -4276914305078636650
+    second: Profile_Friend_Option_Btn_Atlas_11
+  - first:
+      213: 8329130708435172554
+    second: Profile_Friend_Option_Btn_Atlas_12
+  - first:
+      213: 1880483005567217349
+    second: Profile_Friend_Option_Btn_Atlas_13
+  - first:
+      213: 178315203876859561
+    second: Profile_Friend_Option_Btn_Atlas_14
+  - first:
+      213: 1623730065227033332
+    second: Profile_Friend_Option_Btn_Atlas_15
+  - first:
+      213: 2020517850499856240
+    second: Profile_Friend_Option_Btn_Atlas_16
+  - first:
+      213: 5059293636998310818
+    second: Profile_Friend_Option_Btn_Atlas_17
+  - first:
+      213: -8215460329793118933
+    second: Profile_Friend_Option_Btn_Atlas_18
+  - first:
+      213: -6486552131088393827
+    second: Profile_Friend_Option_Btn_Atlas_19
+  - first:
+      213: 3676091702987939073
+    second: Profile_Friend_Option_Btn_Atlas_20
+  - first:
+      213: 3567157854096761926
+    second: Profile_Friend_Option_Btn_Atlas_21
+  - first:
+      213: 1380613433603474952
+    second: Profile_Friend_Option_Btn_Atlas_22
+  - first:
+      213: 7434087229168326601
+    second: Profile_Friend_Option_Btn_Atlas_23
+  - first:
+      213: 4834448982286436039
+    second: Profile_Friend_Option_Btn_Atlas_24
+  - first:
+      213: -3928739698560842205
+    second: Profile_Friend_Option_Btn_Atlas_25
+  - first:
+      213: -1070795395194424483
+    second: Profile_Friend_Option_Btn_Atlas_26
+  - first:
+      213: 1635767968573364026
+    second: Profile_Friend_Option_Btn_Atlas_27
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_1
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 827
+        width: 384
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d72fdafc5f31938b0800000000000000
+      internalID: -5172080750586105219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_2
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 827
+        width: 384
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d233a5cd0ff342e0800000000000000
+      internalID: -2142588563082759467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_3
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 731
+        width: 271
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc323de7da7d941b0800000000000000
+      internalID: -5671765115539348532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_4
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 731
+        width: 271
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bd6e082a4c180cf0800000000000000
+      internalID: -285947471512834633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_5
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 719
+        width: 145
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a85b6d7217b0a8ad0800000000000000
+      internalID: -2699332446027598454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_6
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 719
+        width: 228
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cc99882956e63bc0800000000000000
+      internalID: -3803599564661220160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_7
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 738
+        width: 240
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6606ffce039a91aa0800000000000000
+      internalID: -6189730185244352410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_8
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 605
+        width: 502
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3158bb65d46a4cef0800000000000000
+      internalID: -88763241542744813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_9
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 605
+        width: 104
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e49b07f057e02e50800000000000000
+      internalID: 6782675373748098281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_10
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 436
+        width: 271
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d24c81378ccaabfa0800000000000000
+      internalID: -5784120794479541203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_11
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 436
+        width: 271
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69f400f791955a4c0800000000000000
+      internalID: -4276914305078636650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_12
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 404
+        width: 148
+        height: 146
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acc731cef34079370800000000000000
+      internalID: 8329130708435172554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_13
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 404
+        width: 148
+        height: 142
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ce2ef09451d81a10800000000000000
+      internalID: 1880483005567217349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_14
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 399
+        width: 492
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aea121bbb0897200800000000000000
+      internalID: 178315203876859561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_15
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 397
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4faaaf434e5a88610800000000000000
+      internalID: 1623730065227033332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_16
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 224
+        width: 148
+        height: 146
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0773165a7425a0c10800000000000000
+      internalID: 2020517850499856240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_17
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 224
+        width: 148
+        height: 142
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2abadafe1c8363640800000000000000
+      internalID: 5059293636998310818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_18
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 224
+        width: 493
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2d1e508b52dcfd80800000000000000
+      internalID: -8215460329793118933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_19
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 224
+        width: 179
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d995c6934332bf5a0800000000000000
+      internalID: -6486552131088393827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_20
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 224
+        width: 179
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10d5b565de9140330800000000000000
+      internalID: 3676091702987939073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_21
+      rect:
+        serializedVersion: 2
+        x: 1521
+        y: 219
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 644ae2f2b27118130800000000000000
+      internalID: 3567157854096761926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_22
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 219
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80641126a9ce82310800000000000000
+      internalID: 1380613433603474952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_23
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 44
+        width: 148
+        height: 146
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c798db82fe2b2760800000000000000
+      internalID: 7434087229168326601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_24
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 44
+        width: 148
+        height: 142
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c68ee14cb9671340800000000000000
+      internalID: 4834448982286436039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_25
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 39
+        width: 1004
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3264e4c3f005a79c0800000000000000
+      internalID: -3928739698560842205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_26
+      rect:
+        serializedVersion: 2
+        x: 1521
+        y: 39
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d53ff4ae245c321f0800000000000000
+      internalID: -1070795395194424483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Profile_Friend_Option_Btn_Atlas_27
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 39
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3717cdfc4a63b610800000000000000
+      internalID: 1635767968573364026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Profile_Friend_Option_Btn_Atlas_7: -6189730185244352410
+      Profile_Friend_Option_Btn_Atlas_1: -5172080750586105219
+      Profile_Friend_Option_Btn_Atlas_8: -88763241542744813
+      Profile_Friend_Option_Btn_Atlas_4: -285947471512834633
+      Profile_Friend_Option_Btn_Atlas_13: 1880483005567217349
+      Profile_Friend_Option_Btn_Atlas_15: 1623730065227033332
+      Profile_Friend_Option_Btn_Atlas_22: 1380613433603474952
+      Profile_Friend_Option_Btn_Atlas_26: -1070795395194424483
+      Profile_Friend_Option_Btn_Atlas_2: -2142588563082759467
+      Profile_Friend_Option_Btn_Atlas_3: -5671765115539348532
+      Profile_Friend_Option_Btn_Atlas_14: 178315203876859561
+      Profile_Friend_Option_Btn_Atlas_17: 5059293636998310818
+      Profile_Friend_Option_Btn_Atlas_19: -6486552131088393827
+      Profile_Friend_Option_Btn_Atlas_18: -8215460329793118933
+      Profile_Friend_Option_Btn_Atlas_23: 7434087229168326601
+      Profile_Friend_Option_Btn_Atlas_5: -2699332446027598454
+      Profile_Friend_Option_Btn_Atlas_9: 6782675373748098281
+      Profile_Friend_Option_Btn_Atlas_12: 8329130708435172554
+      Profile_Friend_Option_Btn_Atlas_11: -4276914305078636650
+      Profile_Friend_Option_Btn_Atlas_27: 1635767968573364026
+      Profile_Friend_Option_Btn_Atlas_21: 3567157854096761926
+      Profile_Friend_Option_Btn_Atlas_6: -3803599564661220160
+      Profile_Friend_Option_Btn_Atlas_16: 2020517850499856240
+      Profile_Friend_Option_Btn_Atlas_20: 3676091702987939073
+      Profile_Friend_Option_Btn_Atlas_10: -5784120794479541203
+      Profile_Friend_Option_Btn_Atlas_25: -3928739698560842205
+      Profile_Friend_Option_Btn_Atlas_24: 4834448982286436039
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
