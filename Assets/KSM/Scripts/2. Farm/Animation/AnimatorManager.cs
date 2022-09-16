@@ -30,4 +30,9 @@ public class AnimatorManager : MonoBehaviour
     {
         FarmUI.GetInstance().partTimerObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
+
+    public void InActiveReward()
+    {
+        gameObject.SetActive(false);
+    }
 }

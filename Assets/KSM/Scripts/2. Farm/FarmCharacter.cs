@@ -1,8 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spine;
 using Spine.Unity;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class FarmCharacter : MonoBehaviour
 {
@@ -22,18 +27,59 @@ public class FarmCharacter : MonoBehaviour
 
     private bool loopIdle, loopWalk;
 
+    private bool isReward;
+
+    private const string NETWORK_FAIL = "네트워크가 불안정합니다.\n다시 시도해주세요.";
+    private const string NETWORK_FAIL_EN = "Network is unstable.\nPlease try again.";
+
     //----------------------------------------------------
     [Header("< Character Info >")]
     public float characterSpeed = 5f;
     public int idleEvent1 = 20, idleEvent2 = 20;
 
+    private bool isGift = false; 
+    public float giftCoolTime = 10;
+    private float giftInit;
+    public int giftPercent = 90;
+    public int giftReward = 5;
+
     void Start()
     {
+        //선물 주는 쿨타임 초기화
+        giftInit = giftCoolTime;
+
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);  //선물 아이콘 초기화
+
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
 
         navMeshAgent.Warp(transform.position);
+
+        GetComponent<SkeletonAnimation>().state.Start += delegate (TrackEntry trackEntry)
+        {
+            if (trackEntry.Animation.Name == REWARD)
+            {
+                navMeshAgent.ResetPath();
+
+                isReward = true;
+
+                Debug.LogError("Reward Start");
+            }
+        };
+
+        GetComponent<SkeletonAnimation>().state.End += delegate (TrackEntry trackEntry) {
+
+            if (trackEntry.Animation.Name == REWARD)
+            {
+                isReward = false;
+
+                isGift = false;
+                giftCoolTime = giftInit;
+
+                Debug.LogError("Reward!");
+            }
+        };
 
         StartCoroutine(PlayerController());
     }
@@ -42,20 +88,50 @@ public class FarmCharacter : MonoBehaviour
     {
         navMeshAgent.speed = characterSpeed;
 
-        if (direction - 2 < 0)
-            GetComponent<SkeletonAnimation>().skeleton.ScaleX = -0.9f;
-        else
-            GetComponent<SkeletonAnimation>().skeleton.ScaleX = 0.9f;
-
-        switch (nowState)
+        if (!isGift)
         {
-            case State.Walk:
+            if (giftCoolTime > 0)
+            {
+                giftCoolTime -= Time.deltaTime;
+                transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                if (Random.Range(0, 100) <= giftPercent)
+                {
+                    isGift = true;
+                    transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                }
+                else
+                {
+                    giftCoolTime = giftInit;
+                }
+            }
+        }
+    }
 
-                navMeshAgent.SetDestination(transform.GetChild(1).GetChild(direction).position);
-                break;
+    void LateUpdate()
+    {
+        Debug.LogError("isReward : " + isReward);
 
-            case State.Idle:
-                break;
+        if (!isReward)
+        {
+            if (direction - 2 < 0)
+                GetComponent<SkeletonAnimation>().skeleton.ScaleX = -0.9f;
+            else
+                GetComponent<SkeletonAnimation>().skeleton.ScaleX = 0.9f;
+
+            switch (nowState)
+            {
+                case State.Walk:
+                    SetRotateSpine();
+
+                    navMeshAgent.SetDestination(transform.GetChild(1).GetChild(direction).position);
+                    break;
+
+                case State.Idle:
+                    break;
+            }
         }
     }
 
@@ -67,7 +143,8 @@ public class FarmCharacter : MonoBehaviour
 
         yield return new WaitUntil(() => !loopIdle);
 
-        StartCoroutine(RandomLoopWalk());
+        if(!isReward)
+            StartCoroutine(RandomLoopWalk());
 
         yield return new WaitUntil(() => !loopWalk);
 
@@ -85,7 +162,8 @@ public class FarmCharacter : MonoBehaviour
         int rotateDirection = Random.Range(0, 4);
         direction = rotateDirection;
 
-        ChangeState(State.Idle);
+        if(!isReward)
+            ChangeState(State.Idle);
 
 
         yield return new WaitForSeconds(randomLoopIdleTime);
@@ -106,7 +184,6 @@ public class FarmCharacter : MonoBehaviour
 
         direction = rotateDirection;
 
-
         ChangeState(State.Walk);
 
         yield return new WaitForSeconds(randomLoopWalkTime);
@@ -122,7 +199,6 @@ public class FarmCharacter : MonoBehaviour
         switch (state)
         {
             case State.Walk:
-                SetRotateSpine();
                 break;
             case State.Idle:
                 navMeshAgent.ResetPath();
@@ -172,23 +248,62 @@ public class FarmCharacter : MonoBehaviour
 
     public void RewardedAD(int num)
     {
-        switch (num)
-        {
-            case 0: //엄마
-                ADManager.GetInstance().ShowRewardedAD(() =>
+        FarmUI.GetInstance().ButtonClick();
+
+        ADManager.GetInstance().ShowRewardedAD(
+            () =>
+            {
+                transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + giftReward;
+
+                SetAnimation(REWARD, false);
+                AddAnimation(IDLE[0], true, 0);
+
+                switch (num)
                 {
-                    Debug.LogError("SSSSS");
-                },
+                    case 0: //엄마
+                        BackendServerManager.GetInstance().myInfo.diamond += giftReward;
+                        break;
+
+                    case 1: //아빠
+                        BackendServerManager.GetInstance().myInfo.gold += giftReward;
+                        break;
+
+                    case int n when(2 <= n && n <= 3): //아들, 딸
+                        int ran = Random.Range(0, 3);
+                        int ran2 = Random.Range(1, 101);
+                        transform.GetChild(0).GetChild(1).GetComponentInChildren<Image>().sprite = FarmUI.GetInstance().inventoryHarvestImage[ran];
+                        transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(FarmUI.GetInstance().inventoryHarvestImage[ran].textureRect.width, FarmUI.GetInstance().inventoryHarvestImage[ran].textureRect.height);
+                        transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(0.35f, 0.35f, 1);
+
+                        if(ran2 > 0 && ran2 <= 50)
+                        {
+                            BackendServerManager.GetInstance().myInfo.harvest[ran] += 1;
+                            transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + 1;
+                        }
+                        else if(ran2 > 50 && ran2 <= 80)
+                        {
+                            BackendServerManager.GetInstance().myInfo.harvest[ran] += 2;
+                            transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + 2;
+                        }
+                        else
+                        {
+                            BackendServerManager.GetInstance().myInfo.harvest[ran] += 3;
+                            transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + 3;
+                        }
+                        break;
+                }
+
+                BackendServerManager.GetInstance().SaveMyInfo(true);
+            },
                 () =>
                 {
-                    Debug.LogError("FFFF");
-                },
-                () =>
-                {
-                    Debug.LogError("LF");
+                    FarmUI.GetInstance().SetErrorObject(PlayerPrefs.GetString("Langauge") == "ko" ? NETWORK_FAIL : NETWORK_FAIL_EN, () =>
+                    {
+
+                    });
                 });
-                break;
-        }
     }
 
     private void SetAnimation(string animation, bool loop = true)
@@ -197,7 +312,10 @@ public class FarmCharacter : MonoBehaviour
             GetComponent<SkeletonAnimation>().state.SetAnimation(0, animation, loop);
     }
 
-    private void AddAnimation(string animation, bool loop = true, int delay = 0) => GetComponent<SkeletonAnimation>().state.AddAnimation(0, animation, loop, delay);
+    private void AddAnimation(string animation, bool loop = true, int delay = 0)
+    {
+        GetComponent<SkeletonAnimation>().state.AddAnimation(0, animation, loop, delay);
+    }
 
     private string GetAnimation()
     {

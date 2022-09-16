@@ -87,28 +87,20 @@ public class ADManager : MonoBehaviour
         double amount = args.Amount;
     }
 
-    public void ShowRewardedAD(Action success = null, Action fail = null, Action loadFail = null)
+    public void ShowRewardedAD(Action success = null, Action fail = null)
     {
-        bool isSuccess = false;
         rewardedAd.OnUserEarnedReward += (sender, args) =>
         {
-            isSuccess = true;
+            success();
         };
 
         rewardedAd.OnAdClosed += (sender, args) =>
         {
-            if (isSuccess)
-            {
-                success();
-            }
-            else
-            {
-                fail();
-            }
+
         };
         rewardedAd.OnAdFailedToLoad += (sender, args) =>
         {
-            loadFail();
+            fail();
         };
 
         if (this.rewardedAd.IsLoaded())
@@ -117,7 +109,7 @@ public class ADManager : MonoBehaviour
         }
         else
         {
-            loadFail();
+            fail();
         }
     }
 }

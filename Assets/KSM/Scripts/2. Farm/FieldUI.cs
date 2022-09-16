@@ -11,6 +11,7 @@ using UnityEngine.Events;
 using TMPro;
 using Spine.Unity;
 using UnityEngine.Rendering;
+using Random = UnityEngine.Random;
 
 public partial class FarmUI : MonoBehaviour
 {
@@ -42,7 +43,8 @@ public partial class FarmUI : MonoBehaviour
     public GameObject timerCanvas;
     public GameObject harvestDragCanvas;
 
-    public GameObject[] aiObject;
+    public GameObject aiObject;
+    private int selectNum;
 
     /*
      * 애니메이션 관련
@@ -124,14 +126,15 @@ public partial class FarmUI : MonoBehaviour
                     if (!isPrevious)
                     {
                         isPrevious = true;
-                        previousAnimationPosition = aiObject[0].transform.position;
+                        selectNum = Random.Range(0, 4);
+                        previousAnimationPosition = aiObject.transform.GetChild(selectNum).position;
                     }
 
-                    aiObject[0].GetComponent<SortingGroup>().sortingOrder = 99;
-                    aiObject[0].GetComponent<AIMovement>().isHarvest = true;
-                    aiObject[0].transform.position = harvestCanvasBundle.transform.GetChild(fieldNumber).position + new Vector3(2, 0, 0);
-                    aiObject[0].GetComponent<SkeletonAnimation>().Initialize(true);
-                    aiObject[0].GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, "harvest_front_l", true);
+                    //aiObject.transform.GetChild(selectNum).GetComponent<SortingGroup>().sortingOrder = 99;
+                    //aiObject[0].GetComponent<AIMovement>().isHarvest = true;
+                    //aiObject[0].transform.position = harvestCanvasBundle.transform.GetChild(fieldNumber).position + new Vector3(2, 0, 0);
+                    //aiObject[0].GetComponent<SkeletonAnimation>().Initialize(true);
+                    //aiObject[0].GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, "harvest_front_l", true);
 
                     BackendServerManager.GetInstance().myInfo.harvest[BackendServerManager.GetInstance().field[fieldNumber] - 10]++;
 
@@ -213,9 +216,9 @@ public partial class FarmUI : MonoBehaviour
         {
             harvestAnimationTime = 0;
             isPrevious = false;
-            aiObject[0].GetComponent<AIMovement>().isHarvest = false;
-            aiObject[0].GetComponent<SortingGroup>().sortingOrder = 0;
-            aiObject[0].transform.position = previousAnimationPosition;
+            //aiObject[0].GetComponent<AIMovement>().isHarvest = false;
+            //aiObject[0].GetComponent<SortingGroup>().sortingOrder = 0;
+            //aiObject[0].transform.position = previousAnimationPosition;
         }
     }
 
@@ -625,6 +628,7 @@ public partial class FarmUI : MonoBehaviour
             });
         }
     }
+    #endregion
 
     #region 스킵 기능 (새싹 눌렀을 때)
     public void OpenSkipHarvestCoolTime(int num)
