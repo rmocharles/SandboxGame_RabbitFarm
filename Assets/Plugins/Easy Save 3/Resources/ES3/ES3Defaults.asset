@@ -32,12 +32,18 @@ MonoBehaviour:
     - Assembly-CSharp-firstpass
     - AppleAuth
     - spine-unity
+    - gpm_common
     - Assembly-CSharp
+    - gpm_ui_sample
     - Cinemachine
     - spine-csharp
     - spine-unity-examples
     - NavMeshComponents
+    - gpm_ui
     - Purchasing.Common
+    - gpm_cachestorage
+    - gpm_ui_editor
+    - gpm_manager
     - spine-unity-editor
     - PPv2URPConverters
     - spine-unity-examples-editor

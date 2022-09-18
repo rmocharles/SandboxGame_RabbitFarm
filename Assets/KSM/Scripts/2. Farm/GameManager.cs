@@ -18,9 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private SpriteRenderer mapRenderer, mapRenderer2;
 
-    [Header("[ Main Camera ]")]
-    public CinemachineVirtualCamera mainCamera;
-
     private float mapMinX, mapMinY, mapMaxX, mapMaxY;
     #endregion
     [Header("< Tap >")]
@@ -62,8 +59,8 @@ public class GameManager : MonoBehaviour
     {
         lastTouchTime = Time.time;
 
-        mainCamera.m_Lens.OrthographicSize = 99;
-        //useMouse = Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer && Input.mousePresent;
+        Camera.main.orthographicSize = 99;
+        useMouse = Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer && Input.mousePresent;
     }
 
     void Update()
@@ -86,7 +83,7 @@ public class GameManager : MonoBehaviour
         }
         
 
-        zoomMax = boundMaxX / mainCamera.m_Lens.Aspect;
+        zoomMax = boundMaxX / Camera.main.aspect;
 
         if (useMouse)
         {
@@ -224,7 +221,7 @@ public class GameManager : MonoBehaviour
                         {
                             Debug.LogError("isTouch");
 
-                            FarmUI.GetInstance().harvestDragCanvas.transform.GetChild(0).gameObject.SetActive(false);
+                            //FarmUI.GetInstance().harvestDragCanvas.transform.GetChild(0).gameObject.SetActive(false);
 
                             for (int i = 0; i < FarmUI.GetInstance().selectCanvas.transform.childCount; i++)
                             {
@@ -294,7 +291,7 @@ public class GameManager : MonoBehaviour
         if (onSwipe != null)
             onSwipe(deltaPosition);
 
-        mainCamera.transform.position -= (Camera.main.ScreenToWorldPoint(deltaPosition) - Camera.main.ScreenToWorldPoint(Vector2.zero));
+        Camera.main.transform.position -= (Camera.main.ScreenToWorldPoint(deltaPosition) - Camera.main.ScreenToWorldPoint(Vector2.zero));
     }
 
     private void OnPinch(Vector2 center, float oldDistance, float newDistance, Vector3 touchDelta)
@@ -304,11 +301,11 @@ public class GameManager : MonoBehaviour
             onPinch(oldDistance, newDistance);
         }
 
-        if (mainCamera.m_Lens.Orthographic)
+        if (Camera.main.orthographic)
         {
             var currentPinchPosition = Camera.main.ScreenToWorldPoint(center);
 
-            mainCamera.m_Lens.OrthographicSize = Mathf.Max(zoomMin, mainCamera.m_Lens.OrthographicSize * oldDistance / newDistance);
+            Camera.main.orthographicSize = Mathf.Max(zoomMin, Camera.main.orthographicSize * oldDistance / newDistance);
 
 
             //float tx = Mathf.Clamp(0.01f * oldDistance / newDistance, 0.01f, 0.02f);
@@ -319,7 +316,7 @@ public class GameManager : MonoBehaviour
             print("Result : " + oldDistance / newDistance);
             print("OldDistance : " + oldDistance);
             print("newDistance : " + newDistance);
-            print("Camera OrthographicSize : " + mainCamera.m_Lens.OrthographicSize * oldDistance / newDistance);
+            print("Camera orthographicSize : " + Camera.main.orthographicSize * oldDistance / newDistance);
 
             for(int i = 0; i < BackendServerManager.GetInstance().field.Count; i++)
             {
@@ -329,17 +326,17 @@ public class GameManager : MonoBehaviour
 
             var newPinchPosition = Camera.main.ScreenToWorldPoint(center);
 
-            mainCamera.transform.position -= newPinchPosition - currentPinchPosition;
+            Camera.main.transform.position -= newPinchPosition - currentPinchPosition;
         }
         else
         {
-            //mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView * oldDistance / newDistance, 0.1f, 179.9f);
+            //Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView * oldDistance / newDistance, 0.1f, 179.9f);
         }
     }
 
     private void CameraInBounds()
     {
-        if (mainCamera.m_Lens.Orthographic)
+        if (Camera.main.orthographic)
         {
 
             //var tx = Mathf.Min(selectObject[0].transform.GetChild(1).localScale.x, 0.03f);
@@ -350,8 +347,8 @@ public class GameManager : MonoBehaviour
                 //selectObject[i].transform.GetChild(1).GetComponent<RectTransform>().localScale = new Vector3(tx, tx, tx);
             }
 
-            mainCamera.m_Lens.OrthographicSize = Mathf.Min(mainCamera.m_Lens.OrthographicSize, ((boundMaxY - boundMinY) / 2) - 0.001f);
-            mainCamera.m_Lens.OrthographicSize = Mathf.Min(mainCamera.m_Lens.OrthographicSize, (Screen.height * (boundMaxX - boundMinX) / (2 * Screen.width)) - 0.001f);
+            Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize, ((boundMaxY - boundMinY) / 2) - 0.001f);
+            Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize, (Screen.height * (boundMaxX - boundMinX) / (2 * Screen.width)) - 0.001f);
 
             Vector2 margin = Camera.main.ScreenToWorldPoint((Vector2.up * Screen.height / 2) + (Vector2.right * Screen.width / 2)) - Camera.main.ScreenToWorldPoint(Vector2.zero);
 
@@ -363,10 +360,10 @@ public class GameManager : MonoBehaviour
             float camMinX = boundMinX + marginX;
             float camMinY = boundMinY + marginY;
 
-            float camX = Mathf.Clamp(mainCamera.transform.position.x, camMinX, camMaxX);
-            float camY = Mathf.Clamp(mainCamera.transform.position.y, camMinY, camMaxY);
+            float camX = Mathf.Clamp(Camera.main.transform.position.x, camMinX, camMaxX);
+            float camY = Mathf.Clamp(Camera.main.transform.position.y, camMinY, camMaxY);
 
-            mainCamera.transform.position = new Vector3(camX, camY, mainCamera.transform.position.z);
+            Camera.main.transform.position = new Vector3(camX, camY, Camera.main.transform.position.z);
         }
     }
 
