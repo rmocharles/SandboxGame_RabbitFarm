@@ -7,7 +7,7 @@ public partial class FarmUI : MonoBehaviour
 {
     [Header("[ Table Select Canvas ]")]
     public GameObject tableCanvas;
-    public GameObject tableSelectCanvas;
+    public GameObject tableSelectPanel;
 
 
     [System.Serializable]
@@ -27,19 +27,16 @@ public partial class FarmUI : MonoBehaviour
     public Transform[] exitPosition;
     public Transform[] tablePosition;
     public Transform[] countPosition;
-    public int guestCount = 0;
-    public List<GuestPlayer> guestPlayers = new List<GuestPlayer>();
 
     public GameObject partTimerObject;
 
     public void InitializeTable()
     {
-        for(int i = 0; i < tableSelectCanvas.transform.childCount; i++)
+        for(int i = 0; i < 9; i++)
         {
             if(BackendServerManager.GetInstance().TableType[i] == 0)
             {
                 tableCanvas.transform.GetChild(i).GetComponent<Button>().interactable = true;
-                //tableCanvas.transform.GetChild(i).GetChild(0).gameObject.SetActive(true);
                 tableCanvas.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
                 tableCanvas.transform.GetChild(i).GetChild(2).gameObject.SetActive(true);
             }
@@ -49,7 +46,6 @@ public partial class FarmUI : MonoBehaviour
                 {
                     tableCanvas.transform.GetChild(i).GetComponent<Button>().interactable = false;
 
-                    //tableCanvas.transform.GetChild(i).GetChild(0).gameObject.SetActive(false);
                     tableCanvas.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
                     tableCanvas.transform.GetChild(i).GetChild(2).gameObject.SetActive(false);
 
@@ -65,7 +61,6 @@ public partial class FarmUI : MonoBehaviour
                 {
                     BackendServerManager.GetInstance().TableType[i] = 1;
                     tableCanvas.transform.GetChild(i).GetComponent<Button>().interactable = true;
-                    //tableCanvas.transform.GetChild(i).GetChild(0).gameObject.SetActive(true);
                     tableCanvas.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
                     tableCanvas.transform.GetChild(i).GetChild(2).gameObject.SetActive(false);
                 }
@@ -73,64 +68,84 @@ public partial class FarmUI : MonoBehaviour
         }
     }
 
-    public void TableClick(int num)
+    public void DisplayTable(int tableNumber)
     {
-        if (BackendServerManager.GetInstance().TableType[num] >= 10) return;
+        tableSelectPanel.SetActive(true);
 
-        for(int i = 0; i < 9; i++)
-        {
-            if (BackendServerManager.GetInstance().myInfo.harvest[i] < 1)
-                tableSelectCanvas.transform.GetChild(num).GetChild(i).GetComponent<Button>().interactable = false;
-        }
+        if (BackendServerManager.GetInstance().TableType[tableNumber] >= 10) return;
 
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < 18; i++)
         {
-            if (BackendServerManager.GetInstance().TableType[i] >= 10)
-                tableSelectCanvas.transform.GetChild(num).GetChild(BackendServerManager.GetInstance().TableType[i] - 10).GetComponent<Button>().interactable = false;
-        }
-
-        for (int i = 0; i < tableSelectCanvas.transform.childCount; i++)
-        {
-            if(i == num)
+            switch (i)
             {
-                if(tableSelectCanvas.transform.GetChild(num).gameObject.activeSelf)
-                    tableSelectCanvas.transform.GetChild(num).gameObject.SetActive(false);
-                else
-                    tableSelectCanvas.transform.GetChild(num).gameObject.SetActive(true);
+                case 0:
+
+                    break;
+
+                case 1:
+                    break;
             }
-                
-            else
-                tableSelectCanvas.transform.GetChild(i).gameObject.SetActive(false);
         }
-        
     }
 
-    public void PutOnHarvest(int num)
-    {
-        int tableNumber = 0;
-        int remainNumber = 5;
+    //    public void TableClick(int num)
+    //    {
+    //        if (BackendServerManager.GetInstance().TableType[num] >= 10) return;
 
-        for(int i = 0; i < 9; i++)
-        {
-            if (tableSelectCanvas.transform.GetChild(i).gameObject.activeSelf) tableNumber = i;
+    //        for(int i = 0; i < 9; i++)
+    //        {
+    //            if (BackendServerManager.GetInstance().myInfo.harvest[i] < 1)
+    //                tableSelectCanvas.transform.GetChild(num).GetChild(i).GetComponent<Button>().interactable = false;
+    //        }
 
-            tableSelectCanvas.transform.GetChild(i).gameObject.SetActive(false);
-        }
+    //        for(int i = 0; i < 9; i++)
+    //        {
+    //            if (BackendServerManager.GetInstance().TableType[i] >= 10)
+    //                tableSelectCanvas.transform.GetChild(num).GetChild(BackendServerManager.GetInstance().TableType[i] - 10).GetComponent<Button>().interactable = false;
+    //        }
 
-        if(BackendServerManager.GetInstance().myInfo.harvest[num - 10] >= BackendServerManager.GetInstance().martSheet[num - 10].count)
-        {
-            remainNumber = BackendServerManager.GetInstance().martSheet[num - 10].count;
-            BackendServerManager.GetInstance().myInfo.harvest[num - 10] -= BackendServerManager.GetInstance().martSheet[num - 10].count;
-        }
-        else
-        {
-            remainNumber = BackendServerManager.GetInstance().myInfo.harvest[num - 10];
-            BackendServerManager.GetInstance().myInfo.harvest[num - 10] = 0;
-        }
+    //        for (int i = 0; i < tableSelectCanvas.transform.childCount; i++)
+    //        {
+    //            if(i == num)
+    //            {
+    //                if(tableSelectCanvas.transform.GetChild(num).gameObject.activeSelf)
+    //                    tableSelectCanvas.transform.GetChild(num).gameObject.SetActive(false);
+    //                else
+    //                    tableSelectCanvas.transform.GetChild(num).gameObject.SetActive(true);
+    //            }
 
-        BackendServerManager.GetInstance().TableType[tableNumber] = num;
-        BackendServerManager.GetInstance().TableCount[tableNumber] = remainNumber;
+    //            else
+    //                tableSelectCanvas.transform.GetChild(i).gameObject.SetActive(false);
+    //        }
 
-        BackendServerManager.GetInstance().SaveMyInfo();
-    }
+    //    }
+
+    //    public void PutOnHarvest(int num)
+    //    {
+    //        int tableNumber = 0;
+    //        int remainNumber = 5;
+
+    //        for(int i = 0; i < 9; i++)
+    //        {
+    //            if (tableSelectCanvas.transform.GetChild(i).gameObject.activeSelf) tableNumber = i;
+
+    //            tableSelectCanvas.transform.GetChild(i).gameObject.SetActive(false);
+    //        }
+
+    //        if(BackendServerManager.GetInstance().myInfo.harvest[num - 10] >= BackendServerManager.GetInstance().martSheet[num - 10].count)
+    //        {
+    //            remainNumber = BackendServerManager.GetInstance().martSheet[num - 10].count;
+    //            BackendServerManager.GetInstance().myInfo.harvest[num - 10] -= BackendServerManager.GetInstance().martSheet[num - 10].count;
+    //        }
+    //        else
+    //        {
+    //            remainNumber = BackendServerManager.GetInstance().myInfo.harvest[num - 10];
+    //            BackendServerManager.GetInstance().myInfo.harvest[num - 10] = 0;
+    //        }
+
+    //        BackendServerManager.GetInstance().TableType[tableNumber] = num;
+    //        BackendServerManager.GetInstance().TableCount[tableNumber] = remainNumber;
+
+    //        BackendServerManager.GetInstance().SaveMyInfo();
+    //    }
 }

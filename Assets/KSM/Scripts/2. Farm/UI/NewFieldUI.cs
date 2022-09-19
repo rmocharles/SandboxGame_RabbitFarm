@@ -136,12 +136,14 @@ public partial class FarmUI : MonoBehaviour
         }
 
         //비료 보유량 개수
-        selectPrefab.transform.GetChild(0).GetChild(2).GetComponentInChildren<TextMeshProUGUI>().text = BackendServerManager.GetInstance().myInfo.fertilizer.ToString();
-        selectPrefab.transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = BackendServerManager.GetInstance().myInfo.fertilizer2.ToString();
+        selectPrefab.transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().color = BackendServerManager.GetInstance().myInfo.fertilizer > 0 ? new Color(1, 0.65f, 0) : new Color(1, 0, 0);
+        selectPrefab.transform.GetChild(0).GetChild(2).GetComponentInChildren<TextMeshProUGUI>().color = BackendServerManager.GetInstance().myInfo.fertilizer2 > 0 ? new Color(1, 0.65f, 0) : new Color(1, 0, 0);
+        selectPrefab.transform.GetChild(0).GetChild(2).GetComponentInChildren<TextMeshProUGUI>().text = BackendServerManager.GetInstance().myInfo.fertilizer2.ToString();
+        selectPrefab.transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = BackendServerManager.GetInstance().myInfo.fertilizer.ToString();
 
         //비료 버튼 활성화
-        selectPrefab.transform.GetChild(0).GetChild(2).GetComponent<Toggle>().interactable = BackendServerManager.GetInstance().myInfo.fertilizer > 0;
-        selectPrefab.transform.GetChild(0).GetChild(1).GetComponent<Toggle>().interactable = BackendServerManager.GetInstance().myInfo.fertilizer2 > 0;
+        selectPrefab.transform.GetChild(0).GetChild(2).GetComponent<Toggle>().interactable = BackendServerManager.GetInstance().myInfo.fertilizer2 > 0;
+        selectPrefab.transform.GetChild(0).GetChild(1).GetComponent<Toggle>().interactable = BackendServerManager.GetInstance().myInfo.fertilizer > 0;
 
         //최초 실행했을 때(비료 X)
         for (int i = 0; i < 9; i++)
@@ -191,10 +193,10 @@ public partial class FarmUI : MonoBehaviour
         });
 
         //일반 비료
-        selectPrefab.transform.GetChild(0).GetChild(2).GetComponent<Toggle>().onValueChanged.RemoveAllListeners();
-        selectPrefab.transform.GetChild(0).GetChild(2).GetComponent<Toggle>().onValueChanged.AddListener(delegate
+        selectPrefab.transform.GetChild(0).GetChild(1).GetComponent<Toggle>().onValueChanged.RemoveAllListeners();
+        selectPrefab.transform.GetChild(0).GetChild(1).GetComponent<Toggle>().onValueChanged.AddListener(delegate
         {
-            if (selectPrefab.transform.GetChild(0).GetChild(2).GetComponent<Toggle>().isOn)
+            if (selectPrefab.transform.GetChild(0).GetChild(1).GetComponent<Toggle>().isOn)
             {
                 ButtonClick();
 
@@ -220,10 +222,10 @@ public partial class FarmUI : MonoBehaviour
         });
 
         //천연 비료
-        selectPrefab.transform.GetChild(0).GetChild(1).GetComponent<Toggle>().onValueChanged.RemoveAllListeners();
-        selectPrefab.transform.GetChild(0).GetChild(1).GetComponent<Toggle>().onValueChanged.AddListener(delegate
+        selectPrefab.transform.GetChild(0).GetChild(2).GetComponent<Toggle>().onValueChanged.RemoveAllListeners();
+        selectPrefab.transform.GetChild(0).GetChild(2).GetComponent<Toggle>().onValueChanged.AddListener(delegate
         {
-            if (selectPrefab.transform.GetChild(0).GetChild(1).GetComponent<Toggle>().isOn)
+            if (selectPrefab.transform.GetChild(0).GetChild(2).GetComponent<Toggle>().isOn)
             {
                 ButtonClick();
 
@@ -263,13 +265,13 @@ public partial class FarmUI : MonoBehaviour
                             switch (i)
                             {
                                 case 1:
-                                    BackendServerManager.GetInstance().myInfo.fertilizer2--;
-                                    BackendServerManager.GetInstance().fieldType[fieldNumber] = 2;
+                                    BackendServerManager.GetInstance().myInfo.fertilizer--;
+                                    BackendServerManager.GetInstance().fieldType[fieldNumber] = 1;
                                     break;
 
                                 case 2:
-                                    BackendServerManager.GetInstance().myInfo.fertilizer--;
-                                    BackendServerManager.GetInstance().fieldType[fieldNumber] = 1;
+                                    BackendServerManager.GetInstance().myInfo.fertilizer2--;
+                                    BackendServerManager.GetInstance().fieldType[fieldNumber] = 2;
                                     break;
                             }
                         }

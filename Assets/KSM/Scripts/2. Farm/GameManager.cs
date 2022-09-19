@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         lastTouchTime = Time.time;
 
         Camera.main.orthographicSize = 99;
-        useMouse = Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer && Input.mousePresent;
+        //useMouse = Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer && Input.mousePresent;
     }
 
     void Update()
@@ -228,8 +228,7 @@ public class GameManager : MonoBehaviour
                                 Destroy(FarmUI.GetInstance().selectCanvas.transform.GetChild(i).gameObject);
                             }
 
-                            for (int i = 0; i < FarmUI.GetInstance().tableSelectCanvas.transform.childCount; i++)
-                                FarmUI.GetInstance().tableSelectCanvas.transform.GetChild(i).gameObject.SetActive(false);
+                            FarmUI.GetInstance().tableSelectPanel.SetActive(false);
                         }
 
                         if (Time.time - touchStartTime <= maxDurationForTap

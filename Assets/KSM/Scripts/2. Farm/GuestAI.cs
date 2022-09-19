@@ -40,7 +40,9 @@ public class GuestAI : MonoBehaviour
     public bool isAngry = false;
     public bool isSad = false;
 
+
     private int wantTableNumber = 0;
+    private bool isWait = false;
     private float waitCoolTime = 0;
     private enum State
     {
@@ -137,13 +139,22 @@ public class GuestAI : MonoBehaviour
                         GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, SIGH_WALK, true);
                 }
             }
+
+            if (isAngry)
+            {
+                if(navMeshAgent.velocity.x > 0)
+                {
+                    GetComponent<SkeletonAnimation>().skeleton.ScaleX = 1f;
+                    if (GetComponent<SkeletonAnimation>().AnimationName != ANGRY_WALK)
+                        GetComponent<SkeletonAnimation>().state.SetAnimation(0, ANGRY_WALK, true);
+                }
+            }
         }
         #endregion
 
         #region 도착지점 도달
         if (!navMeshAgent.hasPath)
         {
-            navMeshAgent.ResetPath();
             switch (nowState)
             {
                 case State.Enter:
@@ -170,6 +181,29 @@ public class GuestAI : MonoBehaviour
             }
         }
         #endregion
+
+        if(nowState == State.Wait || nowState == State.Purchase)
+        {
+            if (!isWait) return;
+
+            if (waitCoolTime > 0)
+            {
+                waitCoolTime -= Time.deltaTime;
+
+                if (waitCoolTime < 3)
+                {
+                    if (myOrder == 0)
+                        GetComponent<SkeletonAnimation>().skeleton.ScaleX = -1;
+                    else
+                        GetComponent<SkeletonAnimation>().skeleton.ScaleX = 1;
+
+                    if (GetComponent<SkeletonAnimation>().AnimationName != ANGRY_IDLE)
+                        GetComponent<SkeletonAnimation>().state.SetAnimation(0, ANGRY_IDLE, true);
+                }
+            }
+            else
+                ChangeState(State.AngryExit);
+        }
 
         if(Vector2.Distance(navMeshAgent.destination, transform.position) < 0.5f)
         {
@@ -216,9 +250,11 @@ public class GuestAI : MonoBehaviour
                 break;
 
             case State.AngryExit:
+                StartCoroutine(AngryExit());
                 break;
 
             case State.PurchaseExit:
+                StartCoroutine(PurchaseExit());
                 break;
 
             case State.SighExit:
@@ -243,7 +279,7 @@ public class GuestAI : MonoBehaviour
         {
             GetComponent<SkeletonAnimation>().skeleton.ScaleX = -1;
 
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(1f);
 
             GetComponent<SkeletonAnimation>().skeleton.ScaleX = 1;
         }
@@ -265,7 +301,7 @@ public class GuestAI : MonoBehaviour
         }
         #endregion
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(1f);
 
 
         //손님 체크
@@ -275,17 +311,14 @@ public class GuestAI : MonoBehaviour
         {
             isOk = false;
 
-            transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
-            transform.GetChild(0).GetChild(1).GetChild(1).gameObject.SetActive(true);
+            ChangeMode("Problem");
 
             yield return new WaitForSeconds(1f);
 
             //기다려도 손님이 많을 경우
             if (GuestManager.GetInstance().nowGuestCount > GuestManager.GetInstance().maxGuestCount)
             {
-                transform.GetChild(0).GetChild(1).GetChild(1).gameObject.SetActive(false);
-                transform.GetChild(0).GetChild(1).GetChild(0).gameObject.SetActive(true);
+                ChangeMode("Sigh");
 
                 ChangeState(State.SighExit);
             }
@@ -293,6 +326,7 @@ public class GuestAI : MonoBehaviour
             {
                 transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
                 transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+                GetComponentsInChildren<Image>()[0].sprite = FarmUI.GetInstance().martWantImage[harvestInt];
 
                 isOk = true;
             }
@@ -316,11 +350,6 @@ public class GuestAI : MonoBehaviour
 
             if (!isWant)
             {
-                GetComponent<SkeletonAnimation>().state.SetAnimation(0, SIGH_IDLE, false);
-
-                transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-
-                yield return new WaitForSeconds(1.5f);
                 ChangeState(State.SighExit);
             }
             else
@@ -403,6 +432,8 @@ public class GuestAI : MonoBehaviour
     #region 물품 구매하기
     private IEnumerator WaitPurchaseHarvest()
     {
+        isWait = true;
+
         navMeshAgent.avoidancePriority = 50 - myOrder;
         navMeshAgent.ResetPath();
 
@@ -438,7 +469,13 @@ public class GuestAI : MonoBehaviour
 
         if(myOrder == 0)
         {
+            transform.GetChild(0).GetChild(1).GetChild(3).GetComponent<Button>().onClick.RemoveAllListeners();
+            transform.GetChild(0).GetChild(1).GetChild(3).GetComponent<Button>().onClick.AddListener(() =>
+            {
+                FarmUI.GetInstance().ButtonClick();
 
+                StartCoroutine(PurchaseHarvest());
+            });
         }
 
         yield return null;
@@ -448,27 +485,148 @@ public class GuestAI : MonoBehaviour
     #region 출구로 나가기
     private IEnumerator SighExit()
     {
-        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        ChangeMode("None");
 
         GetComponent<SkeletonAnimation>().state.SetAnimation(0, SIGH_IDLE, false);
-        GetComponent<SkeletonAnimation>().loop = false;
 
         yield return new WaitForSeconds(1.3f);
 
         isSad = true;
 
-        transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
-        transform.GetChild(0).GetChild(1).GetChild(0).gameObject.SetActive(true);
+        ChangeMode("Sigh");
 
         GuestManager.GetInstance().nowGuestCount--;
         navMeshAgent.SetDestination(GuestManager.GetInstance().exitPoint[0].position);
         Destroy(this.gameObject, 10);
     }
+
+    private IEnumerator PurchaseExit()
+    {
+        ChangeMode("None");
+
+        GuestManager.GetInstance().nowGuestCount--;
+        navMeshAgent.SetDestination(GuestManager.GetInstance().exitPoint[0].position);
+        Destroy(this.gameObject, 10);
+
+        yield return null;
+    }
+
+    private IEnumerator AngryExit()
+    {
+        ChangeMode("None");
+
+        GetComponent<SkeletonAnimation>().state.SetAnimation(0, ANGRY_IDLE, false);
+
+        yield return new WaitForSeconds(2f);
+
+        isAngry = true;
+
+        ChangeMode("Angry");
+
+        BackendServerManager.GetInstance().myInfo.harvest[harvestInt]++;
+
+        GuestManager.GetInstance().nowGuestCount--;
+        GuestManager.GetInstance().guests.Remove(GetComponent<GuestAI>());
+        for (int i = GuestManager.GetInstance().guests.Count - 1; i >= 0; i--)
+        {
+            StartCoroutine(GuestManager.GetInstance().guests[i].ReloadList());
+        }
+
+        navMeshAgent.SetDestination(GuestManager.GetInstance().exitPoint[0].position);
+        Destroy(this.gameObject, 10);
+    }
     #endregion
+
+    #region 물품 구매하기
+    private IEnumerator PurchaseHarvest()
+    {
+        GuestManager.GetInstance().nowGuestCount--;
+        GuestManager.GetInstance().guests.Remove(GetComponent<GuestAI>());
+        for (int i = GuestManager.GetInstance().guests.Count - 1; i >= 0; i--)
+        {
+            StartCoroutine(GuestManager.GetInstance().guests[i].ReloadList());
+        }
+
+        BackendServerManager.GetInstance().myInfo.gold += BackendServerManager.GetInstance().martSheet[harvestInt].cost;
+
+        BackendServerManager.GetInstance().SaveMyInfo(true);
+
+        ChangeState(State.PurchaseExit);
+
+        yield return null;
+    }
+    #endregion
+
+    public IEnumerator ReloadList()
+    {
+        for (int i = 0; i < GuestManager.GetInstance().guests.Count; i++)
+            if (GuestManager.GetInstance().guests[i] == GetComponent<GuestAI>())
+                myOrder = i;
+
+        navMeshAgent.SetDestination(GuestManager.GetInstance().counterPoint[myOrder].position);
+        ChangeState(State.Wait);
+        yield return null;
+    }
 
     //============================================
     private bool isReached(Vector3 pos)
     {
         return Vector3.Distance(transform.position, pos) < 0.5f;
+    }
+
+    private void ChangeMode(string mode)
+    {
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        switch (mode)
+        {
+            case "None":
+
+                transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(1).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(2).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(3).gameObject.SetActive(false);
+
+                break;
+            case "Sigh":
+
+                transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(0).GetChild(1).GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(0).GetChild(1).GetChild(1).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(2).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(3).gameObject.SetActive(false);
+
+                break;
+
+            case "Problem":
+
+                transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(0).GetChild(1).GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(0).GetChild(1).GetChild(2).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(3).gameObject.SetActive(false);
+
+                break;
+
+            case "Angry":
+
+                transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(0).GetChild(1).GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(1).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(2).gameObject.SetActive(true);
+                transform.GetChild(0).GetChild(1).GetChild(3).gameObject.SetActive(false);
+
+                break;
+
+            case "Purchase":
+
+                transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(0).GetChild(1).GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(1).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(2).gameObject.SetActive(false);
+                transform.GetChild(0).GetChild(1).GetChild(3).gameObject.SetActive(true);
+
+                break;
+        }
     }
 }
