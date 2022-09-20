@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,22 +71,54 @@ public partial class FarmUI : MonoBehaviour
 
     public void DisplayTable(int tableNumber)
     {
-        tableSelectPanel.SetActive(true);
-
         if (BackendServerManager.GetInstance().TableType[tableNumber] >= 10) return;
 
-        for(int i = 0; i < 18; i++)
-        {
-            switch (i)
-            {
-                case 0:
+        tableSelectPanel.SetActive(true);
 
-                    break;
+        //당근
+        SetItem(0, 0);
+        SetItem(1, 9);
+        SetItem(2, 10);
 
-                case 1:
-                    break;
-            }
-        }
+        //감자
+        SetItem(3, 1);
+        SetItem(4, 11);
+        SetItem(5, 12);
+
+        //토마토
+        SetItem(6, 2);
+        SetItem(7, 13);
+        SetItem(8, 14);
+
+        //오이
+        SetItem(9, 3);
+        SetItem(10, 15);
+
+        //복숭아
+        SetItem(11, 4);
+        SetItem(12, 16);
+
+        //사과
+        SetItem(13, 5);
+        SetItem(14, 17);
+
+        //호박
+        SetItem(15, 6);
+
+        //배
+        SetItem(16, 7);
+
+        //체리
+        SetItem(17, 8);
+
+    }
+
+    //===================================
+    private void SetItem(int order, int num)
+    {
+        tableSelectPanel.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(order).GetComponent<Button>().interactable = BackendServerManager.GetInstance().myInfo.harvest[num] > 0;
+        tableSelectPanel.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(order).GetComponentInChildren<TextMeshProUGUI>().text = BackendServerManager.GetInstance().myInfo.harvest[num] > BackendServerManager.GetInstance().martSheet[num].count ? BackendServerManager.GetInstance().martSheet[num].count + "+" : BackendServerManager.GetInstance().myInfo.harvest[num].ToString();
+        tableSelectPanel.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(order).GetComponentInChildren<TextMeshProUGUI>().color = BackendServerManager.GetInstance().myInfo.harvest[num] == 0 ? new Color(1, 0, 0) : new Color(0, 0, 0);
     }
 
     //    public void TableClick(int num)
