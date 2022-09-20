@@ -215,7 +215,7 @@ public partial class FarmUI : MonoBehaviour
 
         SetInfoMoney();
 
-        UpdateFieldData();
+        UpdateFieldUI();
 
         //UpdateSkipFieldData();
 

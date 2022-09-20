@@ -51,7 +51,7 @@ public class ProductInfo : MonoBehaviour
                 {
                     FarmUI.GetInstance().ButtonClick(1);
                     BackendServerManager.GetInstance().myInfo.diamond -= BackendServerManager.GetInstance().shopSheet[myNumber].price;
-                    BackendServerManager.GetInstance().SaveMyInfo();
+                    BackendServerManager.GetInstance().SaveMyInfo(true);
                 }
                 else
                 {
@@ -66,7 +66,7 @@ public class ProductInfo : MonoBehaviour
                 {
                     FarmUI.GetInstance().ButtonClick(1);
                     BackendServerManager.GetInstance().myInfo.gold -= BackendServerManager.GetInstance().shopSheet[myNumber].price;
-                    BackendServerManager.GetInstance().SaveMyInfo();
+                    BackendServerManager.GetInstance().SaveMyInfo(true);
                 }
                 else
                 {
@@ -90,39 +90,39 @@ public class ProductInfo : MonoBehaviour
                 break;
 
             case "Carrot":
-                BackendServerManager.GetInstance().myInfo.seed_Carrot += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
+                BackendServerManager.GetInstance().myInfo.seed[0] += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
                 break;
 
             case "Potato":
-                BackendServerManager.GetInstance().myInfo.seed_Potato += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
+                BackendServerManager.GetInstance().myInfo.seed[1] += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
                 break;
 
             case "Tomato":
-                BackendServerManager.GetInstance().myInfo.seed_Tomato += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
+                BackendServerManager.GetInstance().myInfo.seed[2] += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
                 break;
 
             case "Cucumber":
-                BackendServerManager.GetInstance().myInfo.seed_Cucumber += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
+                BackendServerManager.GetInstance().myInfo.seed[3] += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
                 break;
 
             case "Apple":
-                BackendServerManager.GetInstance().myInfo.seed_Apple += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
+                BackendServerManager.GetInstance().myInfo.seed[4] += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
                 break;
 
             case "Peach":
-                BackendServerManager.GetInstance().myInfo.seed_Peach += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
+                BackendServerManager.GetInstance().myInfo.seed[5] += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
                 break;
 
             case "Pumpkin":
-                BackendServerManager.GetInstance().myInfo.seed_Pumpkin += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
+                BackendServerManager.GetInstance().myInfo.seed[6] += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
                 break;
 
             case "Pear":
-                BackendServerManager.GetInstance().myInfo.seed_Pear += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
+                BackendServerManager.GetInstance().myInfo.seed[7] += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
                 break;
 
             case "Cherry":
-                BackendServerManager.GetInstance().myInfo.seed_Cherry += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
+                BackendServerManager.GetInstance().myInfo.seed[8] += BackendServerManager.GetInstance().shopSheet[myNumber].compensate_Price;
                 break;
         }
     }

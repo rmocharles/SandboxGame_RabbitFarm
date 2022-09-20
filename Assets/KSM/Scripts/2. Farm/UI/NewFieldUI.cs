@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Spine.Unity;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 /*
- * 밭 오픈
- * 작물 심기
- * 작물 기능
- */
+* 밭 오픈
+* 작물 심기
+* 작물 기능
+*/
 
 public partial class FarmUI : MonoBehaviour
 {
@@ -28,6 +33,24 @@ public partial class FarmUI : MonoBehaviour
 
     [Tooltip("스킵 기능 관련")]
     public GameObject skipPanel;
+
+    public GameObject aiObject;
+
+    [HideInInspector]
+    private Vector3[] wayPoints = new Vector3[1];
+    private bool randomLoop;
+    private int randomHarvest = 0;
+    private Vector3 previousPosition = Vector3.zero;
+    private float harvestAnimationTime = 0;
+    private bool isHarvesting = false;
+
+    #region Update용 함수
+    private void UpdateFieldUI()
+    {
+        UpdateFieldData();
+        UpdateHarvestAnimation();
+    }
+    #endregion
 
     #region Update() -> 밭 상태 체크
     private void UpdateFieldData()
@@ -110,8 +133,58 @@ public partial class FarmUI : MonoBehaviour
             harvestCanvasBundle.transform.GetChild(fieldNumber).GetChild(BackendServerManager.GetInstance().field[fieldNumber] - 8).GetChild(harvestCanvasBundle.transform.GetChild(fieldNumber).GetChild(BackendServerManager.GetInstance().field[fieldNumber] - 8).childCount - 1).GetComponent<Button>().onClick.AddListener(() =>
             {
 
+                if (!isHarvesting)
+                {
+                    Debug.LogError("A");
+                    randomHarvest = Random.Range(0, 4);
+                    previousPosition = aiObject.transform.GetChild(randomHarvest + 1).position;
+                }
+
+                isHarvesting = true;
+                harvestAnimationTime = 1f;
+                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<SortingGroup>().sortingOrder = 100;
+                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<NavMeshAgent>().enabled = false;
+                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<FarmCharacter>().isHarvest = true;
+                aiObject.transform.GetChild(randomHarvest + 1).position = fieldCanvas.transform.GetChild(fieldNumber).position;
+                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<SkeletonAnimation>().state.SetAnimation(0, "harvest_front_l", false);
+
+                StartCoroutine(GetHarvest(fieldNumber));
             });
         }
+    }
+    #endregion
+
+    #region Harvest Animation
+    private void UpdateHarvestAnimation()
+    {
+        if (isHarvesting)
+        {
+            if(harvestAnimationTime > 0)
+            {
+                harvestAnimationTime -= Time.deltaTime;
+            }
+            else
+            {
+                isHarvesting = false;
+                aiObject.transform.GetChild(randomHarvest + 1).position = previousPosition;
+                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<NavMeshAgent>().enabled = true;
+                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<SortingGroup>().sortingOrder = 0;
+            }
+        }
+    }
+    #endregion
+
+    #region 수확 애니메이션
+    private IEnumerator GetHarvest(int fieldNumber)
+    {
+        harvestCanvasBundle.transform.GetChild(fieldNumber).GetChild(BackendServerManager.GetInstance().field[fieldNumber] - 8).gameObject.SetActive(false);
+        BackendServerManager.GetInstance().myInfo.harvest[BackendServerManager.GetInstance().field[fieldNumber] - 10]++;
+        BackendServerManager.GetInstance().field[fieldNumber] = 0;
+        BackendServerManager.GetInstance().fieldType[fieldNumber] = 0;
+
+        BackendServerManager.GetInstance().SaveMyInfo(true);
+
+        yield return null;
     }
     #endregion
 

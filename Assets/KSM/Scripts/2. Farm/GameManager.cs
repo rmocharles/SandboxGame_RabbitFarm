@@ -214,8 +214,6 @@ public class GameManager : MonoBehaviour
                 case TouchPhase.Ended:
                     {
                         lastTouchTime = Time.time;
-                        Debug.LogError(lastTouchTime - touchStartTime);
-
 
                         if (lastTouchTime - touchStartTime < 0.15f && (!IsPointerOverUIObject() || ignoreUI))
                         {

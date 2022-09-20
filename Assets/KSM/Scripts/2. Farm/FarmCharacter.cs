@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Spine;
 using Spine.Unity;
 using TMPro;
@@ -42,6 +43,8 @@ public class FarmCharacter : MonoBehaviour
     private float giftInit;
     public int giftPercent = 90;
     public int giftReward = 5;
+
+    public bool isHarvest;
 
     void Start()
     {
@@ -88,6 +91,15 @@ public class FarmCharacter : MonoBehaviour
     {
         navMeshAgent.speed = characterSpeed;
 
+        //수확중일 때 비활성화
+        if (transform.GetChild(0).GetChild(0).gameObject.activeSelf)
+        {
+            transform.GetChild(0).GetChild(0).GetComponent<Image>().color = isHarvest ? new Color(0, 0, 0, 0) : new Color(1, 1, 1, 1);
+            transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color = isHarvest ? new Color(0, 0, 0, 0) : new Color(1, 1, 1, 1);
+            transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Button>().interactable = !isHarvest;
+        }
+        
+
         if (!isGift)
         {
             if (giftCoolTime > 0)
@@ -112,9 +124,7 @@ public class FarmCharacter : MonoBehaviour
 
     void LateUpdate()
     {
-        Debug.LogError("isReward : " + isReward);
-
-        if (!isReward)
+        if (!isReward && !isHarvest)
         {
             if (direction - 2 < 0)
                 GetComponent<SkeletonAnimation>().skeleton.ScaleX = -0.9f;
@@ -143,7 +153,7 @@ public class FarmCharacter : MonoBehaviour
 
         yield return new WaitUntil(() => !loopIdle);
 
-        if(!isReward)
+        if(!isReward && !isHarvest)
             StartCoroutine(RandomLoopWalk());
 
         yield return new WaitUntil(() => !loopWalk);
@@ -162,7 +172,7 @@ public class FarmCharacter : MonoBehaviour
         int rotateDirection = Random.Range(0, 4);
         direction = rotateDirection;
 
-        if(!isReward)
+        if(!isReward && !isHarvest)
             ChangeState(State.Idle);
 
 
@@ -320,5 +330,11 @@ public class FarmCharacter : MonoBehaviour
     private string GetAnimation()
     {
         return GetComponent<SkeletonAnimation>().AnimationName;
+    }
+
+    public void TEST()
+    {
+        Debug.LogError("?");
+        isHarvest = false;
     }
 }
