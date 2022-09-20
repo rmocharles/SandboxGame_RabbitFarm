@@ -181,4 +181,10 @@ public partial class FarmUI : MonoBehaviour
 
     //        BackendServerManager.GetInstance().SaveMyInfo();
     //    }
+
+    public void PutOnHarvest(int num)
+    {
+        int tableNumber = 0;
+
+    }
 }
