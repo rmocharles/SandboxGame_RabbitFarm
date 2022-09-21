@@ -16,6 +16,12 @@ public class ADManager : MonoBehaviour
     [Header("[Rewarded AD ]")]
     public string rewardedAdUnitID = "ca-app-pub-1478803844863001/8862420851";
 
+    public Action<bool> endRewardAction;
+    public Action loadFail;
+
+    public bool endVideo = false;
+    public bool isReward = false;
+
     public static ADManager GetInstance()
     {
         if (instance == null)
@@ -34,9 +40,39 @@ public class ADManager : MonoBehaviour
         CreateAndLoadRewardedAd();
     }
 
+    void Update()
+    {
+        if(endVideo)
+        {
+            endVideo = false;
+
+            endRewardAction?.Invoke(isReward);
+            endRewardAction = null;
+            isReward = false;
+        }
+    }
+
     private void CreateAndLoadRewardedAd()
     {
+        if(rewardedAd != null)
+        {
+            rewardedAd.Destroy();
+        }
         this.rewardedAd = new RewardedAd(rewardedAdUnitID);
+
+        rewardedAd.OnUserEarnedReward += (sender, args) =>
+        {
+            isReward = true;
+        };
+
+        rewardedAd.OnAdClosed += (sender, args) =>
+        {
+
+        };
+        rewardedAd.OnAdFailedToLoad += (sender, args) =>
+        {
+            loadFail?.Invoke();
+        };
 
         this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
 
@@ -79,6 +115,7 @@ public class ADManager : MonoBehaviour
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
         this.CreateAndLoadRewardedAd();
+        endVideo = true;
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
@@ -87,21 +124,9 @@ public class ADManager : MonoBehaviour
         double amount = args.Amount;
     }
 
-    public void ShowRewardedAD(Action success = null, Action fail = null)
+    public void ShowRewardedAD(Action<bool> endReward = null, Action loadFail = null)
     {
-        rewardedAd.OnUserEarnedReward += (sender, args) =>
-        {
-            success();
-        };
-
-        rewardedAd.OnAdClosed += (sender, args) =>
-        {
-
-        };
-        rewardedAd.OnAdFailedToLoad += (sender, args) =>
-        {
-            fail();
-        };
+        this.endRewardAction = endReward;
 
         if (this.rewardedAd.IsLoaded())
         {
@@ -109,7 +134,7 @@ public class ADManager : MonoBehaviour
         }
         else
         {
-            fail();
+            this.loadFail = loadFail;
         }
     }
 }

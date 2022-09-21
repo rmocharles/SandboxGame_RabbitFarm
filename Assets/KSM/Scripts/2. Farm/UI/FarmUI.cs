@@ -64,6 +64,10 @@ public partial class FarmUI : MonoBehaviour
 
     public int characterRandom;
 
+    public int randomFamily = 0;
+
+    public List<GameObject> characterList = new List<GameObject>();
+
     public static FarmUI GetInstance()
     {
         if (instance == null)
@@ -83,7 +87,20 @@ public partial class FarmUI : MonoBehaviour
 
     void Start()
     {
+        randomFamily = Random.Range(0, 4);
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (i != randomFamily)
+                characterList.Add(aiObject.transform.GetChild(i + 1).gameObject);
+            else
+                aiObject.transform.GetChild(randomFamily + 1).gameObject.SetActive(false);
+        }
+
         characterRandom = Random.Range(0, 4);
+
+
+        familyPartTimerObject.transform.GetChild(randomFamily).gameObject.SetActive(true);
 
 #if UNITY_ANDROID || UNITY_IOS
         Application.targetFrameRate = Screen.currentResolution.refreshRate;
@@ -121,6 +138,9 @@ public partial class FarmUI : MonoBehaviour
         StartCoroutine(InstantiateGuestPlayer());
 
         SoundManager.GetInstance().SetBgm(0);
+
+        for (int i = 0; i < 9; i++)
+            tableObject[i].GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
     }
 
     void Update()

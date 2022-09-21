@@ -260,60 +260,62 @@ public class FarmCharacter : MonoBehaviour
     {
         FarmUI.GetInstance().ButtonClick();
 
-        ADManager.GetInstance().ShowRewardedAD(
-            () =>
+        ADManager.GetInstance().ShowRewardedAD((bool isSuccess) =>
             {
-                transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-                transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
-                transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + giftReward;
-
-                SetAnimation(REWARD, false);
-                AddAnimation(IDLE[0], true, 0);
-
-                switch (num)
+                if (isSuccess)
                 {
-                    case 0: //엄마
-                        BackendServerManager.GetInstance().myInfo.diamond += giftReward;
-                        break;
+                    switch (num)
+                    {
+                        case 0: //엄마
+                            BackendServerManager.GetInstance().myInfo.diamond += giftReward;
+                            break;
 
-                    case 1: //아빠
-                        BackendServerManager.GetInstance().myInfo.gold += giftReward;
-                        break;
+                        case 1: //아빠
+                            BackendServerManager.GetInstance().myInfo.gold += giftReward;
+                            break;
 
-                    case int n when(2 <= n && n <= 3): //아들, 딸
-                        int ran = Random.Range(0, 3);
-                        int ran2 = Random.Range(1, 101);
-                        transform.GetChild(0).GetChild(1).GetComponentInChildren<Image>().sprite = FarmUI.GetInstance().inventoryHarvestImage[ran];
-                        transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(FarmUI.GetInstance().inventoryHarvestImage[ran].textureRect.width, FarmUI.GetInstance().inventoryHarvestImage[ran].textureRect.height);
-                        transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(0.35f, 0.35f, 1);
+                        case int n when (2 <= n && n <= 3): //아들, 딸
+                            int ran = Random.Range(0, 3);
+                            int ran2 = Random.Range(1, 101);
+                            transform.GetChild(0).GetChild(1).GetComponentInChildren<Image>().sprite = FarmUI.GetInstance().inventoryHarvestImage[ran];
+                            transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(FarmUI.GetInstance().inventoryHarvestImage[ran].textureRect.width, FarmUI.GetInstance().inventoryHarvestImage[ran].textureRect.height);
+                            transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(0.35f, 0.35f, 1);
 
-                        if(ran2 > 0 && ran2 <= 50)
-                        {
-                            BackendServerManager.GetInstance().myInfo.harvest[ran] += 1;
-                            transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + 1;
-                        }
-                        else if(ran2 > 50 && ran2 <= 80)
-                        {
-                            BackendServerManager.GetInstance().myInfo.harvest[ran] += 2;
-                            transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + 2;
-                        }
-                        else
-                        {
-                            BackendServerManager.GetInstance().myInfo.harvest[ran] += 3;
-                            transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + 3;
-                        }
-                        break;
+                            if (ran2 > 0 && ran2 <= 50)
+                            {
+                                BackendServerManager.GetInstance().myInfo.harvest[ran] += 1;
+                                transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + 1;
+                            }
+                            else if (ran2 > 50 && ran2 <= 80)
+                            {
+                                BackendServerManager.GetInstance().myInfo.harvest[ran] += 2;
+                                transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + 2;
+                            }
+                            else
+                            {
+                                BackendServerManager.GetInstance().myInfo.harvest[ran] += 3;
+                                transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + 3;
+                            }
+                            break;
+                    }
+
+                    transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+                    transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+                    transform.GetChild(0).GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+" + giftReward;
+
+                    SetAnimation(REWARD, false);
+                    AddAnimation(IDLE[0], true, 0);
+
+                    //BackendServerManager.GetInstance().SaveMyInfo(true);
                 }
 
-                BackendServerManager.GetInstance().SaveMyInfo(true);
-            },
-                () =>
+            }, () =>
+            {
+                FarmUI.GetInstance().SetErrorObject(PlayerPrefs.GetString("Langauge") == "ko" ? NETWORK_FAIL : NETWORK_FAIL_EN, () =>
                 {
-                    FarmUI.GetInstance().SetErrorObject(PlayerPrefs.GetString("Langauge") == "ko" ? NETWORK_FAIL : NETWORK_FAIL_EN, () =>
-                    {
 
-                    });
                 });
+            });
     }
 
     private void SetAnimation(string animation, bool loop = true)

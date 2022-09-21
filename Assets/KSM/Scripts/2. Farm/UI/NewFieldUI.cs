@@ -36,6 +36,8 @@ public partial class FarmUI : MonoBehaviour
 
     public GameObject aiObject;
 
+    public GameObject harvestSuccessPrefab;
+
     [HideInInspector]
     private Vector3[] wayPoints = new Vector3[1];
     private bool randomLoop;
@@ -49,6 +51,7 @@ public partial class FarmUI : MonoBehaviour
     {
         UpdateFieldData();
         UpdateHarvestAnimation();
+        UpdateSkipFieldData();
     }
     #endregion
 
@@ -135,22 +138,81 @@ public partial class FarmUI : MonoBehaviour
 
                 if (!isHarvesting)
                 {
-                    Debug.LogError("A");
-                    randomHarvest = Random.Range(0, 4);
-                    previousPosition = aiObject.transform.GetChild(randomHarvest + 1).position;
+                    randomHarvest = Random.Range(0, 3);
+                    previousPosition = characterList[randomHarvest].transform.position;
                 }
 
                 isHarvesting = true;
                 harvestAnimationTime = 1f;
-                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<SortingGroup>().sortingOrder = 100;
-                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<NavMeshAgent>().enabled = false;
-                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<FarmCharacter>().isHarvest = true;
-                aiObject.transform.GetChild(randomHarvest + 1).position = fieldCanvas.transform.GetChild(fieldNumber).position;
-                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<SkeletonAnimation>().state.SetAnimation(0, "harvest_front_l", false);
+                characterList[randomHarvest].GetComponent<SortingGroup>().sortingLayerName = "UI";
+                characterList[randomHarvest].GetComponent<SortingGroup>().sortingOrder = -1;
+                characterList[randomHarvest].GetComponent<NavMeshAgent>().enabled = false;
+                characterList[randomHarvest].GetComponent<FarmCharacter>().isHarvest = true;
+                characterList[randomHarvest].transform.position = fieldCanvas.transform.GetChild(fieldNumber).position + (characterList[randomHarvest].GetComponent<SkeletonAnimation>().skeleton.ScaleX > 0 ? new Vector3(1, -1, 0) : new Vector3(-1, -1, 0));
+                characterList[randomHarvest].GetComponent<SkeletonAnimation>().state.SetAnimation(0, "harvest_front_l", false);
 
                 StartCoroutine(GetHarvest(fieldNumber));
             });
         }
+    }
+    #endregion
+
+    #region 스킵
+    private void UpdateSkipFieldData()
+    {
+        if (!skipPanel.activeSelf) return;
+        skipPanel.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = PlayerPrefs.GetString("Langauge") == "ko" ? BackendServerManager.GetInstance().langaugeSheet[BackendServerManager.GetInstance().field[skipField] - 3].ko : BackendServerManager.GetInstance().langaugeSheet[BackendServerManager.GetInstance().field[skipField] - 3].en;
+        skipPanel.transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().text = PlayerPrefs.GetString("Langauge") == "ko" ? BackendServerManager.GetInstance().langaugeSheet[1].ko : BackendServerManager.GetInstance().langaugeSheet[1].en;
+        skipPanel.transform.GetChild(2).GetComponent<Image>().sprite = inventoryHarvestImage[BackendServerManager.GetInstance().field[skipField] - 10];
+
+        TimeSpan ts = DateTime.Parse(BackendServerManager.GetInstance().fieldEndTime[skipField]) - DateTime.UtcNow;
+        if (ts.TotalSeconds > 60)
+        {
+            skipPanel.transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().text = Mathf.FloorToInt(((int)ts.TotalSeconds)) >= 0 ? (Mathf.FloorToInt((int)ts.TotalSeconds) / 60).ToString() + "m " + (Mathf.FloorToInt((int)ts.TotalSeconds) % 60).ToString() + "s" : "0s";
+        }
+        else if (ts.TotalSeconds < 60 && ts.TotalSeconds > 0)
+        {
+            skipPanel.transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().text = Mathf.FloorToInt(((int)ts.TotalSeconds)) >= 0 ? Mathf.FloorToInt((int)ts.TotalSeconds).ToString() + "s" : "0" + "s";
+        }
+        else
+        {
+            skipPanel.SetActive(false);
+        }
+
+        skipPanel.transform.GetChild(5).GetComponentInChildren<Text>().text = (Mathf.FloorToInt(((int)ts.TotalSeconds)) / 60 + 1).ToString();
+    }
+
+    private int skipField = 0;
+    public void SkipHarvest(int fieldNumber)
+    {
+        skipField = fieldNumber;
+
+        skipPanel.SetActive(true);
+
+        skipPanel.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+        skipPanel.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() =>
+        {
+            //현재 스킵할 수 있는 다이아량을 소지하고 있을 때
+            if (BackendServerManager.GetInstance().myInfo.diamond >= int.Parse(skipPanel.transform.GetChild(5).GetComponentInChildren<Text>().text))
+            {
+                skipPanel.SetActive(false);
+
+                BackendServerManager.GetInstance().myInfo.diamond -= int.Parse(skipPanel.transform.GetChild(5).GetComponentInChildren<Text>().text);
+                BackendServerManager.GetInstance().fieldEndTime[fieldNumber] = DateTime.UtcNow.ToString();
+
+                BackendServerManager.GetInstance().SaveMyInfo(true);
+
+            }
+
+            //돈이 부족할 경우
+            else
+            {
+                SetErrorObject(PlayerPrefs.GetString("Langauge") == "ko" ? "다이아가 부족합니다.\n상점으로 이동하겠습니까?" : "Not enough diamonds.\nWould you like to go to the store?", () =>
+                {
+                    ChangeShopCategory(0);
+                });
+            }
+        });
     }
     #endregion
 
@@ -166,9 +228,11 @@ public partial class FarmUI : MonoBehaviour
             else
             {
                 isHarvesting = false;
-                aiObject.transform.GetChild(randomHarvest + 1).position = previousPosition;
-                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<NavMeshAgent>().enabled = true;
-                aiObject.transform.GetChild(randomHarvest + 1).GetComponent<SortingGroup>().sortingOrder = 0;
+                characterList[randomHarvest].GetComponent<FarmCharacter>().isHarvest = false;
+                characterList[randomHarvest].transform.position = previousPosition;
+                characterList[randomHarvest].GetComponent<NavMeshAgent>().enabled = true;
+                characterList[randomHarvest].GetComponent<SortingGroup>().sortingLayerName = "ForeGround";
+                characterList[randomHarvest].GetComponent<SortingGroup>().sortingOrder = 0;
             }
         }
     }
@@ -177,14 +241,23 @@ public partial class FarmUI : MonoBehaviour
     #region 수확 애니메이션
     private IEnumerator GetHarvest(int fieldNumber)
     {
+        harvestCanvasBundle.transform.GetChild(fieldNumber).GetChild(BackendServerManager.GetInstance().field[fieldNumber] - 8).GetChild(harvestCanvasBundle.transform.GetChild(fieldNumber).GetChild(BackendServerManager.GetInstance().field[fieldNumber] - 8).childCount - 1).gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
+
+        GameObject harvestPrefab = Instantiate(harvestSuccessPrefab, inventoryObject.transform);
+        harvestPrefab.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+
+
+        harvestPrefab.transform.GetChild(0).GetComponent<Image>().sprite = inventoryHarvestImage[BackendServerManager.GetInstance().field[fieldNumber] - 10];
+        harvestPrefab.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(inventoryHarvestImage[BackendServerManager.GetInstance().field[fieldNumber] - 10].textureRect.width, inventoryHarvestImage[BackendServerManager.GetInstance().field[fieldNumber] - 10].textureRect.height);
+
         harvestCanvasBundle.transform.GetChild(fieldNumber).GetChild(BackendServerManager.GetInstance().field[fieldNumber] - 8).gameObject.SetActive(false);
+        harvestCanvasBundle.transform.GetChild(fieldNumber).GetChild(BackendServerManager.GetInstance().field[fieldNumber] - 8).GetChild(harvestCanvasBundle.transform.GetChild(fieldNumber).GetChild(BackendServerManager.GetInstance().field[fieldNumber] - 8).childCount - 1).gameObject.SetActive(true);
         BackendServerManager.GetInstance().myInfo.harvest[BackendServerManager.GetInstance().field[fieldNumber] - 10]++;
         BackendServerManager.GetInstance().field[fieldNumber] = 0;
         BackendServerManager.GetInstance().fieldType[fieldNumber] = 0;
-
         BackendServerManager.GetInstance().SaveMyInfo(true);
 
-        yield return null;
     }
     #endregion
 

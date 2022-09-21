@@ -28,7 +28,7 @@ public class AnimatorManager : MonoBehaviour
 
     public void DestroyCoin()
     {
-        FarmUI.GetInstance().partTimerObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
     public void InActiveReward()

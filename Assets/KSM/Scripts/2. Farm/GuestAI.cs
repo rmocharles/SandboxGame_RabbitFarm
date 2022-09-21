@@ -348,6 +348,109 @@ public class GuestAI : MonoBehaviour
                 }
             }
 
+            bool isBest = false;
+            switch (harvestInt)
+            {
+                //당근일 경우
+                case 0:
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (BackendServerManager.GetInstance().TableType[j] == 19 && !isBest)
+                        {
+                            wantTableNumber = j;
+                            harvestInt = 9;
+                            isWant = true;
+                        }
+                        if (BackendServerManager.GetInstance().TableType[j] == 20)
+                        {
+                            isBest = true;
+                            wantTableNumber = j;
+                            harvestInt = 10;
+                            isWant = true;
+                        }
+                    }
+                    break;
+
+                //감자일 경우
+                case 1:
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (BackendServerManager.GetInstance().TableType[j] == 21 && !isBest)
+                        {
+                            wantTableNumber = j;
+                            harvestInt = 11;
+                            isWant = true;
+                        }
+                        if (BackendServerManager.GetInstance().TableType[j] == 22)
+                        {
+                            isBest = true;
+                            wantTableNumber = j;
+                            harvestInt = 12;
+                            isWant = true;
+                        }
+                    }
+                    break;
+
+                //토마토일 경우
+                case 2:
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (BackendServerManager.GetInstance().TableType[j] == 23 && !isBest)
+                        {
+                            wantTableNumber = j;
+                            harvestInt = 13;
+                            isWant = true;
+                        }
+                        if (BackendServerManager.GetInstance().TableType[j] == 24)
+                        {
+                            isBest = true;
+                            wantTableNumber = j;
+                            harvestInt = 14;
+                            isWant = true;
+                        }
+                    }
+                    break;
+
+                //오이일 경우
+                case 3:
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (BackendServerManager.GetInstance().TableType[j] == 25)
+                        {
+                            wantTableNumber = j;
+                            harvestInt = 15;
+                            isWant = true;
+                        }
+                    }
+                    break;
+
+                //복숭아일 경우
+                case 4:
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (BackendServerManager.GetInstance().TableType[j] == 26)
+                        {
+                            wantTableNumber = j;
+                            harvestInt = 16;
+                            isWant = true;
+                        }
+                    }
+                    break;
+
+                //사과일 경우
+                case 5:
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (BackendServerManager.GetInstance().TableType[j] == 27)
+                        {
+                            wantTableNumber = j;
+                            harvestInt = 17;
+                            isWant = true;
+                        }
+                    }
+                    break;
+            }
+
             if (!isWant)
             {
                 ChangeState(State.SighExit);
@@ -549,9 +652,16 @@ public class GuestAI : MonoBehaviour
 
         BackendServerManager.GetInstance().myInfo.gold += BackendServerManager.GetInstance().martSheet[harvestInt].cost;
 
-        BackendServerManager.GetInstance().SaveMyInfo(true);
+        BackendServerManager.GetInstance().SaveMyInfo();
 
         ChangeState(State.PurchaseExit);
+
+        GameObject successObj = Instantiate(FarmUI.GetInstance().successPrefab, FarmUI.GetInstance().familyPartTimerObject.transform.parent.GetChild(0));
+        successObj.GetComponentInChildren<Text>().text = "+" + BackendServerManager.GetInstance().martSheet[harvestInt].cost.ToString();
+
+        FarmUI.GetInstance().familyPartTimerObject.transform.GetChild(FarmUI.GetInstance().randomFamily).GetComponent<SkeletonAnimation>().state.SetAnimation(0, "count_back_r", false);
+
+        FarmUI.GetInstance().familyPartTimerObject.transform.GetChild(FarmUI.GetInstance().randomFamily).GetComponent<SkeletonAnimation>().state.AddAnimation(0, "idle1_front_r", false, 0);
 
         yield return null;
     }

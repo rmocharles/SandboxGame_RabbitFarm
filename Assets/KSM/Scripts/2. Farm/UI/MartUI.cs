@@ -19,6 +19,7 @@ public partial class FarmUI : MonoBehaviour
     }
     public TableHarvestImage[] tableHarvestImage;
 
+    public GameObject[] tableObject;
     public Sprite[] wantImage;
     public Sprite[] wantTypeImage;
 
@@ -30,6 +31,11 @@ public partial class FarmUI : MonoBehaviour
     public Transform[] countPosition;
 
     public GameObject partTimerObject;
+    public GameObject familyPartTimerObject;
+
+    public GameObject successPrefab;
+
+    private int selectTableNumber = 0;
 
     public void InitializeTable()
     {
@@ -72,6 +78,8 @@ public partial class FarmUI : MonoBehaviour
     public void DisplayTable(int tableNumber)
     {
         if (BackendServerManager.GetInstance().TableType[tableNumber] >= 10) return;
+
+        selectTableNumber = tableNumber;
 
         tableSelectPanel.SetActive(true);
 
@@ -117,6 +125,13 @@ public partial class FarmUI : MonoBehaviour
     private void SetItem(int order, int num)
     {
         tableSelectPanel.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(order).GetComponent<Button>().interactable = BackendServerManager.GetInstance().myInfo.harvest[num] > 0;
+
+        for (int i = 0; i < 9; i++)
+        {
+            if (BackendServerManager.GetInstance().TableType[i] == num + 10)
+                tableSelectPanel.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(order).GetComponent<Button>().interactable = false;
+        }
+
         tableSelectPanel.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(order).GetComponentInChildren<TextMeshProUGUI>().text = BackendServerManager.GetInstance().myInfo.harvest[num] > BackendServerManager.GetInstance().martSheet[num].count ? BackendServerManager.GetInstance().martSheet[num].count + "+" : BackendServerManager.GetInstance().myInfo.harvest[num].ToString();
         tableSelectPanel.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(order).GetComponentInChildren<TextMeshProUGUI>().color = BackendServerManager.GetInstance().myInfo.harvest[num] == 0 ? new Color(1, 0, 0) : new Color(0, 0, 0);
     }
@@ -131,60 +146,76 @@ public partial class FarmUI : MonoBehaviour
     //                tableSelectCanvas.transform.GetChild(num).GetChild(i).GetComponent<Button>().interactable = false;
     //        }
 
-    //        for(int i = 0; i < 9; i++)
-    //        {
-    //            if (BackendServerManager.GetInstance().TableType[i] >= 10)
-    //                tableSelectCanvas.transform.GetChild(num).GetChild(BackendServerManager.GetInstance().TableType[i] - 10).GetComponent<Button>().interactable = false;
-    //        }
+            //for(int i = 0; i< 9; i++)
+            //{
+            //    if (BackendServerManager.GetInstance().TableType[i] >= 10)
+            //        tableSelectCanvas.transform.GetChild(num).GetChild(BackendServerManager.GetInstance().TableType[i] - 10).GetComponent<Button>().interactable = false;
+            //}
 
-    //        for (int i = 0; i < tableSelectCanvas.transform.childCount; i++)
-    //        {
-    //            if(i == num)
-    //            {
-    //                if(tableSelectCanvas.transform.GetChild(num).gameObject.activeSelf)
-    //                    tableSelectCanvas.transform.GetChild(num).gameObject.SetActive(false);
-    //                else
-    //                    tableSelectCanvas.transform.GetChild(num).gameObject.SetActive(true);
-    //            }
+//        for (int i = 0; i < tableSelectCanvas.transform.childCount; i++)
+//        {
+//            if(i == num)
+//            {
+//                if(tableSelectCanvas.transform.GetChild(num).gameObject.activeSelf)
+//                    tableSelectCanvas.transform.GetChild(num).gameObject.SetActive(false);
+//                else
+//                    tableSelectCanvas.transform.GetChild(num).gameObject.SetActive(true);
+//            }
 
-    //            else
-    //                tableSelectCanvas.transform.GetChild(i).gameObject.SetActive(false);
-    //        }
+//            else
+//                tableSelectCanvas.transform.GetChild(i).gameObject.SetActive(false);
+//        }
 
-    //    }
+//    }
 
-    //    public void PutOnHarvest(int num)
-    //    {
-    //        int tableNumber = 0;
-    //        int remainNumber = 5;
+//    public void PutOnHarvest(int num)
+//    {
+//        int tableNumber = 0;
+//        int remainNumber = 5;
 
-    //        for(int i = 0; i < 9; i++)
-    //        {
-    //            if (tableSelectCanvas.transform.GetChild(i).gameObject.activeSelf) tableNumber = i;
+//        for(int i = 0; i < 9; i++)
+//        {
+//            if (tableSelectCanvas.transform.GetChild(i).gameObject.activeSelf) tableNumber = i;
 
-    //            tableSelectCanvas.transform.GetChild(i).gameObject.SetActive(false);
-    //        }
+//            tableSelectCanvas.transform.GetChild(i).gameObject.SetActive(false);
+//        }
 
-    //        if(BackendServerManager.GetInstance().myInfo.harvest[num - 10] >= BackendServerManager.GetInstance().martSheet[num - 10].count)
-    //        {
-    //            remainNumber = BackendServerManager.GetInstance().martSheet[num - 10].count;
-    //            BackendServerManager.GetInstance().myInfo.harvest[num - 10] -= BackendServerManager.GetInstance().martSheet[num - 10].count;
-    //        }
-    //        else
-    //        {
-    //            remainNumber = BackendServerManager.GetInstance().myInfo.harvest[num - 10];
-    //            BackendServerManager.GetInstance().myInfo.harvest[num - 10] = 0;
-    //        }
+//        if(BackendServerManager.GetInstance().myInfo.harvest[num - 10] >= BackendServerManager.GetInstance().martSheet[num - 10].count)
+//        {
+//            remainNumber = BackendServerManager.GetInstance().martSheet[num - 10].count;
+//            BackendServerManager.GetInstance().myInfo.harvest[num - 10] -= BackendServerManager.GetInstance().martSheet[num - 10].count;
+//        }
+//        else
+//        {
+//            remainNumber = BackendServerManager.GetInstance().myInfo.harvest[num - 10];
+//            BackendServerManager.GetInstance().myInfo.harvest[num - 10] = 0;
+//        }
 
-    //        BackendServerManager.GetInstance().TableType[tableNumber] = num;
-    //        BackendServerManager.GetInstance().TableCount[tableNumber] = remainNumber;
+//        BackendServerManager.GetInstance().TableType[tableNumber] = num;
+//        BackendServerManager.GetInstance().TableCount[tableNumber] = remainNumber;
 
-    //        BackendServerManager.GetInstance().SaveMyInfo();
-    //    }
+//        BackendServerManager.GetInstance().SaveMyInfo();
+//    }
 
-    public void PutOnHarvest(int num)
+public void PutOnHarvest(int num)
     {
-        int tableNumber = 0;
+        tableSelectPanel.SetActive(false);
 
+        int remainNumber = 0;
+        if(BackendServerManager.GetInstance().myInfo.harvest[num - 10] >= BackendServerManager.GetInstance().martSheet[num - 10].count)
+        {
+            remainNumber = BackendServerManager.GetInstance().martSheet[num - 10].count;
+            BackendServerManager.GetInstance().myInfo.harvest[num - 10] -= BackendServerManager.GetInstance().martSheet[num - 10].count;
+        }
+        else
+        {
+            remainNumber = BackendServerManager.GetInstance().myInfo.harvest[num - 10];
+            BackendServerManager.GetInstance().myInfo.harvest[num - 10] = 0;
+        }
+
+        BackendServerManager.GetInstance().TableType[selectTableNumber] = num;
+        BackendServerManager.GetInstance().TableCount[selectTableNumber] = remainNumber;
+
+        BackendServerManager.GetInstance().SaveMyInfo();
     }
 }
