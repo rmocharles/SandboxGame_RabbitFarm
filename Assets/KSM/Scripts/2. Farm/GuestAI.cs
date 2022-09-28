@@ -492,42 +492,51 @@ public class GuestAI : MonoBehaviour
         if (GetComponent<SkeletonAnimation>().AnimationName != IDLE_DOWN)
             GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, IDLE_DOWN, true);
 
-        if(BackendServerManager.GetInstance().TableCount[wantTableNumber] > 0)
+        //판매대에 왔는데 물건이 바뀌거나 없을 경우
+        if(BackendServerManager.GetInstance().TableType[wantTableNumber] - 10 != harvestInt)
         {
-            if (GetComponent<SkeletonAnimation>().AnimationName != PICKUP)
-                GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, PICKUP, false);
-
-            BackendServerManager.GetInstance().TableCount[wantTableNumber] -= 1;
-
-            FarmUI.GetInstance().InitializeTable();
-
-            yield return new WaitForSeconds(0.8f);
-
-            GuestManager.GetInstance().guests.Add(GetComponent<GuestAI>());
-
-            for(int i = 0; i < GuestManager.GetInstance().guests.Count; i++)
-            {
-                if(GuestManager.GetInstance().guests[i] == GetComponent<GuestAI>())
-                {
-                    myOrder = i;
-                    navMeshAgent.SetDestination(GuestManager.GetInstance().counterPoint[i].position);
-                }
-            }
-
-            transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-
-            ChangeState(State.Wait);
-        }
-        else
-        {
-            transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
-
-            transform.GetChild(0).GetChild(1).GetChild(1).gameObject.SetActive(true);
+            ChangeMode("Problem");
 
             yield return new WaitForSeconds(1f);
 
             ChangeState(State.SighExit);
+        }
+        else
+        {
+            if (BackendServerManager.GetInstance().TableCount[wantTableNumber] > 0)
+            {
+                if (GetComponent<SkeletonAnimation>().AnimationName != PICKUP)
+                    GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, PICKUP, false);
+
+                BackendServerManager.GetInstance().TableCount[wantTableNumber] -= 1;
+
+                FarmUI.GetInstance().InitializeTable();
+
+                yield return new WaitForSeconds(0.8f);
+
+                GuestManager.GetInstance().guests.Add(GetComponent<GuestAI>());
+
+                for (int i = 0; i < GuestManager.GetInstance().guests.Count; i++)
+                {
+                    if (GuestManager.GetInstance().guests[i] == GetComponent<GuestAI>())
+                    {
+                        myOrder = i;
+                        navMeshAgent.SetDestination(GuestManager.GetInstance().counterPoint[i].position);
+                    }
+                }
+
+                transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+
+                ChangeState(State.Wait);
+            }
+            else
+            {
+                ChangeMode("Problem");
+
+                yield return new WaitForSeconds(1f);
+
+                ChangeState(State.SighExit);
+            }
         }
     }
     #endregion
