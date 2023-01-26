@@ -47,6 +47,8 @@ public class BunnyController : MonoBehaviour
     [SerializeField] private GameObject bubbleObject;
     public GameObject textBubbleObject;
 
+    [SerializeField] private Button touchButton;
+
     
     public Vector3 originPos { get; private set; }
     private bool nowHarvesting = false;
@@ -72,12 +74,21 @@ public class BunnyController : MonoBehaviour
         if (nowState == State.Work) return;
         
         nowCoroutine = StartCoroutine(PlayerController(.5f));
+        
+        touchButton.onClick.AddListener(() =>
+        {
+            //StaticManager.Sound.SetSFX();
+            ChangeState(State.Idle);
+        });
     }
 
     private void Update()
     {
         //Y축 레이어 순서 정하기
         AdjustSortingLayer();
+        
+        //터치할 시 애니메이션
+        touchButton.gameObject.SetActive(nowState == State.Idle || nowState == State.Walk);
 
         //말풍선 띄어놓기
         ActiveBubble(false);
@@ -91,6 +102,10 @@ public class BunnyController : MonoBehaviour
         //상태 실시간 체크
         switch (nowState)
         {
+            case State.Idle:
+                
+                break;
+            
             case State.Walk:
 
                 if (direction - 2 < 0)

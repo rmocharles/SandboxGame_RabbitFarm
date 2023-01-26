@@ -41,7 +41,7 @@ public class TableUI : MonoBehaviour
                     //테이블 위에 있는지 검사
                     for (int j = 0; j < 9; j++)
                     {
-                        if (StaticManager.Backend.backendGameData.MartData.Dictionary[j].ItemCode == i + 9)
+                        if (StaticManager.Backend.backendGameData.MartData.Dictionary[j].ItemCode == i + 9 && StaticManager.Backend.backendGameData.MartData.Dictionary[j].ItemCount > 0)
                             isTable = true;
                     }
 
@@ -61,7 +61,7 @@ public class TableUI : MonoBehaviour
                     //테이블 위에 있는지 검사
                     for (int j = 0; j < 9; j++)
                     {
-                        if (StaticManager.Backend.backendGameData.MartData.Dictionary[j].ItemCode == i + 15)
+                        if (StaticManager.Backend.backendGameData.MartData.Dictionary[j].ItemCode == i + 15 && StaticManager.Backend.backendGameData.MartData.Dictionary[j].ItemCount > 0)
                             isTable = true;
                     }
 

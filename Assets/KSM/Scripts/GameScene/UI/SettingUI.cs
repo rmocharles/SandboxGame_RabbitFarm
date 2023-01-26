@@ -76,6 +76,12 @@ public class SettingUI : MonoBehaviour
             UniClipboard.SetText(Backend.UserInDate);
             StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(28));
         });
+        
+        accountButton.onClick.AddListener(() =>
+        {
+            StaticManager.Sound.SetSFX();
+            GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(38));
+        });
 
     }
 

@@ -94,6 +94,12 @@ public class HarvestDragUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         duplicateHarvestObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
         duplicateHarvestObject.GetComponent<HarvestDragUI>().SetDrag(false);
         Destroy(duplicateHarvestObject);
+
+        for (int i = 0; i < uiCanvas.transform.childCount; i++)
+        {
+            if (uiCanvas.transform.GetChild(i).GetComponent<HarvestInfoUI>())
+                Destroy(uiCanvas.transform.GetChild(i).gameObject);
+        }
         
         GameManager.Field.selectHarvestUI.GetComponent<RectTransform>().DOMoveY(-50, 1f);
         Invoke("DestroyUI", .1f);

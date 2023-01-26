@@ -13,7 +13,7 @@ public class ADManager : MonoBehaviour
         IronSourceEvents.onRewardedVideoAdStartedEvent += RewardedVideoAdStartedEvent;
         IronSourceEvents.onRewardedVideoAdEndedEvent += RewardedVideoAdEndedEvent;
         //IronSourceEvents.onRewardedVideoAdRewardedEvent += RewardedVideoAdRewardedEvent; 
-        IronSourceEvents.onRewardedVideoAdShowFailedEvent += RewardedVideoAdShowFailedEvent;
+        //IronSourceEvents.onRewardedVideoAdShowFailedEvent += RewardedVideoAdShowFailedEvent;
         
         IronSourceEvents.onInterstitialAdReadyEvent += InterstitialAdReadyEvent;
         IronSourceEvents.onInterstitialAdLoadFailedEvent += InterstitialAdLoadFailedEvent;        
@@ -37,6 +37,12 @@ public class ADManager : MonoBehaviour
       IronSourceEvents.onRewardedVideoAdRewardedEvent += (sender) =>
       {
         rewardAD?.Invoke();
+      };
+
+      IronSourceEvents.onRewardedVideoAdShowFailedEvent += error =>
+      {
+        Debug.LogError(error);
+        StaticManager.UI.AlertUI.OpenUI(error.ToString());
       };
     }
 

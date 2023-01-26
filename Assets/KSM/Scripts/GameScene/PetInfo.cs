@@ -33,6 +33,7 @@ public class PetInfo : MonoBehaviour
     private Coroutine nowCoroutine = null;
 
     [SerializeField] private GameObject bubbleObject;
+    [SerializeField] private Button touchButton;
 
     public float originRemainTime = 30f;
     private float remainTime = 30f;
@@ -90,6 +91,11 @@ public class PetInfo : MonoBehaviour
             }
             
             remainTime = originRemainTime;
+        });
+        
+        touchButton.onClick.AddListener(() =>
+        {
+            ChangeState(State.TOUCH);
         });
     }
 
@@ -216,6 +222,18 @@ public class PetInfo : MonoBehaviour
             ChangeState(State.Walk);
     }
 
+    private IEnumerator RandomTouch(float delay = 0f)
+    {
+        yield return new WaitForSeconds(delay);
+
+        int random = Random.Range(0, 2);
+        GetComponent<SkeletonAnimation>().state.SetAnimation(0, TOUCH[random], true);
+
+        yield return new WaitForSeconds(2.5f);
+        
+        ChangeState(State.Idle);
+    }
+
     #region 상태 변화
 
     public void ChangeState(State state)
@@ -233,6 +251,10 @@ public class PetInfo : MonoBehaviour
             
             case State.Walk:
                 nowCoroutine = StartCoroutine(RandomWalk());
+                break;
+            
+            case State.TOUCH:
+                nowCoroutine = StartCoroutine(RandomTouch());
                 break;
         }
     }

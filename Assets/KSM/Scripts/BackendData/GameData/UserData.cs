@@ -19,7 +19,7 @@ namespace BackendData.GameData
         {
             Level = 1;
             Exp = 0;
-            Diamond = 500;
+            Diamond = 100;
             Gold = 1000;
             Tutorial = 0;
             

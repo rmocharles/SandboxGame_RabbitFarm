@@ -83,17 +83,23 @@ public class QuestUI : MonoBehaviour
                     StaticManager.Backend.backendChart.Quest.questSheet[num].MaxReward);
 
 
-                if (isGold)
+                switch (StaticManager.Backend.backendChart.Quest.questSheet[num].Type)
                 {
-                    StaticManager.Backend.backendGameData.UserData.AddGold(reward);
-                    GameManager.Instance.GoldUI("+" + reward);
+                    case "Gold":
+                        StaticManager.Backend.backendGameData.UserData.AddGold(reward);
+                        GameManager.Instance.GoldUI("+" + reward);
+                        break;
+                    
+                    case "Diamond":
+                        StaticManager.Backend.backendGameData.UserData.AddDiamond(reward);
+                        GameManager.Instance.DiamondUI("+" + reward);
+                        break;
+                    
+                    case "Fertilizer":
+                        StaticManager.Backend.backendGameData.InventoryData.AddItem("Fertilizer", reward);
+                        break;
                 }
-                else
-                {
-                    StaticManager.Backend.backendGameData.UserData.AddDiamond(reward);
-                    GameManager.Instance.DiamondUI("+" + reward);
-                }
-                
+
                 //업그레이드
                 StaticManager.Backend.backendGameData.QuestData.SetQuest(num, -1);
                 

@@ -37,15 +37,15 @@ public class GuestManager : MonoBehaviour
     private IEnumerator SpawnGuest()
     {
         if (StaticManager.Backend.backendGameData.UserData.Level <= 7)
-            spawnGuestTime = Random.Range(4f, 6f);
+            spawnGuestTime = Random.Range(5, 7);
         else if (StaticManager.Backend.backendGameData.UserData.Level <= 10)
-            spawnGuestTime = Random.Range(3f, 5f);
+            spawnGuestTime = Random.Range(4, 6);
         else if (StaticManager.Backend.backendGameData.UserData.Level <= 15)
-            spawnGuestTime = Random.Range(2f, 5f);
+            spawnGuestTime = Random.Range(3, 5);
         else if (StaticManager.Backend.backendGameData.UserData.Level <= 20)
-            spawnGuestTime = Random.Range(2f, 4f);
+            spawnGuestTime = Random.Range(2, 4);
         else
-            spawnGuestTime = Random.Range(2f, 3f);
+            spawnGuestTime = Random.Range(2f, 4f);
 
         yield return new WaitForSeconds(spawnGuestTime);
 

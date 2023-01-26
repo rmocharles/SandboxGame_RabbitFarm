@@ -76,7 +76,12 @@ namespace BackendData.GameData
                 inventoryDic.Add(animalItem[i, 1], 0);
             }
             
+#if UNITY_EDITOR
+            inventoryDic.Add(Fertilizer, 99);
+#else
             inventoryDic.Add(Fertilizer, 0);
+#endif
+            
         }
         
         //Backend.GameData.GetMyData 호출 이후 리턴된 값을 파싱하여 캐싱하는 함수

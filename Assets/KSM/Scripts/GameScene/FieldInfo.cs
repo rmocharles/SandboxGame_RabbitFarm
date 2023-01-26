@@ -43,16 +43,19 @@ public class FieldInfo : MonoBehaviour
             GameObject unLockUI = StaticManager.UI.OpenUI("Prefabs/GameScene/UnlockUI", GameManager.Instance.UICanvas.transform);
             StaticManager.Sound.SetSFX();
 
-            if (fieldNumber < 5)
+            int count = 0;
+            //0 ~ 8
+            for (int i = 0; i < 9; i++)
             {
-                unLockUI.GetComponent<UnlockUI>().Initialize(fieldNumber, 300 * (fieldNumber), UnlockUI.Type.Field);
-            }
-            else
-            {
-                unLockUI.GetComponent<UnlockUI>().Initialize(fieldNumber, 2000 * (fieldNumber - 4), UnlockUI.Type.Field);
+                if (StaticManager.Backend.backendGameData.FieldData.Dictionary[i].FieldLevel != -1)
+                    count++;
             }
 
+            int[] price = {0, 300, 500, 700, 900, 1200, 2000, 4000, 6000};
             
+            unLockUI.GetComponent<UnlockUI>().Initialize(fieldNumber, price[count], UnlockUI.Type.Field);
+
+
         });
         
         //이펙트 생성

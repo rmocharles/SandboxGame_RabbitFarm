@@ -29,11 +29,16 @@ public class WeatherUI : MonoBehaviour
         
         adButton.onClick.AddListener(() =>
         {
+            // StaticManager.Sound.SetSFX(weather == WeatherManager.Weather.Rain ? "Rain" : "Sun");
+            // GameManager.Weather.ActiveWeather(weather == WeatherManager.Weather.Rain ? 2 : 1);
+            
+            backgroundGroup.GetComponent<RectTransform>().DOScale(Vector3.zero, 0.1f);
+            Invoke(nameof(DestroyUI), 0.1f);
             //광고 후
             StaticManager.AD.ShowRewardAD(() =>
             {
                 StaticManager.Sound.SetSFX(weather == WeatherManager.Weather.Rain ? "Rain" : "Sun");
-                GameManager.Weather.ActiveWeather(weather);
+                GameManager.Weather.ActiveWeather(weather == WeatherManager.Weather.Rain ? 2 : 1);
             
                 backgroundGroup.GetComponent<RectTransform>().DOScale(Vector3.zero, 0.1f);
                 Invoke(nameof(DestroyUI), 0.1f);

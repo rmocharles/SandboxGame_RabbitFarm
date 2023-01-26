@@ -43,6 +43,7 @@ public class GameManager : Singleton<GameManager>
     public Button diamondPlusButton;
     public Button moveButton;
     public Button questButton;
+    public GameObject questActiveObject;
 
 
     public Vector3 originQuestPos, originBagPos, originShopPos, originMovePos;
@@ -204,6 +205,8 @@ public class GameManager : Singleton<GameManager>
             //MakeToast(StaticManager.Langauge.Localize(38));
             GameObject questUI = StaticManager.UI.OpenUI("Prefabs/GameScene/QuestUI", UICanvas.transform);
         });
+
+        ActiveQuestIcon();
     }
 
     void Update()
@@ -283,6 +286,24 @@ public class GameManager : Singleton<GameManager>
                 Debug.LogWarning("저장 성공");
             }
         });
+        
+        ActiveQuestIcon();
+    }
+
+    public void ActiveQuestIcon()
+    {
+        bool isActive = false;
+        
+        for (int i = 0; i < 8; i++)
+        {
+            if (StaticManager.Backend.backendGameData.QuestData.Dictionary[i].Count >= StaticManager.Backend.backendChart.Quest.questSheet[i].Upgrade *
+                StaticManager.Backend.backendGameData.QuestData.Dictionary[i].Level)
+            {
+                isActive = true;
+            }
+        }
+       
+        questActiveObject.SetActive(isActive);
     }
 
     public void MakeToast(string text)

@@ -124,49 +124,81 @@ public class ShopUI : MonoBehaviour
         
         petPurchaseButtons[0].onClick.AddListener(() =>
         {
-            if (StaticManager.Backend.backendGameData.UserData.Diamond >= 200)
+            if (StaticManager.Backend.backendGameData.UserData.Level >= 10)
             {
-                StaticManager.Sound.SetSFX("Cash");
-                StaticManager.Backend.backendGameData.UserData.AddDiamond(-200);
-                GameManager.Pet.SetPet(2);
-                GameManager.Instance.SaveAllData();
+                if (StaticManager.Backend.backendGameData.UserData.Diamond >= 200)
+                {
+                    StaticManager.Sound.SetSFX("Cash");
+                    StaticManager.Backend.backendGameData.UserData.AddDiamond(-200);
+                    GameManager.Pet.SetPet(2);
+                    GameManager.Instance.SaveAllData();
+
+                    ActiveMode(Mode.Pet);
+                }
+                else
+                {
+                    StaticManager.Sound.SetSFX();
+                    GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(47));
+                }
             }
             else
             {
                 StaticManager.Sound.SetSFX();
-                GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(47));
+                GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(45));
             }
+            
         });
         
         petPurchaseButtons[1].onClick.AddListener(() =>
         {
-            if (StaticManager.Backend.backendGameData.UserData.Diamond >= 300)
+            if (StaticManager.Backend.backendGameData.UserData.Level >= 20)
             {
-                StaticManager.Sound.SetSFX("Cash");
-                StaticManager.Backend.backendGameData.UserData.AddDiamond(-300);
-                GameManager.Pet.SetPet(3);
-                GameManager.Instance.SaveAllData();
+                if (StaticManager.Backend.backendGameData.UserData.Diamond >= 300)
+                {
+                    StaticManager.Sound.SetSFX("Cash");
+                    StaticManager.Backend.backendGameData.UserData.AddDiamond(-300);
+                    GameManager.Pet.SetPet(3);
+                    GameManager.Instance.SaveAllData();
+                    
+                    ActiveMode(Mode.Pet);
+                }
+                else
+                {
+                    StaticManager.Sound.SetSFX();
+                    GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(47));
+                }
             }
             else
             {
                 StaticManager.Sound.SetSFX();
-                GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(47));
+                GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(45));
             }
+
         });
         
         petPurchaseButtons[2].onClick.AddListener(() =>
         {
-            if (StaticManager.Backend.backendGameData.UserData.Diamond >= 400)
+            if (StaticManager.Backend.backendGameData.UserData.Level >= 30)
             {
-                StaticManager.Sound.SetSFX("Cash");
-                StaticManager.Backend.backendGameData.UserData.AddDiamond(-400);
-                GameManager.Pet.SetPet(4);
-                GameManager.Instance.SaveAllData();
+                if (StaticManager.Backend.backendGameData.UserData.Diamond >= 400)
+                {
+                    StaticManager.Sound.SetSFX("Cash");
+                    StaticManager.Backend.backendGameData.UserData.AddDiamond(-400);
+                    GameManager.Pet.SetPet(4);
+                    GameManager.Instance.SaveAllData();
+                    
+                    ActiveMode(Mode.Pet);
+                }
+                else
+                {
+                    StaticManager.Sound.SetSFX();
+                    GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(47));
+                }
             }
             else
             {
                 StaticManager.Sound.SetSFX();
-                GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(47));
+                GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(45));
             }
         });
     }
@@ -230,6 +262,21 @@ public class ShopUI : MonoBehaviour
                 
                 if(petShopGroup.GetComponentInChildren<Scrollbar>())
                     petShopGroup.GetComponentInChildren<Scrollbar>().value = 1f;
+
+
+                bool isCheck = false;
+                
+                for (int i = 0; i < petShopGroup.transform.GetChild(0).GetChild(0).GetChild(0).childCount; i++)
+                {
+                    if (!StaticManager.Backend.backendGameData.PetData.Dictionary[i + 2])
+                        isCheck = true;
+                    
+                    petShopGroup.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(!StaticManager.Backend.backendGameData.PetData.Dictionary[i + 2]);
+                }
+                
+                if(!isCheck)
+                    GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(70));
+                
                 break;
         }
     }

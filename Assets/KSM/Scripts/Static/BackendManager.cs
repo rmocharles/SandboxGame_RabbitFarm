@@ -37,6 +37,7 @@ public class BackendManager : MonoBehaviour
         public readonly BackendData.GameData.PetData PetData = new();
         public readonly BackendData.GameData.PartTimeData PartTimeData = new();
         public readonly BackendData.GameData.QuestData QuestData = new();
+        public readonly BackendData.GameData.WeatherData WeatherData = new();
         
         public readonly Dictionary<string, GameData> GameDataList = new Dictionary<string, GameData>();
         public BackendGameData()
@@ -51,6 +52,7 @@ public class BackendManager : MonoBehaviour
             GameDataList.Add("8", PetData);
             GameDataList.Add("9", PartTimeData);
             GameDataList.Add("10", QuestData);
+            GameDataList.Add("11", WeatherData);
         }
     }
 

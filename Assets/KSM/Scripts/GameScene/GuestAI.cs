@@ -334,7 +334,7 @@ public class GuestAI : MonoBehaviour
                 }
                 else if (StaticManager.Backend.backendGameData.UserData.Level <= 15)
                 {
-                    int[] random = { 0, 1, 2, 3, 4, 5, 18 };
+                    int[] random = { 0, 1, 2, 3, 4, 5, 20 };
                     Initialize(GameManager.Mart.Guest.guests.Count, random[Random.Range(0, 6)]);
                 }
                 else if (StaticManager.Backend.backendGameData.UserData.Level <= 20)
@@ -711,7 +711,7 @@ public class GuestAI : MonoBehaviour
     
     private bool IsReached(Vector3 pos)
     {
-        return Vector3.Distance(transform.position, pos) < 0.15f;
+        return Vector3.Distance(transform.position, pos) < 0.3f;
     }
     
     public void AdjustSortingLayer()
