@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "226114276995",
+    "project_id": "rabbit-s-carrot-farm",
+    "storage_bucket": "rabbit-s-carrot-farm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226114276995:android:dffd819a272b5c84a255b6",
+        "android_client_info": {
+          "package_name": "com.sandboxgame.rabbitfarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226114276995-sm73846vbonstesiui2kpan521irqpr2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhFmJRvC4Iq9rj_IA6gJSPEOCPm0oIrj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226114276995-sm73846vbonstesiui2kpan521irqpr2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

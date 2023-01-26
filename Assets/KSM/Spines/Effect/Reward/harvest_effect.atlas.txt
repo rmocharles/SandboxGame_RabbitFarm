@@ -1,0 +1,13 @@
+harvest_effect.png
+size:2048,512
+filter:Linear,Linear
+pma:true
+bg
+bounds:2,2,335,322
+offsets:1,21,337,361
+star
+bounds:701,80,369,244
+offsets:2,2,373,248
+star1
+bounds:339,59,360,265
+offsets:1,1,361,267

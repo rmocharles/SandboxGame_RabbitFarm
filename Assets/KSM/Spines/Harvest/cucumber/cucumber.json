@@ -1,0 +1,20 @@
+{"skeleton":{"images":""},
+"bones":[{"name":"root"}],
+"slots":[
+	{"name":"tree","bone":"root","attachment":"tree"},
+	{"name":"leaf2","bone":"root","attachment":"leaf2"},
+	{"name":"fruit2","bone":"root","attachment":"fruit2"},
+	{"name":"fruit1","bone":"root","attachment":"fruit1"},
+	{"name":"leaf","bone":"root","attachment":"leaf"}
+],
+"skins":{
+	"default":{
+		"leaf":{"leaf":{"x":63.5,"y":155.5,"width":87,"height":49}},
+		"fruit1":{"fruit1":{"x":88,"y":90.5,"width":56,"height":107}},
+		"fruit2":{"fruit2":{"x":45,"y":105.5,"width":56,"height":107}},
+		"leaf2":{"leaf2":{"x":46,"y":83,"width":92,"height":100}},
+		"tree":{"tree":{"x":62,"y":95,"width":80,"height":190}}
+	}
+},
+"animations":{"animation":{}}
+}

@@ -1,0 +1,7 @@
+gem_use.png
+size:256,256
+filter:Linear,Linear
+pma:true
+image/gem
+bounds:2,2,216,210
+offsets:20,23,256,256

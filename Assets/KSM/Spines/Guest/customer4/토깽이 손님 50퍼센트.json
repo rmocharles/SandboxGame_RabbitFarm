@@ -1,0 +1,46 @@
+{"skeleton":{"images":""},
+"bones":[{"name":"root"}],
+"slots":[
+	{"name":"leg2","bone":"root","attachment":"leg2"},
+	{"name":"leg1","bone":"root","attachment":"leg1"},
+	{"name":"arm1","bone":"root","attachment":"arm1"},
+	{"name":"body","bone":"root","attachment":"body"},
+	{"name":"head","bone":"root","attachment":"head"},
+	{"name":"nose","bone":"root","attachment":"nose"},
+	{"name":"angry","bone":"root","attachment":"angry"},
+	{"name":"eye3","bone":"root","attachment":"eye3"},
+	{"name":"eye1","bone":"root","attachment":"eye1"},
+	{"name":"eye2","bone":"root","attachment":"eye2"},
+	{"name":"eyebrow2","bone":"root","attachment":"eyebrow2"},
+	{"name":"eyebrow1","bone":"root","attachment":"eyebrow1"},
+	{"name":"back_head","bone":"root","attachment":"back_head"},
+	{"name":"back_leg2","bone":"root","attachment":"back_leg2"},
+	{"name":"back_leg1","bone":"root","attachment":"back_leg1"},
+	{"name":"back_body","bone":"root","attachment":"back_body"},
+	{"name":"back_arm1","bone":"root","attachment":"back_arm1"},
+	{"name":"back_arm2","bone":"root","attachment":"back_arm2"}
+],
+"skins":{
+	"default":{
+		"back_arm2":{"back_arm2":{"x":1301.5,"y":1109.5,"width":133,"height":81}},
+		"back_arm1":{"back_arm1":{"x":1243,"y":1151,"width":78,"height":150}},
+		"back_body":{"back_body":{"x":1325,"y":1120.5,"width":208,"height":275}},
+		"back_leg1":{"back_leg1":{"x":1289.5,"y":1005,"width":91,"height":144}},
+		"back_leg2":{"back_leg2":{"x":1360.5,"y":1023,"width":87,"height":144}},
+		"back_head":{"back_head":{"x":1265,"y":1353,"width":278,"height":290}},
+		"eyebrow1":{"eyebrow1":{"x":1308.5,"y":1305.5,"width":69,"height":39}},
+		"eyebrow2":{"eyebrow2":{"x":1411.5,"y":1332.5,"width":67,"height":31}},
+		"eye2":{"eye2":{"x":1365.5,"y":1291,"width":105,"height":40}},
+		"eye1":{"eye1":{"x":1365.5,"y":1294.5,"width":93,"height":45}},
+		"eye3":{"eye3":{"x":1366,"y":1289,"width":122,"height":42}},
+		"angry":{"angry":{"x":1360.5,"y":1307,"width":133,"height":104}},
+		"nose":{"nose":{"x":1378,"y":1234,"width":88,"height":78}},
+		"head":{"head":{"x":1296.5,"y":1354.5,"width":311,"height":355}},
+		"body":{"body":{"x":1279,"y":1112.5,"width":202,"height":261}},
+		"arm1":{"arm1":{"x":1339.5,"y":1145,"width":97,"height":152}},
+		"leg1":{"leg1":{"x":1257.5,"y":990.5,"width":79,"height":131}},
+		"leg2":{"leg2":{"x":1334,"y":1005,"width":82,"height":124}}
+	}
+},
+"animations":{"animation":{}}
+}

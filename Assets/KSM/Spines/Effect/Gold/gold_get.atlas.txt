@@ -1,0 +1,7 @@
+gold_get.png
+size:256,256
+filter:Linear,Linear
+pma:true
+gold
+bounds:2,2,238,232
+offsets:9,12,256,256

@@ -1,0 +1,14 @@
+sun.png
+size:1024,512
+filter:Linear,Linear
+pma:true
+image/cloud1
+bounds:531,203,117,81
+image/cloud2
+bounds:531,135,95,66
+image/sun1
+bounds:2,2,281,282
+offsets:3,3,287,287
+image/sun2
+bounds:285,40,244,244
+offsets:22,20,287,287

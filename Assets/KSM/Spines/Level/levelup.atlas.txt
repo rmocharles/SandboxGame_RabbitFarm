@@ -1,0 +1,15 @@
+levelup.png
+size:512,1024
+filter:Linear,Linear
+pma:true
+bg
+bounds:2,567,335,322
+offsets:1,21,337,361
+star
+bounds:2,54,369,244
+offsets:2,2,373,248
+star1
+bounds:2,300,360,265
+offsets:1,1,361,267
+text
+bounds:2,2,193,50

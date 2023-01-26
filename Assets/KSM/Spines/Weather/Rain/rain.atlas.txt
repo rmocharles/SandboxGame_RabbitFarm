@@ -1,0 +1,9 @@
+rain.png
+size:512,256
+filter:Linear,Linear
+pma:true
+image/cloud
+bounds:2,2,256,216
+offsets:2,3,261,222
+image/rain
+bounds:260,149,33,69
