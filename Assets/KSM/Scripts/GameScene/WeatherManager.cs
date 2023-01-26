@@ -180,13 +180,14 @@ public class WeatherManager : MonoBehaviour
                 sunParticleObject.SetActive(true);
                 rainParticleObject.SetActive(false);
 
-                if (remainTime.TotalSeconds > 0)
+                if (remainTime.TotalSeconds > 1)
                 {
                     coolTimeText.text = (remainTime.TotalSeconds / 60 - 1).ToString("00") + ":" + (remainTime.TotalSeconds % 60).ToString("00");
                 }
                 else
                 {
                     coolTimeText.text = string.Empty;
+                    coolTimeText.transform.parent.gameObject.SetActive(false);
                     StaticManager.Backend.backendGameData.WeatherData.SetType(0);
                     SetWeather(Weather.Rain);
                     GameManager.Instance.SaveAllData();
@@ -202,13 +203,14 @@ public class WeatherManager : MonoBehaviour
                 sunParticleObject.SetActive(false);
                 rainParticleObject.SetActive(true);
 
-                if (remainTime.TotalSeconds > 0)
+                if (remainTime.TotalSeconds > 1)
                 {
                     coolTimeText.text = (remainTime.TotalSeconds / 60 - 1).ToString("00") + ":" + (remainTime.TotalSeconds % 60).ToString("00");
                 }
                 else
                 {
                     coolTimeText.text = string.Empty;
+                    coolTimeText.transform.parent.gameObject.SetActive(false);
                     StaticManager.Backend.backendGameData.WeatherData.SetType(0);
                     SetWeather(Weather.Sun);
                     GameManager.Instance.SaveAllData();

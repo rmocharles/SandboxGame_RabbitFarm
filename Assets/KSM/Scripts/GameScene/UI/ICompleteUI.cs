@@ -77,7 +77,7 @@ public class ICompleteUI : MonoBehaviour
                 StaticManager.AD.ShowRewardAD(() =>
                 {
                     StaticManager.Sound.SetSFX("Get");
-                    StaticManager.Backend.backendGameData.InventoryData.AddItem("Fertilizer", 1);
+                    StaticManager.Backend.backendGameData.InventoryData.AddItem("Fertilizer", 3);
                 });
             }
             

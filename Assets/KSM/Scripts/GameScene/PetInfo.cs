@@ -65,9 +65,9 @@ public class PetInfo : MonoBehaviour
         bubbleObject.GetComponent<Button>().onClick.AddListener(() =>
         {
             //퀘스트
-            StaticManager.Backend.backendGameData.QuestData.AddCount(7, 1);
+            StaticManager.Backend.backendGameData.QuestData.AddCount(7, 3);
             
-            StaticManager.Backend.backendGameData.InventoryData.AddItem("Fertilizer", 1);
+            StaticManager.Backend.backendGameData.InventoryData.AddItem("Fertilizer", 3);
             GameManager.Instance.SaveAllData();
 
             isSound = false;

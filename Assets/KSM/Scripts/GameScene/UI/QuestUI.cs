@@ -88,15 +88,18 @@ public class QuestUI : MonoBehaviour
                     case "Gold":
                         StaticManager.Backend.backendGameData.UserData.AddGold(reward);
                         GameManager.Instance.GoldUI("+" + reward);
+                        GameManager.Instance.MakeToast(reward + StaticManager.Langauge.Localize(71));
                         break;
                     
                     case "Diamond":
                         StaticManager.Backend.backendGameData.UserData.AddDiamond(reward);
                         GameManager.Instance.DiamondUI("+" + reward);
+                        GameManager.Instance.MakeToast(reward + StaticManager.Langauge.Localize(72));
                         break;
                     
                     case "Fertilizer":
                         StaticManager.Backend.backendGameData.InventoryData.AddItem("Fertilizer", reward);
+                        GameManager.Instance.MakeToast(reward + StaticManager.Langauge.Localize(73));
                         break;
                 }
 
