@@ -171,6 +171,7 @@ public class WeatherManager : MonoBehaviour
         if (!string.IsNullOrEmpty(StaticManager.Backend.backendGameData.WeatherData.RemainTime))
         {
             TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.WeatherData.RemainTime) - DateTime.UtcNow;
+            int remainTimer = Mathf.FloorToInt((float)Math.Truncate(remainTime.TotalSeconds));
             //태양
             if (StaticManager.Backend.backendGameData.WeatherData.Type == 1)
             {
@@ -182,7 +183,7 @@ public class WeatherManager : MonoBehaviour
 
                 if (remainTime.TotalSeconds > 1)
                 {
-                    coolTimeText.text = (remainTime.TotalSeconds / 60 - 1).ToString("00") + ":" + (remainTime.TotalSeconds % 60).ToString("00");
+                    coolTimeText.text = (remainTime.TotalSeconds / 60).ToString("00") + ":" + (remainTime.TotalSeconds % 60).ToString("00");
                 }
                 else
                 {
@@ -205,7 +206,7 @@ public class WeatherManager : MonoBehaviour
 
                 if (remainTime.TotalSeconds > 1)
                 {
-                    coolTimeText.text = (remainTime.TotalSeconds / 60 - 1).ToString("00") + ":" + (remainTime.TotalSeconds % 60).ToString("00");
+                    coolTimeText.text = (remainTimer / 60).ToString("00") + ":" + (remainTimer % 60).ToString("00");
                 }
                 else
                 {

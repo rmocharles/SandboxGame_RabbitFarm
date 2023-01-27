@@ -97,7 +97,7 @@ public class FieldManager : MonoBehaviour
             remainTimer = DateTime.UtcNow.AddSeconds(StaticManager.Backend.backendChart.Harvest.harvestSheet[harvestCode].CoolTime).ToString();
 
             //비올때 쿨타임 50% 감소
-            if (GameManager.Weather.nowWeather == WeatherManager.Weather.Rain && GameManager.Weather.isRain)
+            if (StaticManager.Backend.backendGameData.WeatherData.Type == 2)
             {
                 remainTimer = DateTime.UtcNow.AddSeconds(StaticManager.Backend.backendChart.Harvest.harvestSheet[harvestCode].CoolTime / 2).ToString();
             }

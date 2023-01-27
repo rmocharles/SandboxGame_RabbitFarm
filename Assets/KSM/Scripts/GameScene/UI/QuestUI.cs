@@ -14,8 +14,8 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private Sprite inCompleteButtonSprite;
 
 
-    private Color32 diamondColor = new Color32(228, 249, 252, 255);
-    private Color32 goldColor = new Color32(253, 239, 176, 255);
+    private Color32 backgroundCompleteColor = new Color32(228, 249, 252, 255);
+    private Color32 backgroundInCompleteColor = new Color32(253, 239, 176, 255);
 
     private Color32 completeColor = new Color32(71, 168, 197, 255);
     private Color32 inCompleteColor = new Color32(255, 0, 0, 255);
@@ -43,8 +43,7 @@ public class QuestUI : MonoBehaviour
             TMP_Text maxCountText = layoutGroup[i].GetComponentsInChildren<TMP_Text>()[2];
             TMP_Text completeCountText = layoutGroup[i].GetComponentsInChildren<TMP_Text>()[3];
             
-            //해당 퀘스트가 골드 or 다이아 보상인지 체크 (레이어 색 변경)
-            layoutGroup[i].GetComponent<Image>().color = StaticManager.Backend.backendChart.Quest.questSheet[i].Type == "Gold" ? goldColor : diamondColor;
+            
             
             //퀘스트 번역
             questInfoText.text = StaticManager.Langauge.Localize(62 + i);
@@ -64,6 +63,9 @@ public class QuestUI : MonoBehaviour
             //보상 받을 수 있는지 여부에 따라 버튼 비활성화
             bool isOpen = StaticManager.Backend.backendGameData.QuestData.Dictionary[i].Count >= StaticManager.Backend.backendChart.Quest.questSheet[i].Upgrade *
                 StaticManager.Backend.backendGameData.QuestData.Dictionary[i].Level;
+            
+            //해당 퀘스트가 골드 or 다이아 보상인지 체크 (레이어 색 변경)
+            layoutGroup[i].GetComponent<Image>().color = isOpen ? backgroundCompleteColor : backgroundInCompleteColor;
             layoutGroup[i].GetComponentInChildren<Button>().interactable = isOpen;
             layoutGroup[i].GetComponentsInChildren<Image>()[2].sprite = isOpen ? completeButtonSprite : inCompleteButtonSprite;
 

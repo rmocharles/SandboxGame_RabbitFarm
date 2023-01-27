@@ -12,42 +12,15 @@ public class RefrigeratorUI : MonoBehaviour
         refrigeratorGroup = transform.GetComponentInChildren<HorizontalLayoutGroup>().gameObject;
     }
 
-    public void Initialize(int refigeratorNumber)
+    public void Initialize(int refrigeratorNumber)
     {
-        if (StaticManager.Backend.backendGameData.InventoryData.GetItemCount("Milk") > 0)
+        for (int i = 0; i < 2; i++)
         {
-            bool isRefrigerator = false;
-            for (int i = 0; i < 4; i++)
-            {
-                if (StaticManager.Backend.backendGameData.MartData.Dictionary[i + 9].ItemCode == 18 &&
-                    StaticManager.Backend.backendGameData.MartData.Dictionary[i + 9].ItemCount > 0)
-                    isRefrigerator = true;
-            }
-
-            if (!isRefrigerator)
-            {
-                GameObject item = StaticManager.UI.OpenUI("Prefabs/GameScene/ItemUI", refrigeratorGroup.transform);
-                item.GetComponent<ItemUI>().Initialize(18, refigeratorNumber);
-            }
+            int num = i;
+            GameObject item = StaticManager.UI.OpenUI("Prefabs/GameScene/ItemUI", refrigeratorGroup.transform);
+            Debug.LogError(StaticManager.Backend.backendGameData.InventoryData.GetItemCount(num + 18));
+            item.GetComponentInChildren<Button>().interactable = StaticManager.Backend.backendGameData.InventoryData.GetItemCount(num + 18) > 0;
+            item.GetComponent<ItemUI>().Initialize(num + 18, refrigeratorNumber);
         }
-        
-        if (StaticManager.Backend.backendGameData.InventoryData.GetItemCount("Super_Milk") > 0)
-        {
-            bool isRefrigerator = false;
-            for (int i = 0; i < 4; i++)
-            {
-                if (StaticManager.Backend.backendGameData.MartData.Dictionary[i + 9].ItemCode == 19 &&
-                    StaticManager.Backend.backendGameData.MartData.Dictionary[i + 9].ItemCount > 0)
-                    isRefrigerator = true;
-            }
-
-            if (!isRefrigerator)
-            {
-                GameObject item = StaticManager.UI.OpenUI("Prefabs/GameScene/ItemUI", refrigeratorGroup.transform);
-                item.GetComponent<ItemUI>().Initialize(19, refigeratorNumber);
-            }
-        }
-        
-        
     }
 }

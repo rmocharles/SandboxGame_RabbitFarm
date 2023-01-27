@@ -195,12 +195,12 @@ namespace BackendData.GameData
             
             else if (itemCode >= 18 && itemCode < 20)
             {
-                return inventoryDic[animalItem[itemCode - 18, 0]];
+                return inventoryDic[animalItem[0, itemCode - 18]];
             }
             
             else if (itemCode >= 20 && itemCode < 22)
             {
-                return inventoryDic[animalItem[itemCode - 20, 1]];
+                return inventoryDic[animalItem[1, itemCode - 20]];
             }
 
             return -1;

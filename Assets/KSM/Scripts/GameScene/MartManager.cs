@@ -51,10 +51,12 @@ public class MartManager : MonoBehaviour
                 {
                     slotUI.AddComponent<TableUI>().Initialize(num);
                 }
+                //우유
                 else if(num is >= 9 and <= 12)
                 {
                     slotUI.AddComponent<RefrigeratorUI>().Initialize(num);
                 }
+                //계란
                 else if (num is > 12 and <= 14)
                 {
                     slotUI.AddComponent<ShelfUI>().Initialize(num);
@@ -81,6 +83,7 @@ public class MartManager : MonoBehaviour
 
             if (StaticManager.Backend.backendGameData.MartData.Dictionary[slotNumber].ItemCount > 0)
             {
+                slotButtons[slotNumber].interactable = true;
                 slotButtons[slotNumber].transform.GetChild(0).gameObject.SetActive(true);
                 slotButtons[slotNumber].transform.GetChild(0).GetComponent<Image>().sprite =
                     slotImages[StaticManager.Backend.backendGameData.MartData.Dictionary[slotNumber].ItemCode]

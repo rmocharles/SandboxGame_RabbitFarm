@@ -17,7 +17,7 @@ public class TutorialUI : MonoBehaviour
         {
             StaticManager.Sound.SetSFX();
             Destroy(this.gameObject);
-            StaticManager.Backend.backendGameData.UserData.SetTutorial(0);
+            StaticManager.Backend.backendGameData.UserData.SetTutorial(2);
             GameManager.Instance.SaveAllData();
         });
         

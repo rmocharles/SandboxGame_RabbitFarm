@@ -24,6 +24,7 @@ public class PartTimeManager : MonoBehaviour
 
     void Update()
     {
+        if (StaticManager.Backend.backendGameData.UserData.Level < 5) return;
         //알바생 생성
         for (int i = 0; i < 3; i++)
         {

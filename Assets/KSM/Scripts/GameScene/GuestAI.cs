@@ -554,7 +554,7 @@ public class GuestAI : MonoBehaviour
         {
             SetBubble("Question");
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
             
             SetBubble("Sad");
             
@@ -668,8 +668,12 @@ public class GuestAI : MonoBehaviour
         GameManager.Instance.SaveAllData();
         
         ChangeState(State.Exit);
-        GetComponent<AudioSource>().clip = StaticManager.Sound.SearchClip("Cash");
-        GetComponent<AudioSource>().Play();
+
+        if (GameManager.Instance.nowMode == GameManager.Mode.Mart)
+        {
+            GetComponent<AudioSource>().clip = StaticManager.Sound.SearchClip("Cash");
+            GetComponent<AudioSource>().Play();
+        }
         
         GameObject goldObject = Instantiate(Resources.Load<GameObject>("Prefabs/GameScene/Effect/RewardEffect"), GameManager.Instance.worldCanvas.transform);
         goldObject.transform.position = new Vector3(45,-4.7f,0) + new Vector3(-1, 3.5f, 0);
@@ -711,7 +715,7 @@ public class GuestAI : MonoBehaviour
     
     private bool IsReached(Vector3 pos)
     {
-        return Vector3.Distance(transform.position, pos) < 0.3f;
+        return Vector3.Distance(transform.position, pos) < 0.5f;
     }
     
     public void AdjustSortingLayer()

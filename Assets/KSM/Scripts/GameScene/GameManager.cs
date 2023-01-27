@@ -45,6 +45,8 @@ public class GameManager : Singleton<GameManager>
     public Button questButton;
     public GameObject questActiveObject;
 
+    public GameObject[] allObject;
+
 
     public Vector3 originQuestPos, originBagPos, originShopPos, originMovePos;
     public static FieldManager Field { get; private set; }
@@ -61,6 +63,8 @@ public class GameManager : Singleton<GameManager>
     public static PetManager Pet { get; private set; }
     
     public static PartTimeManager PartTime { get; private set; }
+    
+    public static TutorialManager Tutorial { get; private set; }
 
     public enum Mode
     {
@@ -95,6 +99,7 @@ public class GameManager : Singleton<GameManager>
         Weather = GetComponentInChildren<WeatherManager>();
         Pet = GetComponentInChildren<PetManager>();
         PartTime = GetComponentInChildren<PartTimeManager>();
+        Tutorial = GetComponentInChildren<TutorialManager>();
 
         Bunny.Initialize();
         Field.Initialize();
@@ -102,12 +107,8 @@ public class GameManager : Singleton<GameManager>
         Mart.Initialize();
         Animal.Initialize();
         Weather.Initialize();
-
-        if (StaticManager.Backend.backendGameData.UserData.Tutorial == -1)
-        {
-            GameObject tutorialUI = StaticManager.UI.OpenUI("Prefabs/GameScene/TutorialUI", UICanvas.transform);
-        }
-
+        Tutorial.Initialize();
+        
         //프로필 변경
         profileButton.GetComponent<Image>().sprite =
             Resources.Load<Sprite>("Sprites/Profile/profile_" + (StaticManager.Backend.backendGameData.ProfileData.Represent + 1).ToString("D2"));
@@ -195,7 +196,7 @@ public class GameManager : Singleton<GameManager>
                 moveButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Button/btn_martgo");
                 nowMode = Mode.Farm;
                 UnityEngine.Camera.main.orthographicSize = GameManager.Camera.IsPad() ? 10 : 7;
-                UnityEngine.Camera.main.transform.position = new Vector3(-1, 0, -10);
+                UnityEngine.Camera.main.transform.position = new Vector3(0, 0, -10);
             }
         });
         
@@ -211,6 +212,11 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
+        for (int i = 0; i < allObject.Length; i++)
+        {
+            allObject[i].SetActive(!Tutorial.isTutorial);
+        }
+        
         //재화 요소
         goldText.text = StaticManager.Backend.backendGameData.UserData.Gold > 0 ? string.Format("{0:#,###}", StaticManager.Backend.backendGameData.UserData.Gold) : 0.ToString();
         diamondText.text = StaticManager.Backend.backendGameData.UserData.Diamond > 0 ? string.Format("{0:#,###}", StaticManager.Backend.backendGameData.UserData.Diamond) : 0.ToString();

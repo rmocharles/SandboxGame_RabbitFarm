@@ -14,40 +14,13 @@ public class ShelfUI : MonoBehaviour
 
     public void Initialize(int shelfNumber)
     {
-        if (StaticManager.Backend.backendGameData.InventoryData.GetItemCount("Egg") > 0)
+        for (int i = 0; i < 2; i++)
         {
-            bool isShelf = false;
-            for (int i = 0; i < 2; i++)
-            {
-                if (StaticManager.Backend.backendGameData.MartData.Dictionary[i + 13].ItemCode == 20 &&
-                    StaticManager.Backend.backendGameData.MartData.Dictionary[i + 13].ItemCount > 0)
-                    isShelf = true;
-            }
-
-            if (!isShelf)
-            {
-                GameObject item = StaticManager.UI.OpenUI("Prefabs/GameScene/ItemUI", shelfGroup.transform);
-                item.GetComponent<ItemUI>().Initialize(20, shelfNumber);
-            }
+            int num = i;
+            Debug.LogError($"ItemCode : {num + 20}, ItemCount : {StaticManager.Backend.backendGameData.InventoryData.GetItemCount(num + 20)}");
+            GameObject item = StaticManager.UI.OpenUI("Prefabs/GameScene/ItemUI", shelfGroup.transform);
+            item.GetComponentInChildren<Button>().interactable = StaticManager.Backend.backendGameData.InventoryData.GetItemCount(num + 20) > 0;
+            item.GetComponent<ItemUI>().Initialize(num + 20, shelfNumber);
         }
-        
-        if (StaticManager.Backend.backendGameData.InventoryData.GetItemCount("Golden_Egg") > 0)
-        {
-            bool isShelf = false;
-            for (int i = 0; i < 2; i++)
-            {
-                if (StaticManager.Backend.backendGameData.MartData.Dictionary[i + 13].ItemCode == 19 &&
-                    StaticManager.Backend.backendGameData.MartData.Dictionary[i + 13].ItemCount > 0)
-                    isShelf = true;
-            }
-
-            if (!isShelf)
-            {
-                GameObject item = StaticManager.UI.OpenUI("Prefabs/GameScene/ItemUI", shelfGroup.transform);
-                item.GetComponent<ItemUI>().Initialize(21, shelfNumber);
-            }
-        }
-        
-        
     }
 }

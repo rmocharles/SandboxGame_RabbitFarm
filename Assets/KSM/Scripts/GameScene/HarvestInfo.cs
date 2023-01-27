@@ -95,7 +95,7 @@ public class HarvestInfo : MonoBehaviour
 
                     #endregion
 
-                    if (GameManager.Weather.nowWeather == WeatherManager.Weather.Sun && GameManager.Weather.isSun)
+                    if (StaticManager.Backend.backendGameData.WeatherData.Type == 1)
                         count *= 2;
 
                         #region 유형 정하기

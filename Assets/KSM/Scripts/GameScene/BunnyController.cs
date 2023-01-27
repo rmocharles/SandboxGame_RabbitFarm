@@ -34,7 +34,7 @@ public class BunnyController : MonoBehaviour
     
     public enum State
     {
-        Idle, Walk, Harvest, Work, Reward
+        Idle, Walk, Harvest, Work, Reward, Tutorial
     }
     public State nowState = State.Idle;
 
@@ -64,6 +64,7 @@ public class BunnyController : MonoBehaviour
         navMeshAgent.Warp(transform.position);
 
         bubbleObject.SetActive(false);
+        textBubbleObject.SetActive(false);
     }
 
     void Start()
@@ -73,7 +74,8 @@ public class BunnyController : MonoBehaviour
 
         if (nowState == State.Work) return;
         
-        nowCoroutine = StartCoroutine(PlayerController(.5f));
+        if(!GameManager.Tutorial.isTutorial)
+            nowCoroutine = StartCoroutine(PlayerController(.5f));
         
         touchButton.onClick.AddListener(() =>
         {
@@ -128,6 +130,11 @@ public class BunnyController : MonoBehaviour
             case State.Work:
                 direction = 3;
                 navMeshAgent.Warp(GameManager.Mart.Guest.workPoint.position);
+                break;
+            
+            case State.Tutorial:
+                if (GetComponent<SkeletonAnimation>().AnimationName != IDLE[0])
+                    GetComponent<SkeletonAnimation>().state.SetAnimation(0, IDLE[0], true);
                 break;
         }
     }
@@ -232,6 +239,10 @@ public class BunnyController : MonoBehaviour
             
             case State.Work:
                 Debug.LogError("저는 알바를 대기중인 토니랍니다~");
+                break;
+            
+            case State.Tutorial:
+                originPos = transform.position;
                 break;
         }
     }

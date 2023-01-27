@@ -16,7 +16,7 @@ public class PetInfo : MonoBehaviour
     private string IDLE = "idle_front_r";
 
     private string[] TOUCH = {
-        "touch_front_r", "touch2_front_r"
+        "touch1_front_r", "touch2_front_r"
     };
     #endregion
     

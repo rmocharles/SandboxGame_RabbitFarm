@@ -121,6 +121,9 @@ public class AnimalInfo : MonoBehaviour
         if (nowAnimal == AnimalUpgradeUI.Animal.Chicken)
         {
             lockButton.gameObject.SetActive(StaticManager.Backend.backendGameData.AnimalData.Dictionary["Chicken"].Upgrade == -1);
+            transform.GetChild(0).gameObject.SetActive(StaticManager.Backend.backendGameData.AnimalData.Dictionary["Chicken"].Upgrade != -1);
+            transform.GetChild(1).gameObject.SetActive(StaticManager.Backend.backendGameData.AnimalData.Dictionary["Chicken"].Upgrade != -1);
+
             GetComponent<Button>().interactable = StaticManager.Backend.backendGameData.AnimalData.Dictionary["Chicken"].Upgrade != -1;
             
             //맨 처음 생성 될 시
@@ -130,6 +133,10 @@ public class AnimalInfo : MonoBehaviour
         else
         {
             lockButton.gameObject.SetActive(StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].Upgrade == -1);
+            
+            transform.GetChild(0).gameObject.SetActive(StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].Upgrade != -1);
+            transform.GetChild(1).gameObject.SetActive(StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].Upgrade != -1);
+            
             GetComponent<Button>().interactable = StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].Upgrade != -1;
             //맨 처음 생성 될 시
             if(string.IsNullOrEmpty(StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].RemainTimer) && StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].Upgrade > 0)
