@@ -228,10 +228,10 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
                 break;
             
             case "Apple":
-                
+
                 var loginArgs = new AppleAuthLoginArgs(LoginOptions.IncludeEmail | LoginOptions.IncludeFullName);
 
-        this.appleAuthManager.LoginWithAppleId(
+            this.appleAuthManager.LoginWithAppleId(
             loginArgs,
             credential =>
             {
@@ -257,6 +257,8 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
                                 appleIdCredential.IdentityToken,
                                 0,
                                 appleIdCredential.IdentityToken.Length);
+                    
+                    Debug.LogError($"애플 토큰 : {identityToken}");
 
                     // Authorization code
                     var authorizationCode = Encoding.UTF8.GetString(
@@ -265,19 +267,7 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
                                 appleIdCredential.AuthorizationCode.Length);
                     Debug.LogError("Apple Login.....");
 
-                    // And now you have all the information to create/login a user in your system
-                    SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, identityToken, FederationType.Apple, "apple 인증", callback =>
-                    {
-                        if (callback.IsSuccess())
-                        {
-                            Debug.LogError("애플로그인 성공");
-                            StaticManager.UI.SetLoading(false);
-                            SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, identityToken, FederationType.Apple, AuthorizeProcess);
-                            return;
-                        }
-                        StaticManager.UI.SetLoading(false);
-                        Debug.LogError("Apple 로그인 에러\n" + callback.ToString());
-                    });
+                    SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, identityToken, FederationType.Apple, AuthorizeProcess);
                 }
             },
             error =>
