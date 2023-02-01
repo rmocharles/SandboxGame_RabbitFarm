@@ -283,6 +283,7 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
             error =>
             {
                 // Something went wrong
+                Debug.LogError("애플로그인 실패");
                 StaticManager.UI.SetLoading(false);
                 var authorizationErrorCode = error.GetAuthorizationErrorCode();
                 Debug.LogError(authorizationErrorCode);
