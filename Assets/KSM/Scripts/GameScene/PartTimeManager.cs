@@ -55,7 +55,7 @@ public class PartTimeManager : MonoBehaviour
                 return;
             }
 
-            TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.PartTimeData.RemainTimer) - DateTime.UtcNow;
+            TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.PartTimeData.RemainTimer) - GameManager.Instance.nowTime;
             int remainTimer = Mathf.FloorToInt((float)Math.Truncate(remainTime.TotalSeconds));
             
             int partTimeCoolTime = StaticManager.Backend.backendGameData.PartTimeData.Type == 0 ? 2 : 24;

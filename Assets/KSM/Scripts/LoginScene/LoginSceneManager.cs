@@ -271,10 +271,11 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
                         if (callback.IsSuccess())
                         {
                             Debug.LogError("애플로그인 성공");
-                            SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, appleToken, FederationType.Apple, AuthorizeProcess);
+                            StaticManager.UI.SetLoading(false);
+                            SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, identityToken, FederationType.Apple, AuthorizeProcess);
                             return;
                         }
-
+                        StaticManager.UI.SetLoading(false);
                         Debug.LogError("Apple 로그인 에러\n" + callback.ToString());
                     });
                 }
@@ -282,6 +283,7 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
             error =>
             {
                 // Something went wrong
+                StaticManager.UI.SetLoading(false);
                 var authorizationErrorCode = error.GetAuthorizationErrorCode();
                 Debug.LogError(authorizationErrorCode);
             });

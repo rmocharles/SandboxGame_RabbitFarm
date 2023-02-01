@@ -56,11 +56,11 @@ namespace BackendData.GameData
                     break;
             
                 case 1:
-                    RemainTime = DateTime.UtcNow.AddMinutes(5).ToString();
+                    RemainTime = GameManager.Instance.nowTime.AddMinutes(5).ToString();
                     break;
             
                 case 2:
-                    RemainTime = DateTime.UtcNow.AddMinutes(5).ToString();
+                    RemainTime = GameManager.Instance.nowTime.AddMinutes(5).ToString();
                     break;
             }
         }

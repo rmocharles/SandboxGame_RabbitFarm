@@ -213,6 +213,8 @@ public class TutorialManager : MonoBehaviour
                 break;
             
             case 2:
+                GameManager.Bunny.ChangeBunnyState(0, BunnyController.State.Idle);
+                GameManager.Bunny.ChangeBunnyState(1, BunnyController.State.Idle);
                 SetBubble(1, 48);
                 GameManager.Bunny.MoveBunny(0, new Vector3(50f, -5.5f, 0));
                 GameManager.Bunny.MoveBunny(1, GameManager.Mart.Guest.workPoint.position);

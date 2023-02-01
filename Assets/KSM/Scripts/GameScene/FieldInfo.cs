@@ -134,7 +134,7 @@ public class FieldInfo : MonoBehaviour
 
         if (waitTimer > 0) waitTimer -= Time.deltaTime;
         
-        TimeSpan remainTime = DateTime.Parse(remainTimer) - DateTime.UtcNow;
+        TimeSpan remainTime = DateTime.Parse(remainTimer) - GameManager.Instance.nowTime;
 
         if (remainTime.TotalSeconds > 0)
         {

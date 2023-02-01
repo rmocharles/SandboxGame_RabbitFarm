@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -95,12 +96,12 @@ public class FieldManager : MonoBehaviour
         string remainTimer = string.Empty;
         if (harvestCode != -1)
         {
-            remainTimer = DateTime.UtcNow.AddSeconds(StaticManager.Backend.backendChart.Harvest.harvestSheet[harvestCode].CoolTime).ToString();
-
+            remainTimer = GameManager.Instance.nowTime.AddSeconds(StaticManager.Backend.backendChart.Harvest.harvestSheet[harvestCode].CoolTime).ToString();
+            
             //비올때 쿨타임 50% 감소
             if (StaticManager.Backend.backendGameData.WeatherData.Type == 2)
             {
-                remainTimer = DateTime.UtcNow.AddSeconds(StaticManager.Backend.backendChart.Harvest.harvestSheet[harvestCode].CoolTime / 2).ToString();
+                remainTimer = GameManager.Instance.nowTime.AddSeconds(StaticManager.Backend.backendChart.Harvest.harvestSheet[harvestCode].CoolTime / 2).ToString();
             }
         }
         StaticManager.Backend.backendGameData.FieldData.SetField(fieldNumber, fieldLevel, harvestCode, remainTimer);

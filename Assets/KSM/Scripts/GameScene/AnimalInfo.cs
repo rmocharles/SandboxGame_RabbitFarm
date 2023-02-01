@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -109,8 +110,9 @@ public class AnimalInfo : MonoBehaviour
             }
             
             //업그레이드 레벨에 맞게 남는 시간 부여
-            StaticManager.Backend.backendGameData.AnimalData.SetAnimal(animalName, DateTime.UtcNow.AddSeconds(remainTimer).ToString());
+            StaticManager.Backend.backendGameData.AnimalData.SetAnimal(animalName, GameManager.Instance.nowTime.AddSeconds(remainTimer).ToString());
             GameManager.Instance.SaveAllData();
+            
         });
     }
 
@@ -128,7 +130,7 @@ public class AnimalInfo : MonoBehaviour
             
             //맨 처음 생성 될 시
             if(string.IsNullOrEmpty(StaticManager.Backend.backendGameData.AnimalData.Dictionary["Chicken"].RemainTimer) && StaticManager.Backend.backendGameData.AnimalData.Dictionary["Chicken"].Upgrade > 0)
-                GameManager.Animal.SetAnimal(AnimalUpgradeUI.Animal.Chicken, DateTime.UtcNow.AddSeconds(StaticManager.Backend.backendChart.Animal.animalSheet[StaticManager.Backend.backendGameData.AnimalData.Dictionary["Chicken"].Upgrade].Chicken_Speed).ToString());
+                GameManager.Animal.SetAnimal(AnimalUpgradeUI.Animal.Chicken, GameManager.Instance.nowTime.AddSeconds(StaticManager.Backend.backendChart.Animal.animalSheet[StaticManager.Backend.backendGameData.AnimalData.Dictionary["Chicken"].Upgrade].Chicken_Speed).ToString());
         }
         else
         {
@@ -140,7 +142,7 @@ public class AnimalInfo : MonoBehaviour
             GetComponent<Button>().interactable = StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].Upgrade != -1;
             //맨 처음 생성 될 시
             if(string.IsNullOrEmpty(StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].RemainTimer) && StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].Upgrade > 0)
-                GameManager.Animal.SetAnimal(AnimalUpgradeUI.Animal.Cow, DateTime.UtcNow.AddSeconds(StaticManager.Backend.backendChart.Animal.animalSheet[StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].Upgrade].Cow_Speed).ToString());
+                GameManager.Animal.SetAnimal(AnimalUpgradeUI.Animal.Cow, GameManager.Instance.nowTime.AddSeconds(StaticManager.Backend.backendChart.Animal.animalSheet[StaticManager.Backend.backendGameData.AnimalData.Dictionary["Cow"].Upgrade].Cow_Speed).ToString());
         }
         
         string animalName = nowAnimal == AnimalUpgradeUI.Animal.Chicken ? "Chicken" : "Cow";
@@ -151,7 +153,7 @@ public class AnimalInfo : MonoBehaviour
             return;
         }
         
-        TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.AnimalData.Dictionary[animalName].RemainTimer) - DateTime.UtcNow;
+        TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.AnimalData.Dictionary[animalName].RemainTimer) - GameManager.Instance.nowTime;
 
         if (remainTime.TotalSeconds > 0)
         {

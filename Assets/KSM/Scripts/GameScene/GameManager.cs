@@ -48,6 +48,8 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject[] allObject;
 
+    public DateTime nowTime = new DateTime(2000, 1, 2);
+
 
     public Vector3 originQuestPos, originBagPos, originShopPos, originMovePos;
     public static FieldManager Field { get; private set; }
@@ -82,13 +84,20 @@ public class GameManager : Singleton<GameManager>
         originShopPos = shopButton.transform.position;
         originMovePos = moveButton.transform.position;
 
-        
+        if (!Backend.IsInitialized)
+            SceneManager.LoadScene("1. Login");
     }
     
     void Start()
     {
-        if (!Backend.IsInitialized)
-            SceneManager.LoadScene("1. Login");
+        SendQueue.Enqueue(Backend.Utils.GetServerTime, ( callback ) => 
+        {
+            string time = callback.GetReturnValuetoJSON()["utcTime"].ToString();
+            DateTime parsedDate = DateTime.Parse(time);
+
+            nowTime = parsedDate;
+            StartCoroutine(NowTime());
+        });
 
         StaticManager.Sound.SetBGM("FarmBGM");
 
@@ -251,13 +260,24 @@ public class GameManager : Singleton<GameManager>
         #endregion
     }
 
+    IEnumerator NowTime()
+    {
+        while (true)
+        {
+            DateTime addTime = nowTime.AddSeconds(1);
+            nowTime = addTime;
+            Debug.LogError(nowTime);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
     void Update()
     {
         for (int i = 0; i < allObject.Length; i++)
         {
             allObject[i].SetActive(!Tutorial.isTutorial);
         }
-        
+
         //재화 요소
         goldText.text = StaticManager.Backend.backendGameData.UserData.Gold > 0 ? string.Format("{0:#,###}", StaticManager.Backend.backendGameData.UserData.Gold) : 0.ToString();
         diamondText.text = StaticManager.Backend.backendGameData.UserData.Diamond > 0 ? string.Format("{0:#,###}", StaticManager.Backend.backendGameData.UserData.Diamond) : 0.ToString();

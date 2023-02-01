@@ -32,7 +32,7 @@ public class HarvestInfo : MonoBehaviour
             {
                 if (StaticManager.Backend.backendGameData.FieldData.Dictionary[i].HarvestCode == harvestCode)
                 {
-                    TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.FieldData.Dictionary[i].RemainTimer) - DateTime.UtcNow;
+                    TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.FieldData.Dictionary[i].RemainTimer) - GameManager.Instance.nowTime;
                     if (remainTime.TotalSeconds <= 0)
                     {
 

@@ -174,7 +174,7 @@ public class WeatherManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(StaticManager.Backend.backendGameData.WeatherData.RemainTime))
         {
-            TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.WeatherData.RemainTime) - DateTime.UtcNow;
+            TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.WeatherData.RemainTime) - GameManager.Instance.nowTime;
             int remainTimer = Mathf.FloorToInt((float)Math.Truncate(remainTime.TotalSeconds));
             //태양
             if (StaticManager.Backend.backendGameData.WeatherData.Type == 1)

@@ -57,12 +57,12 @@ namespace BackendData.GameData
                 
                 //10분
                 case 0:
-                    RemainTimer = DateTime.UtcNow.AddMinutes(10).ToString();
+                    RemainTimer = GameManager.Instance.nowTime.AddMinutes(10).ToString();
                     break;
                 
                 //24시간
                 case 1:
-                    RemainTimer = DateTime.UtcNow.AddDays(1).ToString();
+                    RemainTimer = GameManager.Instance.nowTime.AddDays(1).ToString();
                     break;
                 
                 case 2:
