@@ -59,7 +59,8 @@ public class HarvestDragUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             StaticManager.Backend.backendGameData.UserData.Gold >= StaticManager.Backend.backendChart.Harvest.harvestSheet[harvestCode].Price)
         {
             //심을 버니 정하기
-            GameManager.Bunny.harvestBunnyNumber = Random.Range(0, 3);
+            int[] list = { 0, 2, 4 };
+            GameManager.Bunny.harvestBunnyNumber = list[Random.Range(0, 3)];
         
             for(int i = 0; i < uiCanvas.transform.childCount; i++)
                 if (uiCanvas.transform.GetChild(i).GetComponent<HarvestInfoUI>())

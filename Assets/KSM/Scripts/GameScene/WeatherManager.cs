@@ -14,13 +14,9 @@ public class WeatherManager : MonoBehaviour
 {
     private float sunCoolTime;
     private float sunActiveTime;
-    public bool isSun = false;
-    public float sunAbilityTime = 15;
 
     private float rainCoolTime;
     private float rainActiveTime;
-    public bool isRain = false;
-    public float rainAbilityTime = 15;
 
     public GameObject sunObject;
     public GameObject rainObject;
@@ -90,12 +86,12 @@ public class WeatherManager : MonoBehaviour
         switch (weather)
         {
             case Weather.Rain:
-                rainCoolTime = 10;
+                rainCoolTime = StaticManager.Backend.backendChart.Price.GetPrice("Weather_Rain");
                 rainActiveTime = 5;
                 break;
             
             case Weather.Sun:
-                sunCoolTime = 10;
+                sunCoolTime = StaticManager.Backend.backendChart.Price.GetPrice("Weather_Sun");
                 sunActiveTime = 5;
                 break;
         }
@@ -103,13 +99,21 @@ public class WeatherManager : MonoBehaviour
 
     public void ActiveWeather(int weather)
     {
-        Debug.LogError(weather);
         StaticManager.Backend.backendGameData.WeatherData.SetType(weather);
         GameManager.Instance.SaveAllData();
     }
 
     void Update()
     {
+        if (GameManager.Tutorial.isTutorial)
+        {
+            sunParticleObject.SetActive(false);
+            rainParticleObject.SetActive(false);
+            sunObject.SetActive(false);
+            rainObject.SetActive(false);
+            coolTimeText.transform.parent.gameObject.SetActive(false);
+            return;
+        }
         //아무것도 아닐 때
         if (StaticManager.Backend.backendGameData.WeatherData.Type == 0)
         {
@@ -181,9 +185,9 @@ public class WeatherManager : MonoBehaviour
                 sunParticleObject.SetActive(true);
                 rainParticleObject.SetActive(false);
 
-                if (remainTime.TotalSeconds > 1)
+                if (remainTime.TotalSeconds > 0)
                 {
-                    coolTimeText.text = (remainTime.TotalSeconds / 60).ToString("00") + ":" + (remainTime.TotalSeconds % 60).ToString("00");
+                    coolTimeText.text = string.Format("{0:D2}:{1:D2}", remainTimer / 60, remainTimer % 60);
                 }
                 else
                 {

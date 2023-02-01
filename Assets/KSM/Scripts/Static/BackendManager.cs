@@ -22,6 +22,7 @@ public class BackendManager : MonoBehaviour
         public readonly BackendData.Chart.Balance.BalanceChart Balance = new();
         public readonly BackendData.Chart.Animal.AnimalChart Animal = new();
         public readonly BackendData.Chart.Quest.QuestChart Quest = new();
+        public readonly BackendData.Chart.Price.PriceChart Price = new();
     }
     
     //게임 정보 관리 데이터만 모아놓은 클래스

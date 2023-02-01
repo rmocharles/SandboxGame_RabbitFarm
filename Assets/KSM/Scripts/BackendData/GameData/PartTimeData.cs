@@ -55,9 +55,9 @@ namespace BackendData.GameData
                     RemainTimer = string.Empty;
                     break;
                 
-                //2시간
+                //10분
                 case 0:
-                    RemainTimer = DateTime.UtcNow.AddHours(2).ToString();
+                    RemainTimer = DateTime.UtcNow.AddMinutes(10).ToString();
                     break;
                 
                 //24시간

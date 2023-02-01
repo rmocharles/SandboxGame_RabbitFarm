@@ -48,6 +48,7 @@ public class BunnyController : MonoBehaviour
     public GameObject textBubbleObject;
 
     [SerializeField] private Button touchButton;
+    private float touchCoolTime = 0;
 
     
     public Vector3 originPos { get; private set; }
@@ -80,7 +81,11 @@ public class BunnyController : MonoBehaviour
         touchButton.onClick.AddListener(() =>
         {
             //StaticManager.Sound.SetSFX();
-            ChangeState(State.Idle);
+            if (touchCoolTime <= 0)
+            {
+                ChangeState(State.Idle);
+                touchCoolTime += 1;
+            }
         });
     }
 
@@ -94,6 +99,9 @@ public class BunnyController : MonoBehaviour
 
         //말풍선 띄어놓기
         ActiveBubble(false);
+
+        if (touchCoolTime > 0)
+            touchCoolTime -= Time.deltaTime;
         
         //방향 정하기
         if (direction % 2 == 0)

@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
 
     public Button profileButton;
     public GameObject profileGroup;
+    public GameObject cashGroup;
     public Button inventoryButton;
     public Button shopButton;
     public Button goldGroupButton;
@@ -80,6 +81,8 @@ public class GameManager : Singleton<GameManager>
         originBagPos = bagButton.transform.position;
         originShopPos = shopButton.transform.position;
         originMovePos = moveButton.transform.position;
+
+        
     }
     
     void Start()
@@ -116,14 +119,19 @@ public class GameManager : Singleton<GameManager>
         {
             Field.CloseUI();
             StaticManager.Sound.SetSFX();
-            StaticManager.UI.OpenUI("Prefabs/GameScene/ProfileUI", UICanvas.transform);
+            GameObject profileUI = StaticManager.UI.OpenUI("Prefabs/GameScene/ProfileUI", UICanvas.transform);
+            
+            if(Camera.IsPad())
+                profileUI.transform.GetChild(0).GetComponent<RectTransform>().localScale = Vector3.one * 1.2f;
         });
         
         settingButton.onClick.AddListener(() =>
         {
             Field.CloseUI();
             StaticManager.Sound.SetSFX();
-            StaticManager.UI.OpenUI("Prefabs/GameScene/SettingUI", UICanvas.transform);
+            GameObject settingUI = StaticManager.UI.OpenUI("Prefabs/GameScene/SettingUI", UICanvas.transform);
+            if(Camera.IsPad())
+                settingUI.transform.GetChild(0).GetComponent<RectTransform>().localScale = Vector3.one * 1.2f;
         });
         
         inventoryButton.onClick.AddListener(() =>
@@ -139,6 +147,9 @@ public class GameManager : Singleton<GameManager>
             StaticManager.Sound.SetSFX();
             GameObject shopUI = StaticManager.UI.OpenUI("Prefabs/GameScene/ShopUI", UICanvas.transform);
             shopUI.GetComponent<ShopUI>().ActiveMode(ShopUI.Mode.Diamond);
+            
+            if(Camera.IsPad())
+                shopUI.transform.GetChild(0).GetComponent<RectTransform>().localScale = Vector3.one * .9f;
         });
         
         goldGroupButton.onClick.AddListener(() =>
@@ -147,6 +158,9 @@ public class GameManager : Singleton<GameManager>
             StaticManager.Sound.SetSFX();
             GameObject shopUI = StaticManager.UI.OpenUI("Prefabs/GameScene/ShopUI", UICanvas.transform);
             shopUI.GetComponent<ShopUI>().ActiveMode(ShopUI.Mode.Gold);
+            
+            if(Camera.IsPad())
+                shopUI.transform.GetChild(0).GetComponent<RectTransform>().localScale = Vector3.one * .9f;
         });
         
         goldPlusButton.onClick.AddListener(() =>
@@ -155,6 +169,9 @@ public class GameManager : Singleton<GameManager>
             StaticManager.Sound.SetSFX();
             GameObject shopUI = StaticManager.UI.OpenUI("Prefabs/GameScene/ShopUI", UICanvas.transform);
             shopUI.GetComponent<ShopUI>().ActiveMode(ShopUI.Mode.Gold);
+            
+            if(Camera.IsPad())
+                shopUI.transform.GetChild(0).GetComponent<RectTransform>().localScale = Vector3.one * .9f;
         });
         
         diamondGroupButton.onClick.AddListener(() =>
@@ -163,6 +180,9 @@ public class GameManager : Singleton<GameManager>
             StaticManager.Sound.SetSFX();
             GameObject shopUI = StaticManager.UI.OpenUI("Prefabs/GameScene/ShopUI", UICanvas.transform);
             shopUI.GetComponent<ShopUI>().ActiveMode(ShopUI.Mode.Diamond);
+            
+            if(Camera.IsPad())
+                shopUI.transform.GetChild(0).GetComponent<RectTransform>().localScale = Vector3.one * .9f;
         });
         
         diamondPlusButton.onClick.AddListener(() =>
@@ -171,6 +191,9 @@ public class GameManager : Singleton<GameManager>
             StaticManager.Sound.SetSFX();
             GameObject shopUI = StaticManager.UI.OpenUI("Prefabs/GameScene/ShopUI", UICanvas.transform);
             shopUI.GetComponent<ShopUI>().ActiveMode(ShopUI.Mode.Diamond);
+            
+            if(Camera.IsPad())
+                shopUI.transform.GetChild(0).GetComponent<RectTransform>().localScale = Vector3.one * .9f;
         });
         
         moveButton.onClick.AddListener(() =>
@@ -184,6 +207,11 @@ public class GameManager : Singleton<GameManager>
                     nowMode = Mode.Mart;
                     UnityEngine.Camera.main.orthographicSize = GameManager.Camera.IsPad() ? 11 : 8;
                     UnityEngine.Camera.main.transform.position = new Vector3(49, -1, -10);
+
+                    if (StaticManager.Backend.backendGameData.UserData.Tutorial == 4)
+                    {
+                        Tutorial.SetTutorial(2);
+                    }
                 }
                 else
                 {
@@ -208,6 +236,19 @@ public class GameManager : Singleton<GameManager>
         });
 
         ActiveQuestIcon();
+        
+        #region 해상도 대응
+
+        if (Camera.IsPad())
+        {
+            profileGroup.GetComponent<RectTransform>().anchoredPosition = new Vector2(25, 0);
+            profileGroup.GetComponent<RectTransform>().localScale = Vector3.one * 0.9f;
+
+            cashGroup.GetComponent<RectTransform>().anchoredPosition = new Vector2(-250, -75);
+            cashGroup.GetComponent<RectTransform>().localScale = Vector3.one * 1.5f;
+        }
+
+        #endregion
     }
 
     void Update()
@@ -256,6 +297,24 @@ public class GameManager : Singleton<GameManager>
             
             MakeToast(PlayerPrefs.GetInt("LangIndex") == 0 ? (StaticManager.Backend.backendGameData.UserData.Level) + "레벨이 되었습니다." : "It is Level " + StaticManager.Backend.backendGameData.UserData.Level);
         }
+
+        if (!StaticManager.Backend.backendGameData.PetData.Dictionary[1] && StaticManager.Backend.backendGameData.UserData.Level >= 5)
+        {
+            MakeToast(StaticManager.Langauge.Localize(112));
+            StaticManager.Backend.backendGameData.PetData.SetPet(1, true);
+            Pet.SetPet(1);
+            SaveAllData();
+        }
+        
+        //마트 활성화 버튼
+        if (StaticManager.Backend.backendGameData.UserData.Level >= 5)
+        {
+            moveButton.transform.GetChild(0).gameObject.SetActive(StaticManager.Backend.backendGameData.UserData.Tutorial == 4);
+        }
+        else
+        {
+            moveButton.transform.GetChild(0).gameObject.SetActive(false);
+        }
         
         //게임 종료
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -281,17 +340,28 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveAllData()
     {
-        StaticManager.Backend.UpdateAllGameData(callback =>
+        SendQueue.Enqueue(Backend.BMember.IsAccessTokenAlive, callback =>
         {
-            if (!callback.IsSuccess())
+            if (callback.IsSuccess())
             {
-                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(27), () => Application.Quit());
+                StaticManager.Backend.UpdateAllGameData(callback =>
+                {
+                    if (!callback.IsSuccess())
+                    {
+                        StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(27), () => Application.Quit());
+                    }
+                    else
+                    {
+                        Debug.LogWarning("저장 성공");
+                    }
+                });
             }
             else
             {
-                Debug.LogWarning("저장 성공");
+                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(143), () => Application.Quit());
             }
         });
+        
         
         ActiveQuestIcon();
     }
@@ -312,7 +382,7 @@ public class GameManager : Singleton<GameManager>
         questActiveObject.SetActive(isActive);
     }
 
-    public void MakeToast(string text)
+    public void MakeToast(string text, float delay = 1.5f)
     {
         for (int i = 0; i < UICanvas.transform.childCount; i++)
         {
@@ -321,7 +391,19 @@ public class GameManager : Singleton<GameManager>
         }
         
         GameObject toastUI = StaticManager.UI.OpenUI("Prefabs/GameScene/ToastUI", UICanvas.transform);
-        toastUI.GetComponent<ToastUI>().Initialize(text);
+        toastUI.GetComponent<ToastUI>().Initialize(text, delay);
+    }
+    
+    public void MakeToast2(string text, float delay = 1.5f)
+    {
+        for (int i = 0; i < UICanvas.transform.childCount; i++)
+        {
+            if(Instance.UICanvas.transform.GetChild(i).GetComponent<ToastUI>())
+                Destroy(Instance.UICanvas.transform.GetChild(i).gameObject);
+        }
+        
+        GameObject toastUI = StaticManager.UI.OpenUI("Prefabs/GameScene/Toast2UI", UICanvas.transform);
+        toastUI.GetComponent<ToastUI>().Initialize(text, delay);
     }
 
     public GameObject GoldUI(string text)

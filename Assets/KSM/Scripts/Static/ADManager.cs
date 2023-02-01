@@ -1,10 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ADManager : MonoBehaviour
 {
-    public void Initialize()
+  private void OnApplicationPause(bool pauseStatus)
+  {
+    IronSource.Agent.onApplicationPause(pauseStatus);
+  }
+
+  public void Initialize()
     {
         IronSourceEvents.onRewardedVideoAdOpenedEvent += RewardedVideoAdOpenedEvent;
         IronSourceEvents.onRewardedVideoAdClickedEvent += RewardedVideoAdClickedEvent;
@@ -12,7 +18,7 @@ public class ADManager : MonoBehaviour
         IronSourceEvents.onRewardedVideoAvailabilityChangedEvent += RewardedVideoAvailabilityChangedEvent;
         IronSourceEvents.onRewardedVideoAdStartedEvent += RewardedVideoAdStartedEvent;
         IronSourceEvents.onRewardedVideoAdEndedEvent += RewardedVideoAdEndedEvent;
-        //IronSourceEvents.onRewardedVideoAdRewardedEvent += RewardedVideoAdRewardedEvent; 
+        IronSourceEvents.onRewardedVideoAdRewardedEvent += RewardedVideoAdRewardedEvent; 
         //IronSourceEvents.onRewardedVideoAdShowFailedEvent += RewardedVideoAdShowFailedEvent;
         
         IronSourceEvents.onInterstitialAdReadyEvent += InterstitialAdReadyEvent;
@@ -26,21 +32,21 @@ public class ADManager : MonoBehaviour
         IronSource.Agent.shouldTrackNetworkState (true);
     }
 
-    public delegate void RewardAD();
-
     public delegate void InterstitialAD();
 
-    public void ShowRewardAD(RewardAD rewardAD = null)
+    public void ShowRewardAD(Action rewardAD = null)
     {
       IronSource.Agent.showRewardedVideo();
 
       IronSourceEvents.onRewardedVideoAdRewardedEvent += (sender) =>
       {
         rewardAD?.Invoke();
+        rewardAD = null;
       };
 
       IronSourceEvents.onRewardedVideoAdShowFailedEvent += error =>
       {
+        rewardAD = null;
         Debug.LogError(error);
         StaticManager.UI.AlertUI.OpenUI(error.ToString());
       };

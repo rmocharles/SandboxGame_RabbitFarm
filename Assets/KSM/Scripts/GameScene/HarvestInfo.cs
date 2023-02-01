@@ -20,7 +20,7 @@ public class HarvestInfo : MonoBehaviour
         completeButton = GetComponentsInChildren<Button>()[0];
         skipButton = GetComponentsInChildren<Button>()[1];
         
-        completeButton.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
+        //completeButton.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
         completeButton.onClick.RemoveAllListeners();
         completeButton.onClick.AddListener(() =>
         { 
@@ -218,6 +218,13 @@ public class HarvestInfo : MonoBehaviour
                     Destroy(GameManager.Field.fields[i].harvestObject);
                     }
                 }
+            }
+            
+            //첫 튜토리얼 달성
+            if (StaticManager.Backend.backendGameData.UserData.Tutorial == 2)
+            {
+                StaticManager.Backend.backendGameData.UserData.SetTutorial(3);
+                GameManager.Tutorial.SetTutorial(1);
             }
             
             GameManager.Instance.SaveAllData();

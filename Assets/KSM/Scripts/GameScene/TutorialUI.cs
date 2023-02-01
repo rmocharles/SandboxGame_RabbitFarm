@@ -6,78 +6,102 @@ using UnityEngine.UI;
 
 public class TutorialUI : MonoBehaviour
 {
-    [SerializeField] private SkeletonGraphic skeletonGraphic;
+    [SerializeField] private SkeletonGraphic[] skeletonGraphic;
     [SerializeField] private Button closeButton;
     [SerializeField] private Button leftArrowButton;
     [SerializeField] private Button rightArrowButton;
 
-    void Start()
+    private int index = 0;
+
+    public void Initialize(string type, bool isSave = false)
     {
+        if (type == "Farm")
+            index = 0;
+        else
+        {
+            index = 1;
+        }
+        
+        skeletonGraphic[0].gameObject.SetActive(type == "Farm");
+        skeletonGraphic[1].gameObject.SetActive(type == "Mart");
+        
+        closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
             StaticManager.Sound.SetSFX();
             Destroy(this.gameObject);
-            StaticManager.Backend.backendGameData.UserData.SetTutorial(2);
+            
+            if (isSave)
+            {
+                if(type == "Farm")
+                    StaticManager.Backend.backendGameData.UserData.SetTutorial(2);
+            }
+            
             GameManager.Instance.SaveAllData();
         });
         
         leftArrowButton.onClick.AddListener(() =>
         {
-            Debug.LogError(skeletonGraphic.startingAnimation);
-            switch (skeletonGraphic.startingAnimation)
+            StaticManager.Sound.SetSFX();
+            switch (skeletonGraphic[index].startingAnimation)
             {
                 case "step1":
-                    skeletonGraphic.startingAnimation = "step4";
-                    skeletonGraphic.AnimationState.SetAnimation(0, "step4", false);
+                    skeletonGraphic[index].startingAnimation = "step4";
+                    skeletonGraphic[index].AnimationState.SetAnimation(0, "step4", false);
                     break;
                 
                 case "step2":
-                    skeletonGraphic.startingAnimation = "step1";
-                    skeletonGraphic.AnimationState.SetAnimation(0, "step1", false);
+                    skeletonGraphic[index].startingAnimation = "step1";
+                    skeletonGraphic[index].AnimationState.SetAnimation(0, "step1", false);
                     break;
                 
                 case "step3":
-                    skeletonGraphic.startingAnimation = "step2";
-                    skeletonGraphic.AnimationState.SetAnimation(0, "step2", false);
+                    skeletonGraphic[index].startingAnimation = "step2";
+                    skeletonGraphic[index].AnimationState.SetAnimation(0, "step2", false);
                     break;
                 
                 case "step4":
-                    skeletonGraphic.startingAnimation = "step3";
-                    skeletonGraphic.AnimationState.SetAnimation(0, "step3", false);
+                    skeletonGraphic[index].startingAnimation = "step3";
+                    skeletonGraphic[index].AnimationState.SetAnimation(0, "step3", false);
                     break;
             }
 
-            EditorForceReloadSkeletonDataAssetAndComponent(skeletonGraphic.GetComponent<SkeletonRenderer>());
+            EditorForceReloadSkeletonDataAssetAndComponent(skeletonGraphic[index].GetComponent<SkeletonRenderer>());
         });
         
         rightArrowButton.onClick.AddListener(() =>
         {
-            Debug.LogError(skeletonGraphic.startingAnimation);
-            switch (skeletonGraphic.startingAnimation)
+            StaticManager.Sound.SetSFX();
+            switch (skeletonGraphic[index].startingAnimation)
             {
                 case "step1":
-                    skeletonGraphic.startingAnimation = "step2";
-                    skeletonGraphic.AnimationState.SetAnimation(0, "step2", false);
+                    skeletonGraphic[index].startingAnimation = "step2";
+                    skeletonGraphic[index].AnimationState.SetAnimation(0, "step2", false);
                     break;
                 
                 case "step2":
-                    skeletonGraphic.startingAnimation = "step3";
-                    skeletonGraphic.AnimationState.SetAnimation(0, "step3", false);
+                    skeletonGraphic[index].startingAnimation = "step3";
+                    skeletonGraphic[index].AnimationState.SetAnimation(0, "step3", false);
                     break;
                 
                 case "step3":
-                    skeletonGraphic.startingAnimation = "step4";
-                    skeletonGraphic.AnimationState.SetAnimation(0, "step4", false);
+                    skeletonGraphic[index].startingAnimation = "step4";
+                    skeletonGraphic[index].AnimationState.SetAnimation(0, "step4", false);
                     break;
                 
                 case "step4":
-                    skeletonGraphic.startingAnimation = "step1";
-                    skeletonGraphic.AnimationState.SetAnimation(0, "step1", false);
+                    skeletonGraphic[index].startingAnimation = "step1";
+                    skeletonGraphic[index].AnimationState.SetAnimation(0, "step1", false);
                     break;
             }
 
-            EditorForceReloadSkeletonDataAssetAndComponent(skeletonGraphic.GetComponent<SkeletonRenderer>());
+            EditorForceReloadSkeletonDataAssetAndComponent(skeletonGraphic[index].GetComponent<SkeletonRenderer>());
         });
+    }
+
+    void Start()
+    {
+        
     }
     
     private void EditorForceReloadSkeletonDataAssetAndComponent (SkeletonRenderer component) {

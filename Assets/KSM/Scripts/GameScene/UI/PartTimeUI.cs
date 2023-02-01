@@ -20,7 +20,7 @@ public class PartTimeUI : MonoBehaviour
         });
 
         titleText.text = StaticManager.Langauge.Localize(58);
-        infoTexts[0].text = 2 + StaticManager.Langauge.Localize(59);
+        infoTexts[0].text = StaticManager.Langauge.Localize(193);
         infoTexts[1].text = 24 + StaticManager.Langauge.Localize(59);
         infoTexts[2].text = StaticManager.Langauge.Localize(60);
         
@@ -30,7 +30,7 @@ public class PartTimeUI : MonoBehaviour
             StaticManager.Sound.SetSFX();
             StaticManager.AD.ShowRewardAD(() =>
             {
-                //2시간 알바 고용
+                //10분 알바 고용
                 StaticManager.Backend.backendGameData.PartTimeData.SetPartTime(0);
                 
                 //모든 게스트 자동 구매 초기 확인

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class SettingUI : MonoBehaviour
 {
-    [SerializeField] private Button backgroundButton;
+    //[SerializeField] private Button backgroundButton;
     [SerializeField] private Button backgroundButton2;
     [SerializeField] private Button closeButton;
     [SerializeField] private GameObject backgroundGroup;
@@ -22,6 +22,9 @@ public class SettingUI : MonoBehaviour
     [SerializeField] private Button userIDButton;
     [SerializeField] private Button accountButton;
 
+    [SerializeField] private TMP_Text sandBoxLogoText;
+    [SerializeField] private Button sandboxLinkButton;
+
     private Color unCheckedColor = new Color32(142, 148, 152, 255);
     private Color checkedColor = new Color32(41, 119, 178, 255);
 
@@ -29,7 +32,7 @@ public class SettingUI : MonoBehaviour
     {
         CloseLangaugeGroup();
         
-        backgroundButton.onClick.AddListener(() =>CloseLangaugeGroup());
+        //backgroundButton.onClick.AddListener(() =>CloseLangaugeGroup());
         backgroundButton2.onClick.AddListener(() =>CloseLangaugeGroup());
         
         closeButton.onClick.AddListener(() =>
@@ -64,6 +67,7 @@ public class SettingUI : MonoBehaviour
         
         youtubeButton.onClick.AddListener(() =>
         {
+            StaticManager.Sound.SetSFX();
             CloseLangaugeGroup();
             Application.OpenURL("https://youtube.com/c/yoonmi0712");
         });
@@ -83,6 +87,19 @@ public class SettingUI : MonoBehaviour
             GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(38));
         });
 
+        sandboxLinkButton.onClick.AddListener(() =>
+        {
+            StaticManager.Sound.SetSFX();
+            CloseLangaugeGroup();
+
+#if UNITY_ANDROID
+            Application.OpenURL("https://play.google.com/store/apps/dev?id=7372293900601641339&hl=ko&gl=US");
+            
+#elif UNITY_IOS
+            Application.OpenURL("https://apps.apple.com/us/developer/sandbox-network-inc/id1550543533");
+
+#endif
+        });
     }
 
     void Update()
@@ -101,6 +118,9 @@ public class SettingUI : MonoBehaviour
         userIDText.text = StaticManager.Langauge.Localize(29);
         
         accountButton.GetComponentInChildren<TMP_Text>().text = StaticManager.Langauge.Localize(49);
+
+        sandboxLinkButton.GetComponentInChildren<TMP_Text>().text = StaticManager.Langauge.Localize(107);
+        sandBoxLogoText.text = StaticManager.Langauge.Localize(108);
     }
 
     private void SwitchBackground(bool isOn)

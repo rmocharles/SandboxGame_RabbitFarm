@@ -23,9 +23,10 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private GameObject goldShopGroup;
     [SerializeField] private GameObject petShopGroup;
 
-    [SerializeField] private IAPButton[] diamondPurchaseButtons;
+    [SerializeField] private Button[] diamondPurchaseButtons;
     [SerializeField] private Button[] goldPurchaseButtons;
     [SerializeField] private Button[] petPurchaseButtons;
+    [SerializeField] private Button[] petHelpButtons;
 
     public enum Mode
     {
@@ -66,7 +67,7 @@ public class ShopUI : MonoBehaviour
             else
             {
                 packageGroup[i].GetComponentInChildren<Button>().interactable = true;
-                packageGroup[i].GetComponentInChildren<TMP_Text>().text = "구매 안함";
+                //packageGroup[i].GetComponentInChildren<TMP_Text>().text = "구매 안함";
             }
         }
 
@@ -89,6 +90,38 @@ public class ShopUI : MonoBehaviour
                 ActiveMode(Mode.Pet);
             });
         }
+        
+        diamondPurchaseButtons[0].onClick.AddListener(() =>
+        {
+            StaticManager.Sound.SetSFX("Cash");
+            StaticManager.Backend.backendGameData.UserData.AddDiamond(100);
+            StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(101));
+            GameManager.Instance.SaveAllData();
+        });
+        
+        diamondPurchaseButtons[1].onClick.AddListener(() =>
+        {
+            StaticManager.Sound.SetSFX("Cash");
+            StaticManager.Backend.backendGameData.UserData.AddDiamond(450);
+            StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(102));
+            GameManager.Instance.SaveAllData();
+        });
+        
+        diamondPurchaseButtons[2].onClick.AddListener(() =>
+        {
+            StaticManager.Sound.SetSFX("Cash");
+            StaticManager.Backend.backendGameData.UserData.AddDiamond(850);
+            StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(103));
+            GameManager.Instance.SaveAllData();
+        });
+        
+        diamondPurchaseButtons[3].onClick.AddListener(() =>
+        {
+            StaticManager.Sound.SetSFX("Cash");
+            StaticManager.Backend.backendGameData.UserData.AddDiamond(1800);
+            StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(104));
+            GameManager.Instance.SaveAllData();
+        });
 
         goldPurchaseButtons[0].onClick.AddListener(() =>
         {
@@ -98,6 +131,7 @@ public class ShopUI : MonoBehaviour
                 StaticManager.Sound.SetSFX("Cash");
                 StaticManager.Backend.backendGameData.UserData.AddDiamond(-100);
                 StaticManager.Backend.backendGameData.UserData.AddGold(2500);
+                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(138));
                 GameManager.Instance.SaveAllData();
             }
             else
@@ -113,6 +147,7 @@ public class ShopUI : MonoBehaviour
                 StaticManager.Sound.SetSFX("Cash");
                 StaticManager.Backend.backendGameData.UserData.AddDiamond(-300);
                 StaticManager.Backend.backendGameData.UserData.AddGold(10000);
+                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(139));
                 GameManager.Instance.SaveAllData();
             }
             else
@@ -130,6 +165,7 @@ public class ShopUI : MonoBehaviour
                 {
                     StaticManager.Sound.SetSFX("Cash");
                     StaticManager.Backend.backendGameData.UserData.AddDiamond(-200);
+                    StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(140));
                     GameManager.Pet.SetPet(2);
                     GameManager.Instance.SaveAllData();
 
@@ -157,6 +193,7 @@ public class ShopUI : MonoBehaviour
                 {
                     StaticManager.Sound.SetSFX("Cash");
                     StaticManager.Backend.backendGameData.UserData.AddDiamond(-300);
+                    StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(141));
                     GameManager.Pet.SetPet(3);
                     GameManager.Instance.SaveAllData();
                     
@@ -184,6 +221,7 @@ public class ShopUI : MonoBehaviour
                 {
                     StaticManager.Sound.SetSFX("Cash");
                     StaticManager.Backend.backendGameData.UserData.AddDiamond(-400);
+                    StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(142));
                     GameManager.Pet.SetPet(4);
                     GameManager.Instance.SaveAllData();
                     
@@ -201,6 +239,16 @@ public class ShopUI : MonoBehaviour
                 GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(45));
             }
         });
+
+        for (int i = 0; i < 3; i++)
+        {
+            int num = i;
+            petHelpButtons[num].onClick.AddListener(() =>
+            {
+                StaticManager.Sound.SetSFX();
+                GameManager.Instance.MakeToast2(StaticManager.Langauge.Localize(109 + num), 3f);
+            });
+        }
     }
 
     public void ActiveMode(Mode mode = Mode.Diamond)

@@ -24,10 +24,10 @@ namespace BackendData.GameData
             Tutorial = 0;
             
             #if UNITY_EDITOR
-            Level = 50;
+            Level = 1;
             Exp = 0;
-            Diamond = 9999;
-            Gold = 9000;
+            Diamond = 99990;
+            Gold = 99000;
             Tutorial = 0;
             #endif
         }

@@ -87,8 +87,11 @@ public class ICompleteUI : MonoBehaviour
         
         helpButton.onClick.AddListener(() =>
         {
-            //?
+            StaticManager.Sound.SetSFX();
+            GameManager.Instance.MakeToast2("?");
         });
+
+        fertilizerAdButton.GetComponentInChildren<TMP_Text>().text = StaticManager.Langauge.Localize(172);
     }
 
     void Update()

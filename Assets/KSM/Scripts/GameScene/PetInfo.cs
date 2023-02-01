@@ -43,7 +43,8 @@ public class PetInfo : MonoBehaviour
 
     void Awake()
     {
-        
+        if (gameObject.name == "Pet_0")
+            originRemainTime = StaticManager.Backend.backendChart.Price.GetPrice("Pet_0");
     }
 
     void Start()

@@ -19,7 +19,6 @@ public class AnimalUpgradeUI : MonoBehaviour
     [SerializeField] private TMP_Text nowLevelText;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private TMP_Text specialInfoText;
-    [SerializeField] private Button helpButton;
 
     public GameObject[] animalObject;
     
@@ -47,12 +46,14 @@ public class AnimalUpgradeUI : MonoBehaviour
                 nowAnimal = "Chicken";
                 itemImage.sprite = Resources.Load<Sprite>("Sprites/Egg");
                 animalObject[0].SetActive(true);
+                specialInfoText.text = StaticManager.Langauge.Localize(192);
                 break;
             
             case Animal.Cow:
                 nowAnimal = "Cow";
                 itemImage.sprite = Resources.Load<Sprite>("Sprites/Milk");
                 animalObject[1].SetActive(true);
+                specialInfoText.text = StaticManager.Langauge.Localize(191);
                 break;
         }
         
@@ -93,12 +94,7 @@ public class AnimalUpgradeUI : MonoBehaviour
             GameManager.Instance.SaveAllData();
         });
 
-        specialInfoText.text = StaticManager.Langauge.Localize(33);
         
-        helpButton.onClick.AddListener(() =>
-        {
-            //?
-        });
     }
 
     void Update()
@@ -150,16 +146,16 @@ public class AnimalUpgradeUI : MonoBehaviour
         switch (nowAnimal)
         {
             case "Chicken":
-                upgradeButton.GetComponentInChildren<TMP_Text>().text = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel].Chicken_Upgrade.ToString();
+                upgradeButton.GetComponentInChildren<TMP_Text>().text = upgradeLevel >= 20 ? StaticManager.Langauge.Localize(41) : StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel].Chicken_Upgrade.ToString();
                 break;
             
             case "Cow":
-                upgradeButton.GetComponentInChildren<TMP_Text>().text = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel].Cow_Upgrade.ToString();
+                upgradeButton.GetComponentInChildren<TMP_Text>().text = upgradeLevel >= 20 ? StaticManager.Langauge.Localize(41) : StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel].Cow_Upgrade.ToString();
                 break;
         }
 
         //만렙일 경우 업그레이드 방지
-        if (upgradeLevel == 20 || StaticManager.Backend.backendGameData.UserData.Gold < int.Parse(upgradeButton.GetComponentInChildren<TMP_Text>().text))
+        if (upgradeLevel >= 20 || StaticManager.Backend.backendGameData.UserData.Gold < int.Parse(upgradeButton.GetComponentInChildren<TMP_Text>().text))
             upgradeButton.interactable = false;
         else
             upgradeButton.interactable = true;

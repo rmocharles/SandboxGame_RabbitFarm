@@ -79,7 +79,7 @@ namespace BackendData.GameData
 #if UNITY_EDITOR
             inventoryDic.Add(Fertilizer, 99);
 #else
-            inventoryDic.Add(Fertilizer, 0);
+            inventoryDic.Add(Fertilizer, 3);
 #endif
             
         }

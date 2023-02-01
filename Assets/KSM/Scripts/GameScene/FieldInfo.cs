@@ -51,9 +51,7 @@ public class FieldInfo : MonoBehaviour
                     count++;
             }
 
-            int[] price = {0, 300, 500, 700, 900, 1200, 2000, 4000, 6000};
-            
-            unLockUI.GetComponent<UnlockUI>().Initialize(fieldNumber, price[count], UnlockUI.Type.Field);
+            unLockUI.GetComponent<UnlockUI>().Initialize(fieldNumber, StaticManager.Backend.backendChart.Price.GetPrice("Field_" + count), UnlockUI.Type.Field);
 
 
         });

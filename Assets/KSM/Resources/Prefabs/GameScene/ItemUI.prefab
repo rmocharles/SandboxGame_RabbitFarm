@@ -271,91 +271,69 @@ MonoBehaviour:
   itemCountText: {fileID: 8552983550659533568}
   itemLists:
   - itemName: Carrot
-    itemCode: 0
     itemSprite: {fileID: -4083699676845467243, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 8
   - itemName: Potato
-    itemCode: 1
     itemSprite: {fileID: 1834755383516946806, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 9
   - itemName: Tomato
-    itemCode: 2
     itemSprite: {fileID: -2987662311092886330, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 9
   - itemName: Cucumber
-    itemCode: 3
     itemSprite: {fileID: 6313836139641916110, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 8
   - itemName: Peach
-    itemCode: 4
     itemSprite: {fileID: 616962522553582067, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 5
   - itemName: Apple
-    itemCode: 5
     itemSprite: {fileID: 1715661728129326341, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 5
   - itemName: Pumpkin
-    itemCode: 6
     itemSprite: {fileID: -271903270125322713, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 3
   - itemName: Pear
-    itemCode: 7
     itemSprite: {fileID: -1473325739066468166, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 5
   - itemName: Cherry
-    itemCode: 8
     itemSprite: {fileID: 2457006317769485191, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 9
   - itemName: Giant_Carrot
-    itemCode: 9
     itemSprite: {fileID: -1947065110, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 6
   - itemName: Giant_Potato
-    itemCode: 10
     itemSprite: {fileID: 2079499866, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 6
   - itemName: Giant_Tomato
-    itemCode: 11
     itemSprite: {fileID: 1779544671, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 6
   - itemName: Giant_Cucumber
-    itemCode: 12
     itemSprite: {fileID: -1127981630, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 6
   - itemName: Honey_Peach
-    itemCode: 13
     itemSprite: {fileID: -928577265, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 5
   - itemName: Honey_Apple
-    itemCode: 14
     itemSprite: {fileID: 1212477514, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 5
   - itemName: Rainbow_Carrot
-    itemCode: 15
     itemSprite: {fileID: 579474509, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 6
   - itemName: Rainbow_Potato
-    itemCode: 16
     itemSprite: {fileID: 765510911, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 6
   - itemName: Rainbow_Tomato
-    itemCode: 17
     itemSprite: {fileID: 76850074, guid: 73dd7be140babdb4997cd8c9e62a2323, type: 3}
     maxCount: 6
   - itemName: Milk
-    itemCode: 18
     itemSprite: {fileID: 21300000, guid: 6379b102236e4b84895a9d5b3f4e72d3, type: 3}
     maxCount: 6
   - itemName: Super_Milk
-    itemCode: 19
     itemSprite: {fileID: 21300000, guid: fe5d31da8bdd60043b4835caea16fddd, type: 3}
     maxCount: 6
   - itemName: Egg
-    itemCode: 20
     itemSprite: {fileID: 21300000, guid: e6fc0f22892bd134f8db2442054da4fe, type: 3}
     maxCount: 8
   - itemName: Golden_Egg
-    itemCode: 21
     itemSprite: {fileID: 21300000, guid: 44c070e274155064f99c0d0ddc1d8346, type: 3}
     maxCount: 8
 --- !u!1 &4017142516018974242
@@ -556,7 +534,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -37,7 +37,7 @@ public class FieldManager : MonoBehaviour
 
     void Update()
     {
-        HideMainUI(selectHarvestUI != null);
+        HideMainUI(selectHarvestUI != null || GameManager.Mart.slotUI != null);
     }
     public void Initialize()
     {
@@ -60,6 +60,7 @@ public class FieldManager : MonoBehaviour
             fieldPrefab.name = "Field_" + i;
             fieldPrefab.GetComponent<Button>().onClick.AddListener(() =>
             {
+                StaticManager.Sound.SetSFX();
                 //카메라 이동
                 Camera.main.transform.DOMove(new Vector3(fieldPrefab.transform.position.x, fieldPrefab.transform.position.y, -10), 0.2f);
                 
@@ -130,9 +131,7 @@ public class FieldManager : MonoBehaviour
                     count++;
             }
 
-            int[] price = {0, 300, 500, 700, 900, 1200, 2000, 4000, 6000};
-            
-            unLockUI.GetComponent<UnlockUI>().Initialize(fieldNumber, price[count], UnlockUI.Type.Field);
+            unLockUI.GetComponent<UnlockUI>().Initialize(fieldNumber, StaticManager.Backend.backendChart.Price.GetPrice("Field_" + count), UnlockUI.Type.Field);
             return;
         }
         else
@@ -173,7 +172,7 @@ public class FieldManager : MonoBehaviour
     
     public void HideMainUI(bool isActive)
     {
-        float movePos = isActive ? -500 : 0;
+        float movePos = isActive ? -1000 : 0;
         GameManager.Instance.questButton.transform.DOMoveX(GameManager.Instance.originQuestPos.x + movePos, 0.5f);
         GameManager.Instance.bagButton.transform.DOMoveX(GameManager.Instance.originBagPos.x + movePos, 0.5f);
         GameManager.Instance.shopButton.transform.DOMoveX(GameManager.Instance.originShopPos.x + movePos, 0.5f);

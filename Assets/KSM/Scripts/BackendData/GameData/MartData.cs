@@ -52,7 +52,7 @@ namespace BackendData.GameData
 
             for (int i = 0; i < 15; i++)
             {
-                Item item = new Item(true, -1, 0);
+                Item item = new Item(i > 1 && i < 6, -1, 0);
                 martDic.Add(i, item);
             }
         }

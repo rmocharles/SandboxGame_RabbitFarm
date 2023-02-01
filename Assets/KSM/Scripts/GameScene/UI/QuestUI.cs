@@ -14,8 +14,8 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private Sprite inCompleteButtonSprite;
 
 
-    private Color32 backgroundCompleteColor = new Color32(228, 249, 252, 255);
-    private Color32 backgroundInCompleteColor = new Color32(253, 239, 176, 255);
+    private Color32 backgroundCompleteColor = new Color32(222, 250, 196, 255);
+    private Color32 backgroundInCompleteColor = new Color32(228, 249, 252, 255);
 
     private Color32 completeColor = new Color32(71, 168, 197, 255);
     private Color32 inCompleteColor = new Color32(255, 0, 0, 255);

@@ -107,26 +107,25 @@ public class IAPManager : MonoBehaviour, IStoreListener
             if (String.Equals(args.purchasedProduct.definition.id, DIA_1, StringComparison.Ordinal))
             {
                 StaticManager.Backend.backendGameData.UserData.AddDiamond(100);
+                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(101));
                 GameManager.Instance.SaveAllData();
             }
             if (String.Equals(args.purchasedProduct.definition.id, DIA_2, StringComparison.Ordinal))
             {
                 StaticManager.Backend.backendGameData.UserData.AddDiamond(450);
+                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(102));
                 GameManager.Instance.SaveAllData();
             }
             if (String.Equals(args.purchasedProduct.definition.id, DIA_3, StringComparison.Ordinal))
             {
                 StaticManager.Backend.backendGameData.UserData.AddDiamond(850);
+                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(103));
                 GameManager.Instance.SaveAllData();
             }
             if (String.Equals(args.purchasedProduct.definition.id, DIA_4, StringComparison.Ordinal))
             {
                 StaticManager.Backend.backendGameData.UserData.AddDiamond(1800);
-                GameManager.Instance.SaveAllData();
-            }
-            if (String.Equals(args.purchasedProduct.definition.id, DIA_4, StringComparison.Ordinal))
-            {
-                StaticManager.Backend.backendGameData.UserData.AddDiamond(1800);
+                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(104));
                 GameManager.Instance.SaveAllData();
             }
             if (String.Equals(args.purchasedProduct.definition.id, PACKAGE_1, StringComparison.Ordinal))
@@ -134,6 +133,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
                 StaticManager.Backend.backendGameData.UserData.AddDiamond(500);
                 StaticManager.Backend.backendGameData.UserData.AddGold(10000);
                 StaticManager.Backend.backendGameData.InventoryData.AddItem("Fertilizer", 30);
+                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(105));
                 GameManager.Instance.SaveAllData();
             }
             if (String.Equals(args.purchasedProduct.definition.id, PACKAGE_2, StringComparison.Ordinal))
@@ -141,6 +141,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
                 StaticManager.Backend.backendGameData.UserData.AddDiamond(1500);
                 StaticManager.Backend.backendGameData.UserData.AddGold(20000);
                 StaticManager.Backend.backendGameData.InventoryData.AddItem("Fertilizer", 75);
+                StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(106));
                 GameManager.Instance.SaveAllData();
             }
         }

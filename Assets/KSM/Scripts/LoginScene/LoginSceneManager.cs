@@ -1,5 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using AppleAuth;
+using AppleAuth.Enums;
+using AppleAuth.Extensions;
+using AppleAuth.Interfaces;
+using AppleAuth.Native;
 using BackEnd;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
@@ -22,6 +28,11 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
     [SerializeField] private GameObject loginButtonGroup;   //로그인 버튼 그룹
     [SerializeField] private GameObject copyRightObject;
     [SerializeField] private GameObject versionObject;
+    
+    private IAppleAuthManager appleAuthManager;
+    
+    public string appleToken = "";
+
 
     void Awake()
     {
@@ -55,6 +66,19 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = true; // 디버그 로그를 보고 싶지 않다면 false
         PlayGamesPlatform.Activate();
+#endif
+
+        #endregion
+
+        #region IOS 플러그인
+
+#if UNITY_IOS
+        if (AppleAuthManager.IsCurrentPlatformSupported)
+            {
+                Debug.LogError("IOS CHECK");
+                var deserializer = new PayloadDeserializer();
+                appleAuthManager = new AppleAuthManager(deserializer);
+            }
 #endif
 
         #endregion
@@ -204,6 +228,64 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
                 break;
             
             case "Apple":
+                
+                var loginArgs = new AppleAuthLoginArgs(LoginOptions.IncludeEmail | LoginOptions.IncludeFullName);
+
+        this.appleAuthManager.LoginWithAppleId(
+            loginArgs,
+            credential =>
+            {
+                Debug.LogError("함수 실!!");
+
+                // Obtained credential, cast it to IAppleIDCredential
+                var appleIdCredential = credential as IAppleIDCredential;
+                if (appleIdCredential != null)
+                {
+                    // Apple User ID
+                    // You should save the user ID somewhere in the device
+                    var userId = appleIdCredential.User;
+                    PlayerPrefs.SetString(appleToken, userId);
+
+                    // Email (Received ONLY in the first login)
+                    var email = appleIdCredential.Email;
+
+                    // Full name (Received ONLY in the first login)
+                    var fullName = appleIdCredential.FullName;
+
+                    // Identity token
+                    var identityToken = Encoding.UTF8.GetString(
+                                appleIdCredential.IdentityToken,
+                                0,
+                                appleIdCredential.IdentityToken.Length);
+
+                    // Authorization code
+                    var authorizationCode = Encoding.UTF8.GetString(
+                                appleIdCredential.AuthorizationCode,
+                                0,
+                                appleIdCredential.AuthorizationCode.Length);
+                    Debug.LogError("Apple Login.....");
+
+                    // And now you have all the information to create/login a user in your system
+                    SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, identityToken, FederationType.Apple, "apple 인증", callback =>
+                    {
+                        if (callback.IsSuccess())
+                        {
+                            Debug.LogError("애플로그인 성공");
+                            SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, appleToken, FederationType.Apple, AuthorizeProcess);
+                            return;
+                        }
+
+                        Debug.LogError("Apple 로그인 에러\n" + callback.ToString());
+                    });
+                }
+            },
+            error =>
+            {
+                // Something went wrong
+                var authorizationErrorCode = error.GetAuthorizationErrorCode();
+                Debug.LogError(authorizationErrorCode);
+            });
+                
                 break;
             
             case "Guest":
@@ -230,6 +312,8 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
         string _IDtoken = PlayGamesPlatform.Instance.GetIdToken();
         return _IDtoken;
 #endif
+        
+        return null;
     }
 
     #endregion

@@ -10,10 +10,17 @@ public class SelectHarvestUI : MonoBehaviour
 {
     private GameObject harvestGroup;
     private GameObject harvestInfoUIObject;
+
+    [SerializeField] private Button helpButton;
     
     public void Initialize()
     {
-        StaticManager.Sound.SetSFX();
+        helpButton.onClick.AddListener(() =>
+        {
+            StaticManager.Sound.SetSFX();
+            GameObject tutorialUI = StaticManager.UI.OpenUI("Prefabs/GameScene/TutorialUI", GameManager.Instance.UICanvas.transform);
+            tutorialUI.GetComponent<TutorialUI>().Initialize("Farm");
+        });
         
         harvestGroup = transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
 

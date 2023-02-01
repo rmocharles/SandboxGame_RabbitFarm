@@ -335,7 +335,7 @@ public class GuestAI : MonoBehaviour
                 else if (StaticManager.Backend.backendGameData.UserData.Level <= 15)
                 {
                     int[] random = { 0, 1, 2, 3, 4, 5, 20 };
-                    Initialize(GameManager.Mart.Guest.guests.Count, random[Random.Range(0, 6)]);
+                    Initialize(GameManager.Mart.Guest.guests.Count, random[Random.Range(0, 7)]);
                 }
                 else if (StaticManager.Backend.backendGameData.UserData.Level <= 20)
                 {

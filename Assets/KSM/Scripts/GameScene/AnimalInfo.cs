@@ -56,8 +56,8 @@ public class AnimalInfo : MonoBehaviour
             {
                 case AnimalUpgradeUI.Animal.Chicken:
                     upgradeLevel = StaticManager.Backend.backendChart.Animal.animalSheet[StaticManager.Backend.backendGameData.AnimalData.Dictionary[animalName].Upgrade - 1].Level;
-                    speicalPercent = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel].Chicken_Special;
-                    remainTimer = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel].Chicken_Speed;
+                    speicalPercent = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel - 1].Chicken_Special;
+                    remainTimer = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel - 1].Chicken_Speed;
 
                     if (Random.Range(1, 101) <= speicalPercent)
                     {
@@ -83,8 +83,8 @@ public class AnimalInfo : MonoBehaviour
                 
                 case AnimalUpgradeUI.Animal.Cow:
                     upgradeLevel = StaticManager.Backend.backendChart.Animal.animalSheet[StaticManager.Backend.backendGameData.AnimalData.Dictionary[animalName].Upgrade - 1].Level;
-                    speicalPercent = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel].Cow_Special;
-                    remainTimer = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel].Cow_Speed;
+                    speicalPercent = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel - 1].Cow_Special;
+                    remainTimer = StaticManager.Backend.backendChart.Animal.animalSheet[upgradeLevel - 1].Cow_Speed;
 
                     if (Random.Range(1, 101) <= speicalPercent)
                     {

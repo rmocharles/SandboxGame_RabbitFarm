@@ -34,6 +34,7 @@ public partial class LoginSceneManager
         initializeStep.Enqueue(() => { ShowDataName("5"); StaticManager.Backend.backendChart.Balance.BackendChartDataLoad(NextStep);});
         initializeStep.Enqueue(() => { ShowDataName("6"); StaticManager.Backend.backendChart.Animal.BackendChartDataLoad(NextStep);});
         initializeStep.Enqueue(() => { ShowDataName("7"); StaticManager.Backend.backendChart.Quest.BackendChartDataLoad(NextStep);});
+        initializeStep.Enqueue(() => { ShowDataName("8"); StaticManager.Backend.backendChart.Price.BackendChartDataLoad(NextStep);});
         
         //카운트 설정
         maxLoadingCount = initializeStep.Count;
