@@ -102,6 +102,14 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
         StartCoroutine(Initialize());
     }
 
+    void Update()
+    {
+        if (this.appleAuthManager != null)
+        {
+            this.appleAuthManager.Update();
+        }
+    }
+
     //StaticManager 언어 불러온 후 실행
     public IEnumerator Initialize()
     {
@@ -237,7 +245,7 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
                     {
                         var appleIdCredential = credential as IAppleIDCredential;
                         Debug.LogError(appleIdCredential);
-                        if(appleIdCredential.IdentityToken != null)
+                        if(appleIdCredential != null && appleIdCredential.IdentityToken != null)
                         {
                             var identityToken = Encoding.UTF8.GetString(appleIdCredential.IdentityToken, 0, appleIdCredential.IdentityToken.Length);
 
