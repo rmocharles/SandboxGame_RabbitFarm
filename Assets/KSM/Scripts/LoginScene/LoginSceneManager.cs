@@ -231,54 +231,79 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
 
                 var loginArgs = new AppleAuthLoginArgs(LoginOptions.IncludeEmail | LoginOptions.IncludeFullName);
 
-            this.appleAuthManager.LoginWithAppleId(
-            loginArgs,
-            credential =>
-            {
-                Debug.LogError("함수 실!!");
+                this.appleAuthManager.LoginWithAppleId(
+                    loginArgs,
+                    credential =>
+                    {
+                        var appleIdCredential = credential as IAppleIDCredential;
+                        Debug.LogError(appleIdCredential);
+                        if(appleIdCredential.IdentityToken != null)
+                        {
+                            var identityToken = Encoding.UTF8.GetString(appleIdCredential.IdentityToken, 0, appleIdCredential.IdentityToken.Length);
 
-                // Obtained credential, cast it to IAppleIDCredential
-                var appleIdCredential = credential as IAppleIDCredential;
-                if (appleIdCredential != null)
-                {
-                    // Apple User ID
-                    // You should save the user ID somewhere in the device
-                    var userId = appleIdCredential.User;
-                    PlayerPrefs.SetString(appleToken, userId);
+                            SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, identityToken, FederationType.Apple, AuthorizeProcess);
+                        }
+                       
+                    },
+                    error =>
+                    {
+                        // Something went wrong
+                        Debug.LogError("애플로그인 실패");
+                        StaticManager.UI.SetLoading(false);
+                        var authorizationErrorCode = error.GetAuthorizationErrorCode();
+                        Debug.LogError(authorizationErrorCode);
+                    });
 
-                    // Email (Received ONLY in the first login)
-                    var email = appleIdCredential.Email;
+                //    var loginArgs = new AppleAuthLoginArgs(LoginOptions.IncludeEmail | LoginOptions.IncludeFullName);
 
-                    // Full name (Received ONLY in the first login)
-                    var fullName = appleIdCredential.FullName;
+                //this.appleAuthManager.LoginWithAppleId(
+                //loginArgs,
+                //credential =>
+                //{
+                //    Debug.LogError("함수 실!!");
 
-                    // Identity token
-                    var identityToken = Encoding.UTF8.GetString(
-                                appleIdCredential.IdentityToken,
-                                0,
-                                appleIdCredential.IdentityToken.Length);
-                    
-                    Debug.LogError($"애플 토큰 : {identityToken}");
+                //    // Obtained credential, cast it to IAppleIDCredential
+                //    var appleIdCredential = credential as IAppleIDCredential;
+                //    if (appleIdCredential != null)
+                //    {
+                //        // Apple User ID
+                //        // You should save the user ID somewhere in the device
+                //        var userId = appleIdCredential.User;
+                //        PlayerPrefs.SetString(appleToken, userId);
 
-                    // Authorization code
-                    var authorizationCode = Encoding.UTF8.GetString(
-                                appleIdCredential.AuthorizationCode,
-                                0,
-                                appleIdCredential.AuthorizationCode.Length);
-                    Debug.LogError("Apple Login.....");
+                //        // Email (Received ONLY in the first login)
+                //        var email = appleIdCredential.Email;
 
-                    SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, identityToken, FederationType.Apple, AuthorizeProcess);
-                }
-            },
-            error =>
-            {
-                // Something went wrong
-                Debug.LogError("애플로그인 실패");
-                StaticManager.UI.SetLoading(false);
-                var authorizationErrorCode = error.GetAuthorizationErrorCode();
-                Debug.LogError(authorizationErrorCode);
-            });
-                
+                //        // Full name (Received ONLY in the first login)
+                //        var fullName = appleIdCredential.FullName;
+
+                //        // Identity token
+                //        var identityToken = Encoding.UTF8.GetString(
+                //                    appleIdCredential.IdentityToken,
+                //                    0,
+                //                    appleIdCredential.IdentityToken.Length);
+
+                //        Debug.LogError($"애플 토큰 : {identityToken}");
+
+                //        // Authorization code
+                //        var authorizationCode = Encoding.UTF8.GetString(
+                //                    appleIdCredential.AuthorizationCode,
+                //                    0,
+                //                    appleIdCredential.AuthorizationCode.Length);
+                //        Debug.LogError("Apple Login.....");
+
+                //        SendQueue.Enqueue(Backend.BMember.AuthorizeFederation, identityToken, FederationType.Apple, AuthorizeProcess);
+                //    }
+                //},
+                //error =>
+                //{
+                //// Something went wrong
+                //Debug.LogError("애플로그인 실패");
+                //StaticManager.UI.SetLoading(false);
+                //var authorizationErrorCode = error.GetAuthorizationErrorCode();
+                //Debug.LogError(authorizationErrorCode);
+                //});
+
                 break;
             
             case "Guest":
