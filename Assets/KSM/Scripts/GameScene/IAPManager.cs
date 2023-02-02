@@ -144,6 +144,22 @@ public class IAPManager : MonoBehaviour, IStoreListener
                 StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(106));
                 GameManager.Instance.SaveAllData();
             }
+            if (String.Equals(args.purchasedProduct.definition.id, EMPLOYEE, StringComparison.Ordinal))
+            {
+                for (int i = 0; i < GameManager.Instance.UICanvas.transform.childCount; i++)
+                {
+                    if(GameManager.Instance.UICanvas.transform.GetChild(i).GetComponent<PartTimeUI>())
+                        Destroy(GameManager.Instance.UICanvas.transform.GetChild(i).gameObject);
+                }
+                StaticManager.Sound.SetSFX("Cash");
+                StaticManager.Backend.backendGameData.PartTimeData.SetPartTime(2);
+                
+                //모든 게스트 자동 구매 초기 확인
+                for(int i = 0; i < GameManager.Mart.Guest.waitGuests.Count; i++)
+                    GameManager.Mart.Guest.waitGuests[i].PurchaseInitial();
+                
+                GameManager.Instance.SaveAllData();
+            }
         }
 
         return PurchaseProcessingResult.Complete;

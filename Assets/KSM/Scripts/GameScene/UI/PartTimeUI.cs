@@ -64,21 +64,6 @@ public class PartTimeUI : MonoBehaviour
                 GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(47));
             }
         });
-        
-        purchaseButtons[2].onClick.AddListener(() =>
-        {
-            //결제 부분
-            Destroy(this.gameObject);
-            StaticManager.Sound.SetSFX("Cash");
-
-            StaticManager.Backend.backendGameData.PartTimeData.SetPartTime(2);
-            
-            //모든 게스트 자동 구매 초기 확인
-            for(int i = 0; i < GameManager.Mart.Guest.waitGuests.Count; i++)
-                GameManager.Mart.Guest.waitGuests[i].PurchaseInitial();
-            
-            GameManager.Instance.SaveAllData();
-        });
     }
 
 }

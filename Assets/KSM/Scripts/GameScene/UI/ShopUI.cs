@@ -103,29 +103,29 @@ public class ShopUI : MonoBehaviour
             });
         }
         
-        diamondPurchaseButtons[0].onClick.AddListener(() =>
-        {
-            StaticManager.Sound.SetSFX("Cash");
-            StaticManager.Backend.backendGameData.UserData.AddDiamond(100);
-            StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(101));
-            GameManager.Instance.SaveAllData();
-        });
-        
-        diamondPurchaseButtons[1].onClick.AddListener(() =>
-        {
-            StaticManager.Sound.SetSFX("Cash");
-            StaticManager.Backend.backendGameData.UserData.AddDiamond(450);
-            StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(102));
-            GameManager.Instance.SaveAllData();
-        });
-        
-        diamondPurchaseButtons[2].onClick.AddListener(() =>
-        {
-            StaticManager.Sound.SetSFX("Cash");
-            StaticManager.Backend.backendGameData.UserData.AddDiamond(850);
-            StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(103));
-            GameManager.Instance.SaveAllData();
-        });
+        // diamondPurchaseButtons[0].onClick.AddListener(() =>
+        // {
+        //     StaticManager.Sound.SetSFX("Cash");
+        //     StaticManager.Backend.backendGameData.UserData.AddDiamond(100);
+        //     StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(101));
+        //     GameManager.Instance.SaveAllData();
+        // });
+        //
+        // diamondPurchaseButtons[1].onClick.AddListener(() =>
+        // {
+        //     StaticManager.Sound.SetSFX("Cash");
+        //     StaticManager.Backend.backendGameData.UserData.AddDiamond(450);
+        //     StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(102));
+        //     GameManager.Instance.SaveAllData();
+        // });
+        //
+        // diamondPurchaseButtons[2].onClick.AddListener(() =>
+        // {
+        //     StaticManager.Sound.SetSFX("Cash");
+        //     StaticManager.Backend.backendGameData.UserData.AddDiamond(850);
+        //     StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(103));
+        //     GameManager.Instance.SaveAllData();
+        // });
         
         diamondPurchaseButtons[3].onClick.AddListener(() =>
         {
