@@ -134,7 +134,7 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
 #endif
         
         //테스트 종료 시 해당 주석 지울 것
-        //loginButtons[3].gameObject.SetActive(false);
+        loginButtons[3].gameObject.SetActive(false);
 
         AutoLoginWithBackend();
     }
