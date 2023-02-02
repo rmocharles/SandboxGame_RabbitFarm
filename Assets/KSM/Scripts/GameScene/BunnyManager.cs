@@ -38,7 +38,7 @@ public class BunnyManager : MonoBehaviour
 
     void Update()
     {
-        if (StaticManager.Backend.backendGameData.UserData.Level < 5 && StaticManager.Backend.backendGameData.UserData.Tutorial < 5) return;
+        if (StaticManager.Backend.backendGameData.UserData.Level < 3 && StaticManager.Backend.backendGameData.UserData.Tutorial < 5) return;
         
         //알바생이 존재하지 않을 경우
         if(StaticManager.Backend.backendGameData.PartTimeData.Type == -1 && bunnies[1].nowState != BunnyController.State.Work)

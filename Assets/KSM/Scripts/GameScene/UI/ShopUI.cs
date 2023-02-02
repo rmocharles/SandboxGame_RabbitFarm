@@ -28,6 +28,13 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private Button[] petPurchaseButtons;
     [SerializeField] private Button[] petHelpButtons;
 
+    [SerializeField] private TMP_Text restoreText;
+
+    [SerializeField] private TMP_Text[] langaugeTexts;
+
+    [SerializeField] private Image[] packageImage;
+    [SerializeField] private Sprite[] langaugeSprites;
+
     public enum Mode
     {
         Diamond,
@@ -44,6 +51,9 @@ public class ShopUI : MonoBehaviour
 
     void Start()
     {
+        packageImage[0].sprite = PlayerPrefs.GetInt("LangIndex") == 0 ? langaugeSprites[0] : langaugeSprites[1];
+        packageImage[1].sprite = PlayerPrefs.GetInt("LangIndex") == 0 ? langaugeSprites[2] : langaugeSprites[3];
+        
         closeButton.onClick.AddListener(() =>
         {
             StaticManager.Sound.SetSFX();
@@ -52,6 +62,8 @@ public class ShopUI : MonoBehaviour
         });
 
         infoText.text = PlayerPrefs.GetInt("LangIndex") == 0 ? "상점" : "Shop";
+
+        restoreText.text = StaticManager.Langauge.Localize(197);
         
         //패키지를 구매했을 경우 우선순위 뒤로 미루기
         for (int i = 0; i < StaticManager.Backend.backendGameData.ShopData.packageItem.Length; i++)
@@ -248,6 +260,11 @@ public class ShopUI : MonoBehaviour
                 StaticManager.Sound.SetSFX();
                 GameManager.Instance.MakeToast2(StaticManager.Langauge.Localize(109 + num), 3f);
             });
+        }
+
+        for (int i = 0; i < langaugeTexts.Length; i++)
+        {
+            langaugeTexts[i].text = StaticManager.Langauge.Localize(201 + i);
         }
     }
 

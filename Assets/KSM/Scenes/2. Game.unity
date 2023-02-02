@@ -7512,7 +7512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -9610,7 +9610,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -600
   m_Sprite: {fileID: -1863352109435614086, guid: 4920086380865c742af9c1c2045027e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9862,7 +9862,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.913, y: -3.87}
+  m_AnchoredPosition: {x: 44.913, y: -3.25}
   m_SizeDelta: {x: 199.6392, y: 42.4764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &489699744
@@ -27671,7 +27671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -39092,6 +39092,7 @@ MonoBehaviour:
     - {fileID: -2080780055, guid: bca1502ba3c45134cb148d7393f59002, type: 3}
   - name: Giant_Carrot
     sprites:
+    - {fileID: 1314292919, guid: da9bf2ea751246547b0fc9217dce56d7, type: 3}
     - {fileID: 335895331, guid: da9bf2ea751246547b0fc9217dce56d7, type: 3}
     - {fileID: -1511106643, guid: da9bf2ea751246547b0fc9217dce56d7, type: 3}
     - {fileID: -1214363161, guid: da9bf2ea751246547b0fc9217dce56d7, type: 3}

@@ -42,6 +42,7 @@ public class ItemUI : MonoBehaviour
             if (StaticManager.Backend.backendGameData.MartData.Dictionary[slotNumber].ItemCount > 0)
             {
                 StaticManager.Backend.backendGameData.InventoryData.AddItem(StaticManager.Backend.backendGameData.MartData.Dictionary[slotNumber].ItemCode, StaticManager.Backend.backendGameData.MartData.Dictionary[slotNumber].ItemCount);
+                StaticManager.Backend.backendGameData.MartData.SetItem(slotNumber, itemCode, 0);
             }
 
             if (StaticManager.Backend.backendGameData.InventoryData.GetItemCount(itemCode) >= itemLists[itemCode].maxCount)

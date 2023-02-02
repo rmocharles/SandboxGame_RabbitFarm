@@ -49,6 +49,7 @@ public partial class LoginSceneManager : Singleton<LoginSceneManager>
     }
     void Start()
     {
+        titleSpine.GetComponent<SkeletonGraphic>().Skeleton.SetSkin(PlayerPrefs.GetInt("LangIndex") == 0 ? "kor" : "eng");
         titleSpine.GetComponent<SkeletonGraphic>().AnimationState.SetAnimation(0, "play", false);
         titleSpine.GetComponent<SkeletonGraphic>().AnimationState.AddAnimation(0, "idle", true, 0);
         

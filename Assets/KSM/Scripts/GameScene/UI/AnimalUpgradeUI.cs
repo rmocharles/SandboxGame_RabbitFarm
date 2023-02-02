@@ -99,7 +99,7 @@ public class AnimalUpgradeUI : MonoBehaviour
 
     void Update()
     {
-        TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.AnimalData.Dictionary[nowAnimal].RemainTimer) - DateTime.UtcNow;
+        TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.AnimalData.Dictionary[nowAnimal].RemainTimer) - GameManager.Instance.nowTime;
         int remainTimer = Mathf.FloorToInt((float)Math.Truncate(remainTime.TotalSeconds));
         //시, 분, 초로 변경
         if (remainTime.TotalSeconds > 0)

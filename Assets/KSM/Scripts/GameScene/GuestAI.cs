@@ -321,26 +321,32 @@ public class GuestAI : MonoBehaviour
                 break;
             
             case State.Search:
-                if (StaticManager.Backend.backendGameData.UserData.Level <= 7)
+                if (StaticManager.Backend.backendGameData.UserData.Level <= 3)
                 {
-                    int[] random = { 0, 1, 2 };
-                    Initialize(GameManager.Mart.Guest.guests.Count, random[Random.Range(0, 2)]);
-                }
-                    
-                else if (StaticManager.Backend.backendGameData.UserData.Level <= 10)
-                {
-                    int[] random = { 0, 1, 2, 3, 4 };
+                    int[] random = { 0, 1, 2, 3 };
                     Initialize(GameManager.Mart.Guest.guests.Count, random[Random.Range(0, 4)]);
                 }
-                else if (StaticManager.Backend.backendGameData.UserData.Level <= 15)
+                
+                if (StaticManager.Backend.backendGameData.UserData.Level <= 5)
+                {
+                    int[] random = { 0, 1, 2, 3 };
+                    Initialize(GameManager.Mart.Guest.guests.Count, random[Random.Range(0, 4)]);
+                }
+                    
+                else if (StaticManager.Backend.backendGameData.UserData.Level <= 7)
                 {
                     int[] random = { 0, 1, 2, 3, 4, 5, 20 };
                     Initialize(GameManager.Mart.Guest.guests.Count, random[Random.Range(0, 7)]);
                 }
-                else if (StaticManager.Backend.backendGameData.UserData.Level <= 20)
+                else if (StaticManager.Backend.backendGameData.UserData.Level <= 10)
                 {
-                    int[] random = { 0, 1, 2, 3, 4, 5, 6, 18, 20 };
+                    int[] random = { 0, 1, 2, 3, 4, 5, 20, 18 };
                     Initialize(GameManager.Mart.Guest.guests.Count, random[Random.Range(0, 8)]);
+                }
+                else if (StaticManager.Backend.backendGameData.UserData.Level <= 12)
+                {
+                    int[] random = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 20, 18 };
+                    Initialize(GameManager.Mart.Guest.guests.Count, random[Random.Range(0, 11)]);
                 }
                 else
                 {

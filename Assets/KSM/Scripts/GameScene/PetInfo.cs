@@ -66,7 +66,7 @@ public class PetInfo : MonoBehaviour
         bubbleObject.GetComponent<Button>().onClick.AddListener(() =>
         {
             //퀘스트
-            StaticManager.Backend.backendGameData.QuestData.AddCount(7, 3);
+            StaticManager.Backend.backendGameData.QuestData.AddCount(7, 1);
             
             StaticManager.Backend.backendGameData.InventoryData.AddItem("Fertilizer", 3);
             GameManager.Instance.SaveAllData();
@@ -75,12 +75,12 @@ public class PetInfo : MonoBehaviour
 
             if (gameObject.name == "Pet_0")
             {
-                StaticManager.AD.ShowRewardAD(() =>
+                StaticManager.AD.ShowAD(() =>
                 {
                     StaticManager.Sound.SetSFX("Get");
                     GameObject itemObject = Instantiate(Resources.Load<GameObject>("Prefabs/GameScene/Effect/RewardEffect"), GameManager.Instance.worldCanvas.transform);
                     itemObject.transform.position = transform.position + new Vector3(0, 2, 0);
-                    itemObject.GetComponent<RewardEffect>().Initialize(22, 1);
+                    itemObject.GetComponent<RewardEffect>().Initialize(22, 2);
                 });
             }
             else

@@ -82,7 +82,7 @@ public class TutorialManager : MonoBehaviour
                         StaticManager.Backend.backendGameData.UserData.SetTutorial(1);
                         GameObject tutorialUI = StaticManager.UI.OpenUI("Prefabs/GameScene/TutorialUI", GameManager.Instance.UICanvas.transform);
                         tutorialUI.GetComponent<TutorialUI>().Initialize("Farm", true);
-                        
+                        Debug.LogError(1);
                         GameManager.Instance.SaveAllData();
                         return;
                 }
@@ -213,8 +213,11 @@ public class TutorialManager : MonoBehaviour
                 break;
             
             case 2:
-                GameManager.Bunny.ChangeBunnyState(0, BunnyController.State.Idle);
-                GameManager.Bunny.ChangeBunnyState(1, BunnyController.State.Idle);
+                for (int i = 0; i < 4; i++)
+                {
+                    GameManager.Bunny.bunnies[i].ChangeState(BunnyController.State.Tutorial);
+                }
+                
                 SetBubble(1, 48);
                 GameManager.Bunny.MoveBunny(0, new Vector3(50f, -5.5f, 0));
                 GameManager.Bunny.MoveBunny(1, GameManager.Mart.Guest.workPoint.position);

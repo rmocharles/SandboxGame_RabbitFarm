@@ -35,6 +35,7 @@ public class TableUI : MonoBehaviour
             {
                 if (StaticManager.Backend.backendGameData.InventoryData.GetHarvestItemCount(i, 1) > 0)
                 {
+                    Debug.LogError(i + 9);
                     GameObject item = StaticManager.UI.OpenUI("Prefabs/GameScene/ItemUI", tableGroup.transform);
                     item.GetComponentInChildren<Button>().interactable = StaticManager.Backend.backendGameData.InventoryData.GetHarvestItemCount(i, 1) > 0;
                     item.GetComponent<ItemUI>().Initialize(i + 9, tableNumber);

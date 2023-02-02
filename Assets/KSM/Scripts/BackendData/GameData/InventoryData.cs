@@ -154,20 +154,18 @@ namespace BackendData.GameData
             
             else if (itemCode >= 18 && itemCode < 20)
             {
-                inventoryDic[animalItem[itemCode - 18, 0]] += itemCount;
+                inventoryDic[animalItem[0, itemCode - 18]] += itemCount;
             }
             
             else if (itemCode >= 20 && itemCode < 22)
             {
-                inventoryDic[animalItem[itemCode - 20, 1]] += itemCount;
+                inventoryDic[animalItem[1, itemCode - 20]] += itemCount;
             }
         }
 
         public void AddItem(int[] array, int itemCount)
         {
             IsChangedData = true;
-            Debug.LogError(array[0]);
-            Debug.LogError(array[1]);
             inventoryDic[harvestItem[array[0], array[1]]] += itemCount;
         }
 

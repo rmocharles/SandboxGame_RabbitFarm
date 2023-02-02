@@ -84,7 +84,7 @@ public class SettingUI : MonoBehaviour
         accountButton.onClick.AddListener(() =>
         {
             StaticManager.Sound.SetSFX();
-            GameManager.Instance.MakeToast(StaticManager.Langauge.Localize(38));
+            GameObject deleteUI = StaticManager.UI.OpenUI("Prefabs/GameScene/DeleteUI", GameManager.Instance.UICanvas.transform);
         });
 
         sandboxLinkButton.onClick.AddListener(() =>

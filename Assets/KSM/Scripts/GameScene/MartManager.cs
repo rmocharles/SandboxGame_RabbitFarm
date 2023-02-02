@@ -42,7 +42,6 @@ public class MartManager : MonoBehaviour
             
             slotButtons[num].onClick.AddListener(() =>
             {
-                Debug.LogError(num);
                 if (!StaticManager.Backend.backendGameData.MartData.Dictionary[num].IsOpen)
                 {
                     GameObject unLockUI = StaticManager.UI.OpenUI("Prefabs/GameScene/UnlockUI", GameManager.Instance.UICanvas.transform);

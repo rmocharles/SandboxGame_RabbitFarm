@@ -250,6 +250,7 @@ public class BunnyController : MonoBehaviour
                 break;
             
             case State.Tutorial:
+                GetComponent<SkeletonAnimation>().state.SetAnimation(0, IDLE[0], true);
                 originPos = transform.position;
                 break;
         }

@@ -32,7 +32,7 @@ public class PartTimeManager : MonoBehaviour
     {
         remainObject.SetActive(StaticManager.Backend.backendGameData.PartTimeData.Type != -1 && StaticManager.Backend.backendGameData.PartTimeData.Type != 2);
 
-        if (StaticManager.Backend.backendGameData.UserData.Level < 5)
+        if (StaticManager.Backend.backendGameData.UserData.Level < 3)
         {
             partTimeButton.gameObject.SetActive(false);
         }

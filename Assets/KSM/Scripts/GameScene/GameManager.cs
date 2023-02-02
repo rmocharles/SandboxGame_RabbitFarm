@@ -49,6 +49,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject[] allObject;
 
     public DateTime nowTime = new DateTime(2000, 1, 2);
+    public DateTime m_AppQuitTime = new DateTime(2000, 1, 2);
 
 
     public Vector3 originQuestPos, originBagPos, originShopPos, originMovePos;
@@ -209,7 +210,7 @@ public class GameManager : Singleton<GameManager>
         {
             if (nowMode == Mode.Farm)
             {
-                if (StaticManager.Backend.backendGameData.UserData.Level >= 5)
+                if (StaticManager.Backend.backendGameData.UserData.Level >= 3)
                 {
                     StaticManager.Sound.SetBGM("MartBGM");
                     moveButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Button/btn_farmgo");
@@ -266,7 +267,6 @@ public class GameManager : Singleton<GameManager>
         {
             DateTime addTime = nowTime.AddSeconds(1);
             nowTime = addTime;
-            Debug.LogError(nowTime);
             yield return new WaitForSeconds(1f);
         }
     }
@@ -320,15 +320,16 @@ public class GameManager : Singleton<GameManager>
 
         if (!StaticManager.Backend.backendGameData.PetData.Dictionary[1] && StaticManager.Backend.backendGameData.UserData.Level >= 5)
         {
-            MakeToast(StaticManager.Langauge.Localize(112));
+            MakeToast(StaticManager.Langauge.Localize(194));
             StaticManager.Backend.backendGameData.PetData.SetPet(1, true);
             Pet.SetPet(1);
             SaveAllData();
         }
         
         //마트 활성화 버튼
-        if (StaticManager.Backend.backendGameData.UserData.Level >= 5)
+        if (StaticManager.Backend.backendGameData.UserData.Level >= 3)
         {
+            MakeToast(StaticManager.Langauge.Localize(112));
             moveButton.transform.GetChild(0).gameObject.SetActive(StaticManager.Backend.backendGameData.UserData.Tutorial == 4);
         }
         else
@@ -345,7 +346,20 @@ public class GameManager : Singleton<GameManager>
     {
         if (isFocus)
         {
+            SendQueue.Enqueue(Backend.Utils.GetServerTime, (callback) =>
+            {
+                string time = callback.GetReturnValuetoJSON()["utcTime"].ToString();
+                DateTime parsedDate = DateTime.Parse(time);
+
+                nowTime = parsedDate;
+            });
             SaveAllData();
+            
+            if (!Backend.IsInitialized)
+                SceneManager.LoadScene("1. Login");
+        }
+        else
+        {
         }
     }
 

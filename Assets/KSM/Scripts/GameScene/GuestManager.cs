@@ -31,7 +31,7 @@ public class GuestManager : MonoBehaviour
 
     public void Initialize()
     {
-        if(StaticManager.Backend.backendGameData.UserData.Level >= 5 && StaticManager.Backend.backendGameData.UserData.Tutorial >= 5)
+        if(StaticManager.Backend.backendGameData.UserData.Level >= 3 && StaticManager.Backend.backendGameData.UserData.Tutorial >= 5)
             StartCoroutine(SpawnGuest());
     }
 

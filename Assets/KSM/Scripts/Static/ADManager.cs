@@ -12,6 +12,8 @@ public class ADManager : MonoBehaviour
 
   public void Initialize()
     {
+        IronSource.Agent.shouldTrackNetworkState (true);
+      
         IronSourceEvents.onRewardedVideoAdOpenedEvent += RewardedVideoAdOpenedEvent;
         IronSourceEvents.onRewardedVideoAdClickedEvent += RewardedVideoAdClickedEvent;
         IronSourceEvents.onRewardedVideoAdClosedEvent += RewardedVideoAdClosedEvent; 
@@ -29,13 +31,15 @@ public class ADManager : MonoBehaviour
         IronSourceEvents.onInterstitialAdOpenedEvent += InterstitialAdOpenedEvent;
         IronSourceEvents.onInterstitialAdClosedEvent += InterstitialAdClosedEvent;
         
-        IronSource.Agent.shouldTrackNetworkState (true);
+        IronSource.Agent.loadInterstitial();
+
     }
 
     public delegate void InterstitialAD();
 
     public void ShowRewardAD(Action rewardAD = null)
     {
+      StaticManager.UI.SetLoading(true);
       IronSource.Agent.showRewardedVideo();
 
       IronSourceEvents.onRewardedVideoAdRewardedEvent += (sender) =>
@@ -48,24 +52,36 @@ public class ADManager : MonoBehaviour
       {
         rewardAD = null;
         Debug.LogError(error);
+        StaticManager.UI.SetLoading(false);
         StaticManager.UI.AlertUI.OpenUI(error.ToString());
       };
     }
 
     public void ShowAD(InterstitialAD rewardAD = null)
     {
-      IronSource.Agent.loadInterstitial();
 
+      IronSource.Agent.showInterstitial();
       IronSourceEvents.onInterstitialAdClosedEvent += () =>
       {
         rewardAD?.Invoke();
+        rewardAD = null;
+      };
+
+      IronSourceEvents.onInterstitialAdLoadFailedEvent += error =>
+      {
+        rewardAD = null;
+        Debug.LogError(error);
+        StaticManager.UI.SetLoading(false);
+        StaticManager.UI.AlertUI.OpenUI(error.ToString());
       };
     }
     
   void RewardedVideoAdOpenedEvent() {
+    StaticManager.UI.SetLoading(false);
   }  
 
   void RewardedVideoAdClosedEvent() {
+    StaticManager.UI.SetLoading(false);
   }
 
   void RewardedVideoAvailabilityChangedEvent(bool available) {
@@ -77,6 +93,7 @@ public class ADManager : MonoBehaviour
   }
 
   void RewardedVideoAdShowFailedEvent (IronSourceError error){
+    StaticManager.UI.SetLoading(false);
   }
 
   // ----------------------------------------------------------------------------------------
@@ -87,9 +104,11 @@ public class ADManager : MonoBehaviour
 
   //Invoked when the video ad starts playing. 
   void RewardedVideoAdStartedEvent() { 
+    StaticManager.UI.SetLoading(false);
   } 
   //Invoked when the video ad finishes playing. 
   void RewardedVideoAdEndedEvent() { 
+    StaticManager.UI.SetLoading(false);
   }
   //Invoked when the video ad is clicked. 
   void RewardedVideoAdClickedEvent(IronSourcePlacement placement) { 
@@ -112,6 +131,7 @@ public class ADManager : MonoBehaviour
   }
 // Invoked when the interstitial ad closed and the user goes back to the application screen.
   void InterstitialAdClosedEvent () {
+    IronSource.Agent.loadInterstitial();
   }
 // Invoked when the Interstitial is Ready to shown after load function is called
   void InterstitialAdReadyEvent() {

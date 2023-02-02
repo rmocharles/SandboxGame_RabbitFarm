@@ -135,6 +135,8 @@ public class BackendManager : MonoBehaviour
         //바뀥 데이터가 몇 개 있는지 체크
         List<GameData> gameDatas = new List<GameData>();
 
+        //if (gameDatas.Count == 0) return;
+
         foreach(var gameData in backendGameData.GameDataList)
         {
             if (gameData.Value.IsChangedData)

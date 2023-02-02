@@ -21,7 +21,18 @@ public class TutorialUI : MonoBehaviour
         {
             index = 1;
         }
-        
+
+        if (PlayerPrefs.GetInt("LangIndex") == 0)
+        {
+            skeletonGraphic[0].Skeleton.SetSkin("kor");
+            skeletonGraphic[1].Skeleton.SetSkin("kor");
+        }
+        else
+        {
+            skeletonGraphic[0].Skeleton.SetSkin("eng");
+            skeletonGraphic[1].Skeleton.SetSkin("eng");
+        }
+
         skeletonGraphic[0].gameObject.SetActive(type == "Farm");
         skeletonGraphic[1].gameObject.SetActive(type == "Mart");
         
