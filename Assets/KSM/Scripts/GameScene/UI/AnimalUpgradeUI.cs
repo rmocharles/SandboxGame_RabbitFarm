@@ -140,7 +140,14 @@ public class AnimalUpgradeUI : MonoBehaviour
         
         nowLevelText.text = "Lv." + StaticManager.Backend.backendGameData.AnimalData.Dictionary[nowAnimal].Upgrade;
 
-        completeButton.GetComponentInChildren<TMP_Text>().text = (remainTimer / 60 + 1).ToString();
+        if (upgradeButton.interactable)
+        {
+            completeButton.GetComponentInChildren<TMP_Text>().text = (remainTimer / 60 + 1).ToString();
+        }
+        else
+        {
+            completeButton.GetComponentInChildren<TMP_Text>().text = string.Empty;
+        }
 
         int upgradeLevel = StaticManager.Backend.backendGameData.AnimalData.Dictionary[nowAnimal].Upgrade;
         switch (nowAnimal)

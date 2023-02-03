@@ -316,6 +316,11 @@ public class GameManager : Singleton<GameManager>
             StaticManager.Backend.backendGameData.UserData.AddLevel(1);
             
             MakeToast(PlayerPrefs.GetInt("LangIndex") == 0 ? (StaticManager.Backend.backendGameData.UserData.Level) + "레벨이 되었습니다." : "It is Level " + StaticManager.Backend.backendGameData.UserData.Level);
+
+            if (StaticManager.Backend.backendGameData.UserData.Level == 3)
+            {
+                MakeToast(StaticManager.Langauge.Localize(112));
+            }
         }
 
         if (!StaticManager.Backend.backendGameData.PetData.Dictionary[1] && StaticManager.Backend.backendGameData.UserData.Level >= 5)
@@ -329,7 +334,7 @@ public class GameManager : Singleton<GameManager>
         //마트 활성화 버튼
         if (StaticManager.Backend.backendGameData.UserData.Level >= 3)
         {
-            MakeToast(StaticManager.Langauge.Localize(112));
+            //MakeToast(StaticManager.Langauge.Localize(112));
             moveButton.transform.GetChild(0).gameObject.SetActive(StaticManager.Backend.backendGameData.UserData.Tutorial == 4);
         }
         else
