@@ -105,6 +105,8 @@ public class AnimalUpgradeUI : MonoBehaviour
         if (remainTime.TotalSeconds > 0)
         {
             completeButton.interactable = true;
+
+            completeButton.GetComponentInChildren<TMP_Text>().text = (remainTimer / 60 + 1).ToString();
             
             if (remainTime.TotalSeconds >= 3600)
             {

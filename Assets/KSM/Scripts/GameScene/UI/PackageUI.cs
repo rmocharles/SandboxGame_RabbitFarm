@@ -39,6 +39,16 @@ public class PackageUI : MonoBehaviour
         }
 
         purchaseButton.productId = index == 0 ? "beginner_package" : "newyear_package";
+        
+        purchaseButton.onPurchaseComplete.AddListener(delegate(Product arg0)
+        {
+            Destroy(this.gameObject);
+        });
+
+        purchaseButton.onPurchaseFailed.AddListener((arg0, reason) =>
+        {
+            Destroy(this.gameObject);
+        });
     }
 
     // Update is called once per frame

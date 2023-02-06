@@ -27,6 +27,7 @@ public class DeleteUI : MonoBehaviour
                 {
                     //SceneManager.LoadScene("0. Logo");
                     //StaticManager.Sound.SetBGM("FarmBGM", false);
+                    Backend.BMember.DeleteGuestInfo( );
                     Application.Quit();
                 }
             });
