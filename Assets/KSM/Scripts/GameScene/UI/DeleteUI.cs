@@ -25,8 +25,9 @@ public class DeleteUI : MonoBehaviour
             SendQueue.Enqueue(Backend.BMember.WithdrawAccount, callback => {
                 if (callback.IsSuccess())
                 {
-                    SceneManager.LoadScene("0. Logo");
-                    StaticManager.Sound.SetBGM("FarmBGM", false);
+                    //SceneManager.LoadScene("0. Logo");
+                    //StaticManager.Sound.SetBGM("FarmBGM", false);
+                    Application.Quit();
                 }
             });
         });

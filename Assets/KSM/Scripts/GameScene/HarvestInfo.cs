@@ -223,7 +223,11 @@ public class HarvestInfo : MonoBehaviour
             //첫 튜토리얼 달성
             if (StaticManager.Backend.backendGameData.UserData.Tutorial == 2)
             {
-                StartCoroutine(StartTutorial());
+                StaticManager.Backend.backendGameData.UserData.SetTutorial(3);
+                GameManager.Tutorial.SetTutorial(1);
+        
+                GameManager.Instance.SaveAllData();
+                //StartCoroutine(StartTutorial());
             }
             
             GameManager.Instance.SaveAllData();

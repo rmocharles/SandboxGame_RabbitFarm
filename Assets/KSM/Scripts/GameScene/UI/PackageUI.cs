@@ -25,9 +25,18 @@ public class PackageUI : MonoBehaviour
             Destroy(this.gameObject);
         });
 
-        diamondText.text = StaticManager.Langauge.Localize(219);
-        goldText.text = StaticManager.Langauge.Localize(220);
-        fertilizerText.text = StaticManager.Langauge.Localize(221);
+        if (index == 0)
+        {
+            diamondText.text = StaticManager.Langauge.Localize(219);
+            goldText.text = StaticManager.Langauge.Localize(220);
+            fertilizerText.text = StaticManager.Langauge.Localize(221);
+        }
+        else
+        {
+            diamondText.text = StaticManager.Langauge.Localize(222);
+            goldText.text = StaticManager.Langauge.Localize(223);
+            fertilizerText.text = StaticManager.Langauge.Localize(224);
+        }
 
         purchaseButton.productId = index == 0 ? "beginner_package" : "newyear_package";
     }

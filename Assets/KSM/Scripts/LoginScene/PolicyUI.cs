@@ -38,8 +38,8 @@ public class PolicyUI : MonoBehaviour
         termButton.onClick.AddListener(() => ChangeAgree("Term"));
         serviceButton.onClick.AddListener(() => ChangeAgree("Service"));
         
-        termReadButton.onClick.AddListener(() => GoToURL("https://sandboxnetwork.zendesk.com/hc/ko/articles/9275451667993-%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4-%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8"));
-        serviceReadButton.onClick.AddListener(() => GoToURL("https://sandboxnetwork.zendesk.com/hc/ko/articles/9193451596313-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%9D%B4%EC%9A%A9%EC%95%BD%EA%B4%80"));
+        termReadButton.onClick.AddListener(() => GoToURL("https://sandboxnetwork.zendesk.com/hc/ko/articles/9193451596313-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%9D%B4%EC%9A%A9%EC%95%BD%EA%B4%80"));
+        serviceReadButton.onClick.AddListener(() => GoToURL("https://sandboxnetwork.zendesk.com/hc/ko/articles/9275451667993-%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4-%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8"));
     }
 
     void Update()
