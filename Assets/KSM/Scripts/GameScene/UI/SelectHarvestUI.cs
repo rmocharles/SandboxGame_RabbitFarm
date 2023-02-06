@@ -56,9 +56,9 @@ public class SelectHarvestUI : MonoBehaviour
             
             //보유량 체크
             string harvestCount = string.Empty;
-            if (StaticManager.Backend.backendGameData.InventoryData.Dictionary[StaticManager.Backend.backendGameData.InventoryData.harvestItem[i, 0]] > 99)
+            if (StaticManager.Backend.backendGameData.InventoryData.Dictionary[StaticManager.Backend.backendGameData.InventoryData.harvestItem[i, 0]] > 999)
             {
-                harvestCount = "99+";
+                harvestCount = "999+";
             }
             else
                 harvestCount = StaticManager.Backend.backendGameData.InventoryData.Dictionary[StaticManager.Backend.backendGameData.InventoryData.harvestItem[i, 0]].ToString();

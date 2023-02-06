@@ -61,8 +61,8 @@ public class QuestUI : MonoBehaviour
                 StaticManager.Backend.backendChart.Quest.questSheet[i].MaxReward)).ToString();
             
             //보상 받을 수 있는지 여부에 따라 버튼 비활성화
-            bool isOpen = StaticManager.Backend.backendGameData.QuestData.Dictionary[i].Count >= StaticManager.Backend.backendChart.Quest.questSheet[i].Upgrade *
-                StaticManager.Backend.backendGameData.QuestData.Dictionary[i].Level;
+            bool isOpen = StaticManager.Backend.backendGameData.QuestData.Dictionary[i].Count >= Mathf.Min(StaticManager.Backend.backendChart.Quest.questSheet[i].Upgrade * StaticManager.Backend.backendGameData.QuestData.Dictionary[i].Level,
+                StaticManager.Backend.backendChart.Quest.questSheet[i].MaxUpgrade);
             
             //해당 퀘스트가 골드 or 다이아 보상인지 체크 (레이어 색 변경)
             layoutGroup[i].GetComponent<Image>().color = isOpen ? backgroundCompleteColor : backgroundInCompleteColor;

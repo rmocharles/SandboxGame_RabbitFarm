@@ -60,8 +60,8 @@ public class InventoryItem : MonoBehaviour
                 
                 else if(items[i].code == 22)
                     itemImage.GetComponent<RectTransform>().localScale *= 0.9f;
-                if (StaticManager.Backend.backendGameData.InventoryData.GetItemCount(itemName) > 99)
-                    itemCountText.text = "99+";
+                if (StaticManager.Backend.backendGameData.InventoryData.GetItemCount(itemName) > 999)
+                    itemCountText.text = "999+";
                 else
                     itemCountText.text = StaticManager.Backend.backendGameData.InventoryData.GetItemCount(itemName).ToString();
             }

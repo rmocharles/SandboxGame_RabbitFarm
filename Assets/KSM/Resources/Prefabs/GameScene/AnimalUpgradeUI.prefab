@@ -1122,7 +1122,6 @@ MonoBehaviour:
   nowLevelText: {fileID: 3553236256570423661}
   upgradeButton: {fileID: 5721391626230075733}
   specialInfoText: {fileID: 3553236257064610911}
-  helpButton: {fileID: 0}
   animalObject:
   - {fileID: 3387544750404369662}
   - {fileID: 2749304101386637715}

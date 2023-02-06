@@ -58,8 +58,8 @@ public class PartTimeManager : MonoBehaviour
             TimeSpan remainTime = DateTime.Parse(StaticManager.Backend.backendGameData.PartTimeData.RemainTimer) - GameManager.Instance.nowTime;
             int remainTimer = Mathf.FloorToInt((float)Math.Truncate(remainTime.TotalSeconds));
             
-            int partTimeCoolTime = StaticManager.Backend.backendGameData.PartTimeData.Type == 0 ? 2 : 24;
-            remainObject.GetComponentsInChildren<Image>()[1].fillAmount = (float)(1 - (remainTime.TotalSeconds) / (3600 * partTimeCoolTime));
+            int partTimeCoolTime = StaticManager.Backend.backendGameData.PartTimeData.Type == 0 ? 10 : 60;
+            remainObject.GetComponentsInChildren<Image>()[1].fillAmount = (float)(1 - (remainTime.TotalSeconds) / (60 * partTimeCoolTime));
             remainObject.GetComponentInChildren<TMP_Text>().text = string.Format("{0:D2}:{1:D2}:{2:D2}", remainTimer / 3600, remainTimer % 3600 / 60, remainTimer % 3600 % 60 );
             //알바생인 경우
             if(StaticManager.Backend.backendGameData.PartTimeData.Type < 2)

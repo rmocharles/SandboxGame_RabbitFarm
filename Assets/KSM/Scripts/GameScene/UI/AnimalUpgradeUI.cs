@@ -140,15 +140,6 @@ public class AnimalUpgradeUI : MonoBehaviour
         
         nowLevelText.text = "Lv." + StaticManager.Backend.backendGameData.AnimalData.Dictionary[nowAnimal].Upgrade;
 
-        if (upgradeButton.interactable)
-        {
-            completeButton.GetComponentInChildren<TMP_Text>().text = (remainTimer / 60 + 1).ToString();
-        }
-        else
-        {
-            completeButton.GetComponentInChildren<TMP_Text>().text = string.Empty;
-        }
-
         int upgradeLevel = StaticManager.Backend.backendGameData.AnimalData.Dictionary[nowAnimal].Upgrade;
         switch (nowAnimal)
         {
@@ -167,6 +158,10 @@ public class AnimalUpgradeUI : MonoBehaviour
         else
             upgradeButton.interactable = true;
 
+        if (upgradeLevel >= 20)
+        {
+            upgradeButton.gameObject.SetActive(false);
+        }
     }
     
     private void DestroyUI()

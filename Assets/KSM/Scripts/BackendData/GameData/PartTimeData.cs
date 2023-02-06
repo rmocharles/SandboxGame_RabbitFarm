@@ -60,9 +60,9 @@ namespace BackendData.GameData
                     RemainTimer = GameManager.Instance.nowTime.AddMinutes(10).ToString();
                     break;
                 
-                //24시간
+                //1시간
                 case 1:
-                    RemainTimer = GameManager.Instance.nowTime.AddDays(1).ToString();
+                    RemainTimer = GameManager.Instance.nowTime.AddMinutes(60).ToString();
                     break;
                 
                 case 2:

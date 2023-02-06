@@ -21,7 +21,7 @@ public class PartTimeUI : MonoBehaviour
 
         titleText.text = StaticManager.Langauge.Localize(58);
         infoTexts[0].text = StaticManager.Langauge.Localize(193);
-        infoTexts[1].text = 24 + StaticManager.Langauge.Localize(59);
+        infoTexts[1].text = StaticManager.Langauge.Localize(59);
         infoTexts[2].text = StaticManager.Langauge.Localize(60);
         
         purchaseButtons[0].onClick.AddListener(() =>
@@ -43,11 +43,11 @@ public class PartTimeUI : MonoBehaviour
         
         purchaseButtons[1].onClick.AddListener(() =>
         {
-            if (StaticManager.Backend.backendGameData.UserData.Diamond >= 120)
+            if (StaticManager.Backend.backendGameData.UserData.Diamond >= 50)
             {
                 Destroy(this.gameObject);
                 StaticManager.Sound.SetSFX("Cash");
-                StaticManager.Backend.backendGameData.UserData.AddDiamond(-120);
+                StaticManager.Backend.backendGameData.UserData.AddDiamond(-50);
 
                 //24시간 알바 고용
                 StaticManager.Backend.backendGameData.PartTimeData.SetPartTime(1);

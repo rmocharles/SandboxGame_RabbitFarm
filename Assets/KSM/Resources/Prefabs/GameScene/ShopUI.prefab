@@ -49,7 +49,6 @@ GameObject:
   - component: {fileID: 3326584409173018033}
   - component: {fileID: 4724501882399686875}
   - component: {fileID: 4934067584611033248}
-  - component: {fileID: 48038100894429553}
   m_Layer: 5
   m_Name: Package_Purchase(Button)
   m_TagString: Untagged
@@ -160,30 +159,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &48038100894429553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 121135911110192775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productId: newyear_package
-  buttonType: 0
-  consumePurchase: 1
-  onPurchaseComplete:
-    m_PersistentCalls:
-      m_Calls: []
-  onPurchaseFailed:
-    m_PersistentCalls:
-      m_Calls: []
-  titleText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  priceText: {fileID: 0}
 --- !u!1 &125481463247523871
 GameObject:
   m_ObjectHideFlags: 0
@@ -10258,7 +10233,6 @@ GameObject:
   - component: {fileID: 533685380675549494}
   - component: {fileID: 1904924151391315210}
   - component: {fileID: 59388760440586598}
-  - component: {fileID: 2477787861522305304}
   m_Layer: 5
   m_Name: Package_Purchase(Button)
   m_TagString: Untagged
@@ -10369,30 +10343,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2477787861522305304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4064693505370712783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productId: beginner_package
-  buttonType: 0
-  consumePurchase: 1
-  onPurchaseComplete:
-    m_PersistentCalls:
-      m_Calls: []
-  onPurchaseFailed:
-    m_PersistentCalls:
-      m_Calls: []
-  titleText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  priceText: {fileID: 0}
 --- !u!1 &5313956892887759255
 GameObject:
   m_ObjectHideFlags: 0
@@ -11445,7 +11395,7 @@ MonoBehaviour:
   useOcclusionCulling: 0
   startingPanel: 0
   useSwipeGestures: 1
-  minimumSwipeSpeed: 0
+  minimumSwipeSpeed: 10
   previousButton: {fileID: 0}
   nextButton: {fileID: 0}
   pagination: {fileID: 6880700145060222801}

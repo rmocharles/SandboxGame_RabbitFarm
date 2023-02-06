@@ -82,6 +82,18 @@ public class ShopUI : MonoBehaviour
                 //packageGroup[i].GetComponentInChildren<TMP_Text>().text = "구매 안함";
             }
         }
+        
+        packageGroup[0].GetComponentInChildren<Button>().onClick.AddListener(() =>
+        {
+            GameObject packageUI = StaticManager.UI.OpenUI("Prefabs/GameScene/PackageUI", GameManager.Instance.UICanvas.transform);
+            packageUI.GetComponent<PackageUI>().Initialize(0);
+        });
+        
+        packageGroup[1].GetComponentInChildren<Button>().onClick.AddListener(() =>
+        {
+            GameObject packageUI = StaticManager.UI.OpenUI("Prefabs/GameScene/PackageUI", GameManager.Instance.UICanvas.transform);
+            packageUI.GetComponent<PackageUI>().Initialize(1);
+        });
 
         for (int i = 0; i < 2; i++)
         {

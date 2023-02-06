@@ -18,11 +18,11 @@ public class SettingUI : MonoBehaviour
     [SerializeField] private Button langaugeButton;
     [SerializeField] private GameObject langaugeGroup;
     [SerializeField] private Button youtubeButton;
+    [SerializeField] private TMP_Text userText;
     [SerializeField] private TMP_Text userIDText;
-    [SerializeField] private Button userIDButton;
     [SerializeField] private Button accountButton;
+    [SerializeField] private TMP_Text restoreText;
 
-    [SerializeField] private TMP_Text sandBoxLogoText;
     [SerializeField] private Button sandboxLinkButton;
 
     private Color unCheckedColor = new Color32(142, 148, 152, 255);
@@ -41,6 +41,7 @@ public class SettingUI : MonoBehaviour
             backgroundButton2.GetComponent<RectTransform>().DOScale(Vector3.zero, 0.1f);
             Invoke("DestroyUI", 0.1f);
         });
+
 
         backgroundGroup.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => StaticManager.Sound.SwitchBackgroundSound(1));
         backgroundGroup.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => StaticManager.Sound.SwitchBackgroundSound(0));
@@ -72,14 +73,15 @@ public class SettingUI : MonoBehaviour
             Application.OpenURL("https://youtube.com/c/yoonmi0712");
         });
 
-        userIDButton.GetComponentInChildren<TMP_Text>().text = Backend.UserInDate;
-        userIDButton.onClick.AddListener(() =>
-        {
-            CloseLangaugeGroup();
-            StaticManager.Sound.SetSFX();
-            UniClipboard.SetText(Backend.UserInDate);
-            StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(28));
-        });
+        userIDText.text = Backend.UserInDate;
+        // userIDButton.GetComponentInChildren<TMP_Text>().text = Backend.UserInDate;
+        // userIDButton.onClick.AddListener(() =>
+        // {
+        //     CloseLangaugeGroup();
+        //     StaticManager.Sound.SetSFX();
+        //     UniClipboard.SetText(Backend.UserInDate);
+        //     StaticManager.UI.AlertUI.OpenUI(StaticManager.Langauge.Localize(28));
+        // });
         
         accountButton.onClick.AddListener(() =>
         {
@@ -104,23 +106,25 @@ public class SettingUI : MonoBehaviour
 
     void Update()
     {
-        //배경음
+#if UNITY_ANDROID
+        restoreText.transform.parent.gameObject.SetActive(false);
+#endif
+            //배경음
         SwitchBackground(PlayerPrefs.GetInt("bgm") == 1);
         
         //효과음
         SwitchEffect(PlayerPrefs.GetInt("sfx") == 1);
         
+        userText.text = StaticManager.Langauge.Localize(29);
+        
+        restoreText.text = StaticManager.Langauge.Localize(218);
+
+        
         //언어
         langaugeGroup.GetComponentsInChildren<TMP_Text>()[0].color = PlayerPrefs.GetInt("LangIndex") == 0 ? checkedColor : unCheckedColor;
         langaugeGroup.GetComponentsInChildren<TMP_Text>()[1].color = PlayerPrefs.GetInt("LangIndex") == 1 ? checkedColor : unCheckedColor;
         
-
-        userIDText.text = StaticManager.Langauge.Localize(29);
-        
         accountButton.GetComponentInChildren<TMP_Text>().text = StaticManager.Langauge.Localize(49);
-
-        sandboxLinkButton.GetComponentInChildren<TMP_Text>().text = StaticManager.Langauge.Localize(107);
-        sandBoxLogoText.text = StaticManager.Langauge.Localize(108);
     }
 
     private void SwitchBackground(bool isOn)

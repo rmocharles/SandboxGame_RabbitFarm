@@ -18,5 +18,5 @@ EditorBuildSettings:
     path: Assets/AppleAuthSample/LandscapeSampleScene.unity
     guid: 68da1cf4dda854c5887ef4c16bad630f
   m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: e36bd5f6c0afa5849906986c18ea6dbe, type: 2}
-    com.unity.localization.settings: {fileID: 11400000, guid: 012a0508a50ad7442baf56e25046f4b1, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: ce0c70cf57daac8408d32a8a2ee5bd1f, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 07c033f7e0cdd0d41a59be2b380bc48e, type: 2}

@@ -30,8 +30,8 @@ public class ItemUI : MonoBehaviour
             itemImage.GetComponent<RectTransform>().sizeDelta = new Vector2(256, 256);
         }
 
-        if (StaticManager.Backend.backendGameData.InventoryData.GetItemCount(itemLists[itemCode].itemName) > 99)
-            itemCountText.text = "99+";
+        if (StaticManager.Backend.backendGameData.InventoryData.GetItemCount(itemLists[itemCode].itemName) > 999)
+            itemCountText.text = "999+";
         else
         {
             itemCountText.text = StaticManager.Backend.backendGameData.InventoryData.GetItemCount(itemCode).ToString();

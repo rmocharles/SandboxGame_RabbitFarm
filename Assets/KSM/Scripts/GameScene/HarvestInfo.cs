@@ -223,8 +223,7 @@ public class HarvestInfo : MonoBehaviour
             //첫 튜토리얼 달성
             if (StaticManager.Backend.backendGameData.UserData.Tutorial == 2)
             {
-                StaticManager.Backend.backendGameData.UserData.SetTutorial(3);
-                GameManager.Tutorial.SetTutorial(1);
+                StartCoroutine(StartTutorial());
             }
             
             GameManager.Instance.SaveAllData();
@@ -253,5 +252,15 @@ public class HarvestInfo : MonoBehaviour
         
         completeButton.transform.parent.gameObject.SetActive(isActive);
         skipButton.gameObject.SetActive(!isActive);
+    }
+
+    IEnumerator StartTutorial()
+    {
+        yield return new WaitForSeconds(1f);
+        
+        StaticManager.Backend.backendGameData.UserData.SetTutorial(3);
+        GameManager.Tutorial.SetTutorial(1);
+        
+        GameManager.Instance.SaveAllData();
     }
 }

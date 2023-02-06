@@ -32,13 +32,11 @@ public class BunnyManager : MonoBehaviour
             var bunnyController = bunnyPool.transform.GetChild(i).GetComponent<BunnyController>();
             bunnies.Add(i, bunnyController);
         }
-        
-        
     }
 
     void Update()
     {
-        if (StaticManager.Backend.backendGameData.UserData.Level < 3 && StaticManager.Backend.backendGameData.UserData.Tutorial < 5) return;
+        if (StaticManager.Backend.backendGameData.UserData.Level < 3) return;
         
         //알바생이 존재하지 않을 경우
         if(StaticManager.Backend.backendGameData.PartTimeData.Type == -1 && bunnies[1].nowState != BunnyController.State.Work)
